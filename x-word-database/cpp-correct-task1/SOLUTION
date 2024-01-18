@@ -2,7 +2,9 @@
 
 ## Solution
 #c_solution(src='main.c') # -lm -O2 as default
-cxx_solution(src='main.cc', flags=["-std=c++20", "-O2", "-Wall", "-Wextra"])
+cxx_solution(src='main.cc', 
+             flags=["-std=c++20", "-O2", "-Wall", "-Wextra"],
+             challenge_cases=[])
 #kotlin_solution(src='main.kt') # kotlin
 #java_solution(src='Main.java', encoding='UTF-8', mainclass='Main')
 #java_solution(src='Main.java', encoding='UTF-8', mainclass='Main',

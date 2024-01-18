@@ -148,7 +148,6 @@ int main() {
         ans += dp[0][4] + dp[1][4];
     }
 
-    // cout << ans.val() << endl;
-    cout << "error!" << endl;
+    cout << ans.val() << endl;
 
 }

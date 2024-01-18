@@ -43,11 +43,11 @@ generator/validatorは後で弄ることにする、そのまま抜けてOK
 
 入力は `xxx.in`、出力は `xxx.diff` にする
 
-##### 実際に走らす
+##### 実際にテストを実行する
 
 問題のディレクトリで、
 ```
-$ rime test .
+$ rime test . -k
 ```
 
 ### 作問時の注意
@@ -62,7 +62,7 @@ $ rime test .
     │  └─SOLUTION    // expected_score(100) とする
     ├─cpp-correct-task1
     │  ├─main.cc     // 部分点想定解法では最初に入力validateをすること！
-    │  └─SOLUTION    // 部分点を設定
+    │  └─SOLUTION    // 部分点を設定し、challenge_cases=[] を書く
     ├─cpp-correct-task2 ...
     └─tests
       ├─TESTSET

@@ -11,3 +11,8 @@ jobs:
         run: |
           sudo apt install build-essential
           pip install rime
+
+      - name: Rime test
+        run: |
+          cd x-word-database
+          rime test .

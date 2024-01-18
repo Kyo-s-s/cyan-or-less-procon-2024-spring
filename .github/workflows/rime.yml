@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         path: 
-          - x-word-database,
+          - x-word-database
         
     runs-on: ubuntu-latest
     steps:

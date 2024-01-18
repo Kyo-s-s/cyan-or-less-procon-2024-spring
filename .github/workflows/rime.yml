@@ -9,5 +9,5 @@ jobs:
 
       - name: Setup
         run: |
-          apt install build-essential
+          sudo apt install build-essential
           pip install rime

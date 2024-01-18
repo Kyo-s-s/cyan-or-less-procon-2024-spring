@@ -147,7 +147,7 @@ template<class T> struct Enumeration{
     vector<T> _fact, _finv, _inv;
 
     void update(int sz) {
-        if(_fact.size() < sz + 1){
+        if((int)_fact.size() < sz + 1){
             int pre_sz = max(1, (int)_fact.size());
             _fact.resize(sz + 1, T(1));
             _finv.resize(sz + 1, T(1));

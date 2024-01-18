@@ -9,9 +9,9 @@ jobs:
   test:
     strategy:
       matrix:
-        path: [
-          x-word-database,
-        ]
+        path: 
+          - x-word-database,
+        
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

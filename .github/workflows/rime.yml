@@ -1,0 +1,7 @@
+name: Rime
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: ls

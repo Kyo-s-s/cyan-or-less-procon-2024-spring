@@ -1,0 +1,24 @@
+name: Rime
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        path: 
+          - x-word-database
+        
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Rime
+        run: pip install rime
+
+      - name: Rime test
+        run: rime test ${{ matrix.path }}

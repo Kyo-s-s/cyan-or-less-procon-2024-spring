@@ -13,6 +13,4 @@ jobs:
           pip install rime
 
       - name: Rime test
-        run: |
-          cd x-word-database
-          rime test .
+        run: rime test x-word-database

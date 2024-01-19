@@ -67,13 +67,13 @@ CyanTheme.document '<
       +phantom (from 3) <
         +p {
           長さが ${K} で `cyan`を含む文字列の個数は，包除原理を使うと，
-          \eqn (${\sum_{i = 1}^{\floor{K/4}} ( - 1 )^{i + 1} \mH{i+1}{K-4i}});
+          \eqn (${\sum_{i = 1}^{\floor{K/4}} ( - 1 )^{i + 1} \cdot 2 6^{K - 4 i} \cdot \mH{i+1}{K-4i}});
           で求められる(ここで， ${\mH{n}{k}} は重複組合せ )．
           \phantom (from 4) { よって，答えは， }
         }
       >
       +phantom (from 4) <
-        +eqn (${\sum_{K = 4}^X \sum_{i = 1}^{\floor{K/4}} ( - 1 )^{i + 1} \mH{i+1}{K-4i}});
+        +eqn (${\sum_{K = 4}^X \sum_{i = 1}^{\floor{K/4}} ( - 1 )^{i + 1} \cdot 2 6^{K - 4 i} \cdot \mH{i+1}{K-4i}});
       >
     >
     +frame ?:(3) { 満点解法 } <

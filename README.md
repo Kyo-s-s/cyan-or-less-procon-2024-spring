@@ -6,8 +6,12 @@
 
 |問題名|Writer|問題文|テストケース|想定解実装|Tester AC|(Python AC)|解説|
 |:--|:--|:--:|:--:|:--:|:--:|:--:|:--:|
-|X-word database|Kyo_s_s|✔|✔|✔||||
+|xxxxx|Ackvy||||||
 |f(f(f(f(f(x)))))|Kyo_s_s|✔||✔||||
+|Unions|yasunori||||||
+|X-word Database|Kyo_s_s|✔|✔|✔||||
+|Long Chess Board|yasunori||||||
+|LCM and GCD|yasunori||||||
 ||||||||
 
 - 問題文: `statement.md` に記述、そのままMofeCoderに登録できるようにする

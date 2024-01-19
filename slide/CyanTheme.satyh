@@ -1,0 +1,285 @@
+@require: class-slydifi/slydifi
+@require: math
+
+module CyanTheme: sig
+  val document: block-text -> document
+  direct +make-title: [
+    (|
+      title: inline-text list;
+      author: inline-text list;
+      date: inline-text list;
+    |);
+  ] block-cmd
+  direct +section: [
+    inline-text list;
+    block-text;
+  ] block-cmd
+  direct +frame: [
+    int?;
+    inline-text;
+    block-text;
+  ] block-cmd
+  direct \emph: [inline-text] inline-cmd
+end = struct
+  let section-name = SlydifiParam.make {}
+  let page-num = SlydifiParam.make 0
+
+  let layout =
+    (|
+      paper-width = 254mm;
+      paper-height = 142.9mm;
+      text-width = 254mm -' 40pt;
+      text-height = 142.9mm -' 30pt;
+      text-horizontal-margin = 20pt;
+      text-vertical-margin = 10pt;
+    |)
+  let xrel xfloat = layout#paper-width *' xfloat
+  let yrel yfloat = layout#paper-height *' yfloat
+  let rel xfloat yfloat = (xrel xfloat, yrel yfloat)
+
+  let default-config =
+    let default-font-conf fsize ctx =
+      ctx % |> set-font Latin (`lmsans`, 1.0, 0.0)
+      % |> set-font Kana (`ipaexg`, 1.0, 0.0)
+      % |> set-font HanIdeographic (`ipaexg`, 1.0, 0.0)
+
+        |> set-font Latin (`system:ZenKakuGothicNew-Medium`, 1.0, 0.0)
+        |> set-font Kana (`system:ZenKakuGothicNew-Medium`, 1.0, 0.0)
+        |> set-font HanIdeographic (`system:ZenKakuGothicNew-Medium`, 1.0, 0.0)
+        |> set-font-size fsize
+        |> set-paragraph-margin (fsize *' 0.65) (fsize *' 0.65)
+        |> set-leading (fsize *' 1.4) in
+      (|
+        font-normal = SlydifiScheme.apply-font-cfg [
+          default-font-conf 20pt;
+        ];
+        font-emph = SlydifiScheme.apply-font-cfg [
+          set-text-color Color.red;
+        ];
+        font-slide-title = SlydifiScheme.apply-font-cfg [
+          default-font-conf 32pt;
+        ];
+        font-slide-author = SlydifiScheme.apply-font-cfg [
+          default-font-conf 20pt;
+        ];
+        font-slide-date = SlydifiScheme.apply-font-cfg [
+          default-font-conf 18pt;
+        ];
+        font-section-title = SlydifiScheme.apply-font-cfg [
+          default-font-conf 26pt;
+        ];
+        font-frame-title = SlydifiScheme.apply-font-cfg [
+          default-font-conf 26pt;
+        ];
+        font-pagenum = SlydifiScheme.apply-font-cfg [
+          default-font-conf 12pt;
+        ];
+        font-footnote = SlydifiScheme.apply-font-cfg [
+          default-font-conf 12pt;
+        ];
+        color-bg = Color.of-css `#ffffff`;
+      |)
+  let config = SlydifiParam.make default-config
+  let color-cyan = Color.of-css `#00c0c0`
+
+  let document bt =
+    let config = SlydifiParam.get config in
+    let hookf _ _ =
+      let numpages = SlydifiParam.get page-num in register-cross-reference `pagecount` (arabic numpages) in SlydifiScheme.document-scheme layout (config#font-normal) hookf bt
+
+  let frame-master config =
+    let f ctx () =
+      (block-nil, [
+        Gr.rectangle (0pt, 0pt) (layout#paper-width, layout#paper-height)
+          |> fill config#color-bg;
+      ]) in Frame.make layout f
+
+  let frame-master-with-footer config =
+    let f ctx () =
+      let (_, gr-frame-master) =
+        frame-master config
+          |> Frame.embed ctx () in
+      let gr-page-number =
+        let it-pagenum =
+          SlydifiParam.get page-num
+            |> arabic
+            |> embed-string in
+        let it-total =
+          get-cross-reference `pagecount`
+            |> Option.from ` `
+            |> embed-string in
+        let ctx-pagenum = config#font-pagenum ctx in
+        let ib = read-inline ctx-pagenum { #it-pagenum;/#it-total; } in
+        let (wid, _, dp) = get-natural-metrics ib in
+        let x = layout#paper-width -' wid -' 10pt in
+        let y = dp +' 10pt in
+          [
+            draw-text (x, y) ib;
+          ] in
+        (block-nil, [
+          gr-frame-master;
+          gr-page-number;
+        ]
+          |> List.concat) in Frame.make layout f
+
+  let frame-slide-title config =
+    let f ctx content =
+      let (_, gr-frame-master) =
+        frame-master config
+          |> Frame.embed ctx () in
+      let title-mgn = 16pt in
+      let gr-title =
+        let ctx = config#font-slide-title ctx in
+        let iblst = List.map (read-inline ctx) content#title in
+        let pos = (xrel 0.1, yrel 0.45 +' title-mgn) in
+          SlydifiGraphics.put-texts (|
+            align = (0.0, 0.0);
+            text-align = 0.5;
+            leading = (get-font-size ctx *' 1.6);
+          |) pos iblst in
+      let gr-author =
+        let ctx = config#font-slide-author ctx in
+        let iblst = List.map (read-inline ctx) content#author in
+        let pos = (xrel 0.1, yrel 0.45 -' title-mgn) in
+          SlydifiGraphics.put-texts (|
+            align = (0.0, 1.0);
+            text-align = 0.5;
+            leading = (get-font-size ctx *' 1.6);
+          |) pos iblst in
+      let gr-date =
+        let ctx = config#font-slide-date ctx in
+        let iblst = List.map (read-inline ctx) content#date in
+        let pos = (xrel 0.1, yrel 0.35 -' title-mgn) in
+          SlydifiGraphics.put-texts (|
+            align = (0.0, 1.0);
+            text-align = 0.5;
+            leading = (get-font-size ctx *' 1.6);
+          |) pos iblst in
+      let gr-line =
+        [
+          stroke 1pt color-cyan (Gr.line ((xrel 0.07), (yrel 0.45)) ((xrel 0.93), (yrel 0.45)));
+        ] in
+        (block-nil, [
+          gr-frame-master;
+          gr-title;
+          gr-author;
+          gr-date;
+          gr-line;
+        ]
+          |> List.concat) in Frame.make layout f
+
+  let-block ctx +make-title content =
+    read-block ctx '<
+      +SlydifiScheme.genframe (frame-slide-title (SlydifiParam.get config)) (1) (content);
+    >
+
+  let frame-section-title config =
+    let f ctx content =
+      let (_, gr-frame-master) =
+        frame-master config
+          |> Frame.embed ctx () in
+      let gr-title =
+        let ctx =
+          ctx
+            |> config#font-section-title in
+        let iblst =
+          content#title
+            |> List.map (read-inline ctx) in
+        let pos = (xrel 0.22, yrel 0.52) in
+          SlydifiGraphics.put-texts (|
+            align = (0.0, 0.5);
+            text-align = 0.5;
+            leading = (get-font-size ctx *' 1.6);
+          |) pos iblst in
+      let gr-line =
+        let float-pagenum = float (SlydifiParam.get page-num) in
+        let float-total =
+          let total =
+            get-cross-reference `pagecount`
+              |> Option.from `1` in
+          let int-total = Int.of-string total in
+            float (if int-total <= 1
+            then
+              2
+            else
+              int-total) in
+        let par = float-pagenum /. float-total in
+        let margin = 0.2 in
+        let lim = (1.0 -. (margin *. 2.0)) *. par in
+          [
+            stroke 1pt (Color.gray 0.5) (Gr.line ((xrel (margin +. lim)), (yrel 0.45)) ((xrel (1.0 -. margin)), (yrel 0.45)));
+            stroke 1pt color-cyan (Gr.line ((xrel margin), (yrel 0.45)) ((xrel (margin +. lim)), (yrel 0.45)));
+          ] in
+        (block-nil, [
+          gr-frame-master;
+          gr-title;
+          gr-line;
+        ]
+          |> List.concat) in Frame.make layout f
+
+  % arctic でsection名を保存みたいなコードがある
+  let-block ctx +section title inner =
+    let () =
+      section-name
+        |> SlydifiParam.set (title
+        |> List.fold-left (fun it1 it2 -> { #it1;#it2; }) {}) in
+    let bb-section =
+      read-block ctx '<
+        +SlydifiScheme.genframe (frame-section-title (SlydifiParam.get config)) (1) ((|title = title|));
+      > in
+    let bb-inner = read-block ctx inner in bb-section +++ bb-inner
+
+  let frame-normal config =
+    let f ctx content =
+      let (_, gr) =
+        frame-master-with-footer config
+          |> Frame.embed ctx () in
+      let bb-title =
+        let ctx-title =
+          ctx
+            |> config#font-frame-title
+            |> set-paragraph-margin 0pt 20pt in
+        let ib-title = read-inline ctx-title content#title in line-break true true ctx-title (ib-title ++ inline-fil) in
+      let bb-inner =
+        let ctx =
+          ctx
+            |> config#font-normal in read-block ctx content#inner in (bb-title +++ bb-inner, gr) in Frame.make layout f
+
+  let-inline ctx \sp = inline-skip
+
+  let-block ctx +frame ?:n-frame title inner =
+    let section = SlydifiParam.get section-name in
+    let () =
+      page-num
+        |> SlydifiParam.set (SlydifiParam.get page-num + 1) in
+    let n-frame =
+      n-frame
+        |> Option.from 1 in
+      read-block ctx '<
+        +SlydifiScheme.genframe (frame-normal (SlydifiParam.get config)) (n-frame) ((|
+          title = { #section; \sp (0pt); #title; };
+          inner = inner;
+        |));
+      >
+
+  let-inline ctx \emph it =
+    read-inline (ctx
+      |> set-text-color Color.red) it
+end
+let-math \text it =
+  let f = (fun ctx -> read-inline ctx it) in text-in-math MathRel f
+let-block ctx +eqn inner =
+  read-block ctx '<
+    +AZMathEquation.eqn ?:(AZMathEquation.notag) (inner);
+  >
+let-block ctx +align inner =
+  read-block ctx '<
+    +AZMathEquation.align ?:(AZMathEquation.notag) (inner);
+  >
+let-block ctx +gather inner =
+  read-block ctx '<
+    +AZMathEquation.gather ?:(AZMathEquation.notag) (inner);
+  >
+let-inline ctx \eqn inner = read-inline ctx { \AZMathEquation.eqn ?:(AZMathEquation.notag) (inner); }
+let-inline ctx \align inner = read-inline ctx { \AZMathEquation.align ?:(AZMathEquation.notag) (inner); }
+let-inline ctx \gather inner = read-inline ctx { \AZMathEquation.gather ?:(AZMathEquation.notag) (inner); }

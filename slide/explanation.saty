@@ -1,0 +1,103 @@
+@require: class-slydifi/slydifi
+@require: math
+@require: enumitem/enumitem
+@require: azmath/azmath
+@import: CyanTheme
+
+open SlydifiOverlay
+open CyanTheme
+let-block ctx +block-skip v = block-skip v
+let-inline ctx \fil = inline-fil
+let-math \mH a b =
+  let nil = text-in-math MathOrd (fun ctx -> inline-nil) in
+  let a = ${#nil_#a} in
+  let b = ${#nil_#b} in
+  let c = ${H} in ${#a #c #b}
+in
+
+CyanTheme.document '<
+  +make-title ((|
+    title = { |水以下コン(チーム戦) 解説| };
+    author = { |Kyo_s_s, yasunori, ecto0310, Ackvy| };
+    date = { |2024/03/30| };
+  |));
+  +section { | X: X-word Database | } <
+    +frame ?:(2) {} <
+      +p { 整数 ${X \  \p{4 \leq X \leq 10^5}} と文字列 ${S \  ( 1 \leq \abs{S} \leq X )} が与えられる． }
+      +p {
+        以下の条件を満たす文字列を\emph { よい文字列 }と呼ぶ:
+        \listing {
+          * 文字列の長さが ${X} 以下
+          * 辞書順で ${S} 以下
+          * 連続部分列に`cyan`を含む
+        }
+        よい文字列は何個ある？
+      }
+      +block-skip (15pt);
+      +phantom (only 2) <
+        +p { ${X = 5 , \  S =} `cyanc` のとき，条件を満たす文字列は， }
+        +p { \fil; `acyan`, `bcyan`, `ccyan`, `cyan`, `cyana`, `cyanb`, `cyanc` }
+        +p { の${7}個． }
+      >
+    >
+    +frame ?:(3) { 部分点1解法 } <
+      +listing { * ${X \leq 8} }
+      +block-skip (5pt);
+      +phantom (from 2) <
+        +p { `cyan` を含む長さ ${8} 以下の文字列を全て試せばOK． }
+        +block-skip (10pt);
+        +p { たとえば長さが ${8} で `cyan` を含む文字列は， }
+        +p { \fil; `****cyan`, `***cyan*`, `**cyan**`, `*cyan***`, `cyan****` }
+        +p {
+          のどれかの形なので，`*` に入るアルファベットを全て試して
+          それぞれがよい文字列かどうかを判定すればよい！
+        }
+      >
+      +block-skip (15pt);
+      +phantom (from 3) <
+        +p { このままだと ${X = 8} で `cyancyan` を ${2} 回数えてしまうのでそこだけ注意． }
+      >
+    >
+    +frame ?:(4) { 部分点2解法 } <
+      +listing { * ${X \leq 1 0^3 , \  S} はすべて `z` で長さが ${X} の文字列 }
+      +block-skip (5pt);
+      +phantom (from 2) <
+        +p { 長さが ${X} 以下で `cyan` を含むような文字列はすべてよい文字列になる． }
+      >
+      +phantom (from 3) <
+        +p {
+          長さが ${K} で `cyan`を含む文字列の個数は，包除原理を使うと，
+          \eqn (${\sum_{i = 1}^{\floor{K/4}} ( - 1 )^{i + 1} \mH{i+1}{K-4i}});
+          で求められる(ここで， ${\mH{n}{k}} は重複組合せ )．
+          \phantom (from 4) { よって，答えは， }
+        }
+      >
+      +phantom (from 4) <
+        +eqn (${\sum_{K = 4}^X \sum_{i = 1}^{\floor{K/4}} ( - 1 )^{i + 1} \mH{i+1}{K-4i}});
+      >
+    >
+    +frame ?:(3) { 満点解法 } <
+      +phantom (from 2) <
+        +p { 桁DPで解ける！ }
+        +align [
+          ${\mathrm{dp} \pB{i} \pB{smaller} \pB{j} :=};
+          ${X \text!{の上から} i \text!{番目まで見て，}};
+          ${};
+          ${smaller = 0 : X \text!{と同じ} \/ \  1 : X \text!{より小さく，}};
+          ${};
+          ${\text!{`cyan`の} j \text!{文字目までを末尾に含む} \/ \text!{すでに`cyan`を含む}};
+          ${};
+          ${\text!{文字列の個数}};
+        ];
+      >
+      +phantom (from 3) <
+        +p { 上からDPをしていくことで， ${X} 字以下の文字列の個数も求められている． }
+        +eqn (${\sum_{i = 0}^X \p{\mathrm{dp} \pB{i} \pB{0} \pB{\text!{`cyan`を含む}} + \mathrm{dp} \pB{i} \pB{1} \pB{\text!{`cyan`を含む}}}});
+        +p { が答え． }
+      >
+    >
+  >
+  +section { |B問題| } <
+    +frame { B問題 } <>
+  >
+>

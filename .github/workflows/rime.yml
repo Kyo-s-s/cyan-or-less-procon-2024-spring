@@ -21,4 +21,4 @@ jobs:
         run: pip install rime
 
       - name: Rime test
-        run: rime test ${{ matrix.path }}
+        run: rime test ${{ matrix.path }} -k

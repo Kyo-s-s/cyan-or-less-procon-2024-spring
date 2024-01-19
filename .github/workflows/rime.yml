@@ -11,6 +11,7 @@ jobs:
       matrix:
         path: 
           - x-word-database
+          - fffffx
         
     runs-on: ubuntu-latest
     steps:

@@ -15,7 +15,7 @@
 #               mainclass='tmp/validator/Validator')
 #rust_validator(src='validator.rs')
 #go_validator(src='validator.go')
-#script_validator(src='validator.pl')
+script_validator(src='validator.py')
 
 ## Output judges.
 #c_judge(src='judge.c')

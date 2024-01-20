@@ -86,12 +86,14 @@ struct Parser {
         while (true) {
             char p = peek();
             if ('0' <= p && p <= '9') {
+                assert(!(res == 0 && p == '0'));
                 res = res * 10 + (p - '0');
                 read();
             } else {
                 break;
             }
         }
+        assert(res < 1000000000LL);
         return res;
     }
 };

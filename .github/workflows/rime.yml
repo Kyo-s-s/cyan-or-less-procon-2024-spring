@@ -10,8 +10,9 @@ jobs:
     strategy:
       matrix:
         path: 
-          - x-word-database
           - fffffx
+          - unions
+          - x-word-database
         
     runs-on: ubuntu-latest
     steps:

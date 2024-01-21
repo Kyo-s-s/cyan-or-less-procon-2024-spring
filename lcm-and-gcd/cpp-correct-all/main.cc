@@ -104,15 +104,16 @@ using Modint1000000007 = StaticModint<1000000007>;
 
 using Mint = Modint998244353;
 
-map<ll, int> factorize(ll n) {
-    map<ll, int> res;
+vector<pair<ll, int>> factorize(ll n) {
+    vector<pair<ll, int>> res;
     for (ll i = 2; i * i <= n; i++) {
         while (n % i == 0) {
-            res[i]++;
+            if (res.empty() || res.back().first != i) res.push_back({i, 0});
+            res.back().second++;
             n /= i;
         }
     }
-    if (n > 1) res[n]++;
+    if (n > 1) res.push_back({n, 1});
     return res;
 }
 
@@ -135,7 +136,7 @@ int main() {
     for (auto [p, ks] : ps) {
         sort(ks.begin(), ks.end());       
         reverse(ks.begin(), ks.end());
-        for (int i = 0; i < ks.size(); i++) {
+        for (int i = 0; i < (int)ks.size(); i++) {
             ans[i] *= Mint(p).pow(ks[i]);
         }
     }

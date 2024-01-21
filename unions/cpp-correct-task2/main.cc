@@ -16,6 +16,8 @@ int main() {
     vector<int> C(M); for (auto &c : C) cin >> c;
     vector<ll> D(M); for (auto &d : D) cin >> d;
 
+    assert(reduce(C.begin(), C.end(), 0, plus<int>()) <= 1000);
+
     vector<vector<edge>> G(N);
     for (int i = 0; i < M; i++) {
         vector<int> A(C[i]); 

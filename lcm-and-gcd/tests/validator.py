@@ -4,6 +4,9 @@ import re
 import sys
 
 def main():
+
+    # m = re.match(r'^(\d+)\n(\d+) (\d+)\n$', sys.stdin.read())
+
     line = re.match(r'(\d+)$', sys.stdin.readline())
     assert line, 'Does not match with regexp'
     N = int(line.groups()[0])

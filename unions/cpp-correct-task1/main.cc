@@ -16,6 +16,8 @@ int main() {
     vector<int> C(M); for (auto &c : C) cin >> c;
     vector<ll> D(M); for (auto &d : D) cin >> d;
 
+    assert(all_of(C.begin(), C.end(), [&](int c) { return c == 2; }));
+
     vector<vector<edge>> G(N);
     for (int i = 0; i < M; i++) {
         int a, b; cin >> a >> b; a--; b--;

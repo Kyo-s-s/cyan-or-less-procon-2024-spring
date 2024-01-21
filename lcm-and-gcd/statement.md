@@ -17,7 +17,7 @@
 
 ## 制約
 
-- $2 \leq N \leq 3 \times 10^5$
+- $2 \leq N \leq 3 \times 10^4$
 - $1 \leq A_i < 998244353~~(1 \leq i \leq N)$
 - 入力はすべて整数
 

@@ -35,6 +35,9 @@ def main():
             assert 1 <= a <= N, 'A out of range: %d' % a
         assert len(set(A)) == len(A), 'A is not unique: %s' % A
 
+    line = re.match(r'$', sys.stdin.read())
+    assert line, 'Does not match with regexp'
+
 
 
 

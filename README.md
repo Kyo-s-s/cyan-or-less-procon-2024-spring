@@ -11,7 +11,7 @@
 | Unions             | yasunori |   ✔    |      △       |     ✔      |           |             |
 | X-word Database    | Kyo_s_s  |   ✔    |      ✔       |     ✔      |           |             |  ✔   |
 | Long Chess Board   | yasunori |        |              |            |           |             |      |
-| LCM and GCD        | yasunori |        |              |            |           |             |      |
+| LCM and GCD        | yasunori |   ✔    |      △       |     △      |           |             |      |
 | Range Rotate Query | loop0919 |   ✔    |              |            |           |             |      |
 |                    |          |        |              |            |           |             |      |
 

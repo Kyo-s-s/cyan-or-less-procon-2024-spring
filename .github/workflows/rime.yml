@@ -10,6 +10,7 @@ jobs:
     strategy:
       matrix:
         path: 
+          - straight-conditions
           - fffffx
           - unions
           - x-word-database

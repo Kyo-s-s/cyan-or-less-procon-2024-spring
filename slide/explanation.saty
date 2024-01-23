@@ -13,15 +13,135 @@ let-math \mH a b =
   let a = ${#nil_#a} in
   let b = ${#nil_#b} in
   let c = ${H} in ${#a #c #b}
+let-math \mod = ${\  \mathrm{mod} \ }
 in
 
 CyanTheme.document '<
   +make-title ((|
     title = { |水以下コン(チーム戦) 解説| };
-    author = { |Kyo_s_s, yasunori, ecto0310, Ackvy| };
+    author = { |運営メンバーのなまえ| };
     date = { |2024/03/30| };
   |));
-  +section { | X: X-word Database | } <
+
+  +section ?:({ Writer: Kyo_s_s }) { |X: f(f(f(f(f(x)))))| } <
+    +frame ?:(2) {} <
+      +p {
+        整数 ${K \  ( 1 \leq K \leq 1 0^{1 8} )} と ${x} についての関数 ${f ( x )} が与えられる．
+        最初 ${x = 1} として，次の操作を ${K} 回繰り返す:
+        \listing { * ${x} を ${f ( x )} で更新する }
+        最終的な ${x}\emph { ${\mod 9 9 8} } は？
+      }
+      +block-skip (15pt);
+      +phantom (from 2) <
+        +p { 構文解析をがんばる必要がある...？ }
+        +p { ${\to} めちゃめちゃな式は与えられないため，そんなに頑張らなくてよい． }
+      >
+    >
+    +frame ?:(2) { 部分点1解法 } <
+      +listing { * ${K = 1 , \  \  f ( x ) \text!{に `*`, `^` は含まれない．}} }
+      +block-skip (5pt);
+      +phantom (from 2) <
+        +p { ${f ( x )} は， ${x} もしくは ${1} 以上 ${1 0^9} 未満の整数 の和で表されているので， }
+        +block-skip (5pt);
+        +enumerate ?:(let step idx =
+          let it =
+            idx
+              |> arabic
+              |> embed-string in { step #it;.\ } in EnumitemAlias.index-label step) {
+          * ${f ( x )} を `+` で分割する
+          * 分割したそれぞれの文字列を数値に変換する ( ${x} なら ${1} )
+          * すべて足し合わせる
+        }
+        +block-skip (5pt);
+        +p { を実装すればOK． }
+      >
+    >
+
+    +frame ?:(3) { 部分点2解法 } <
+      +listing { * ${K \leq 1 0^4 , \  \  f ( x ) \text!{に `^` は含まれない．}} }
+      +block-skip (5pt);
+      +phantom (from 2) <
+        +p { 部分点1解法で，「数値/ ${x} と演算子 `+`のみからなる数式」を計算した． }
+        +p { ${\to} 改造すると，「数値/ ${x} と 演算子 `*`のみからなる数式」を計算できる． }
+      >
+      +phantom (from 3) <
+        +enumerate ?:(let step idx =
+          let it =
+            idx
+              |> arabic
+              |> embed-string in { step #it;.\ } in EnumitemAlias.index-label step) {
+          * ${f ( x )} を `+` で分割する
+          * 分割したそれぞれの文字列は「数値/ ${x} と 演算子 `*`のみからなる数式」なので，
+          それぞれを計算する
+          * すべて足し合わせる
+        }
+        +block-skip (5pt);
+        +p { そのままだとオーバーフローするため，和/積の計算時に ${\mod 9 9 8} を取ればOK． }
+      >
+    >
+
+    +frame ?:(2) { 部分点3解法 } <
+      +listing { * ${K \leq 1 0^4} }
+      +block-skip (5pt);
+      +phantom (from 2) <
+        +p { 「数値/ ${x} と 演算子 `*`, `^`のみからなる数式」 を計算できればOK．これは， }
+        +enumerate ?:(let step idx =
+          let it =
+            idx
+              |> arabic
+              |> embed-string in { step #it;.\ } in
+          EnumitemAlias.with-depth [
+            EnumitemAlias.index-label step;
+            EnumitemAlias.bullet;
+          ]) {
+          * ${f ( x )} を `*` で分割する
+          * 分割したそれぞれの文字列は「数値/ ${x} もしくは，演算子 `^`のみからなる数式」なので，
+           ** `^` を含む: `(数値 or x)^(数値)` の形になっているので計算する
+           ** `^` を含まない: そのまま数値に変換する
+          * すべて掛け合わせる
+        }
+        +p { とすれば実装できる．愚直に ${K} 回シミュレーションすればOK． }
+      >
+    >
+
+    +frame ?:(3) { 満点解法 } <
+      +phantom (from 2) <
+        +p {
+          関数 ${f ( x )} の形から，
+          ${x} を更新するときに ${x \mod 9 9 8} で更新してもよい．
+          つまり，関数 ${f} は，
+        }
+        +eqn (${f : \mathbb{Z} / 9 9 8 \mathbb{Z} \to \mathbb{Z} / 9 9 8 \mathbb{Z}});
+        +p { とみなせる． ${\to} ダブリングできる！ }
+      >
+      +block-skip (5pt);
+      +phantom (from 3) <
+        +p {
+          前処理として ${x = 0 , 1 , \ldots , 9 9 7} に対する
+          ${f ( x )} を計算しておくことにより， ${x = 0 , 1 , \ldots , 9 9 7} に対する
+          ${f ( f ( x ) )} の値が計算でき，さらにこの値を用いて ${x} に対する ${f ( f ( f ( f ( x ) ) ) )} の値が計算でき， ${\ldots}
+        }
+        +p { これを繰り返し，必要な部分を適用することで ${K} 回操作した後の値を求めることができる！ }
+      >
+    >
+
+    +frame { 裏話 } <
+      +block-skip (5pt);
+      +listing {
+        * 原案では 引き算 `-` と 括弧 `()` も含まれていたのですが，さすがにやりすぎということで無くしました．
+         ** 括弧が入ってくるとちゃんと再帰的な処理をする必要があります．
+      }
+      +block-skip (15pt);
+      +listing {
+        * `^` もなくていいじゃん，と言われていたのですが，
+        `^` が無いとPythonの`eval`を使うことで構文解析をサボれてしまうのでやむなく入れました．
+         ** 部分点2までは `eval` をやるだけで通せます．
+         ** `^` が入ると `998244353^998244353` のような計算でTLEしてしまうはずです．
+      }
+    >
+  >
+
+  +section ?:({ Writer: Kyo_s_s }) { | X: X-word Database | } <
     +frame ?:(2) {} <
       +p { 整数 ${X \  \p{4 \leq X \leq 10^5}} と文字列 ${S \  ( 1 \leq \abs{S} \leq X )} が与えられる． }
       +p {
@@ -97,7 +217,7 @@ CyanTheme.document '<
       >
     >
   >
-  +section { |B問題| } <
-    +frame { B問題 } <>
+  +section { |X問題| } <
+    +frame {} <>
   >
 >

@@ -104,6 +104,16 @@ $ rime test . -k
   subtask_testset(name='all', score=50, input_patterns=['*.in'])
   ```
 
+### MofeCoderへのアップロード
+
+```
+$ python3 export.py
+```
+
+をすると、`export-testcases`というフォルダが作成されて、その中の `.zip` がそのままMofeCoderにアップロードできる
+
+サンプルとそれに対する説明の付与は自分でやらないとダメ
+
 ## TODO
 
 - generator？ これは別に各自で書けばよいかも

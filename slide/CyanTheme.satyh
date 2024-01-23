@@ -11,6 +11,7 @@ module CyanTheme: sig
     |);
   ] block-cmd
   direct +section: [
+    inline-text?;
     inline-text list;
     block-text;
   ] block-cmd
@@ -210,22 +211,37 @@ end = struct
             stroke 1pt (Color.gray 0.5) (Gr.line ((xrel (margin +. lim)), (yrel 0.45)) ((xrel (1.0 -. margin)), (yrel 0.45)));
             stroke 1pt color-cyan (Gr.line ((xrel margin), (yrel 0.45)) ((xrel (margin +. lim)), (yrel 0.45)));
           ] in
+      let gr-subtitle =
+        match content#subtitle with
+          | None -> []
+          | Some(subtitle) -> let ctx = config#font-slide-date ctx in
+          let subtitle = read-inline ctx subtitle in
+          let pos = (xrel (1.0 -. 0.22), yrel 0.4) in
+            SlydifiGraphics.put-texts (|
+              align = (1.0, 0.5);
+              text-align = 0.5;
+              leading = (get-font-size ctx *' 1.6);
+            |) pos [subtitle;] in
         (block-nil, [
           gr-frame-master;
           gr-title;
           gr-line;
+          gr-subtitle;
         ]
           |> List.concat) in Frame.make layout f
 
   % arctic でsection名を保存みたいなコードがある
-  let-block ctx +section title inner =
+  let-block ctx +section ?:subtitle title inner =
     let () =
       section-name
         |> SlydifiParam.set (title
         |> List.fold-left (fun it1 it2 -> { #it1;#it2; }) {}) in
     let bb-section =
       read-block ctx '<
-        +SlydifiScheme.genframe (frame-section-title (SlydifiParam.get config)) (1) ((|title = title|));
+        +SlydifiScheme.genframe (frame-section-title (SlydifiParam.get config)) (1) ((|
+          title = title;
+          subtitle = subtitle;
+        |));
       > in
     let bb-inner = read-block ctx inner in bb-section +++ bb-inner
 

@@ -13,7 +13,7 @@ $Q$ 個のクエリが与えられるので、それぞれについて答えて�
 
 - $3 \leq N \leq 2 \times 10^5$
 - $-10^5 \leq X_i, Y_i \leq 10^5$
-- $1 \leq Q \leq 5 \times 10^5$
+- $1 \leq Q \leq 10^5$
 - $0 \leq l \leq r \leq 2 \times 10^{10}$
 - $0 \leq \theta \lt 360$
 - $1 \leq a < b < c \leq N$

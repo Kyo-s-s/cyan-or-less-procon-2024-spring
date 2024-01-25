@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 from math import pi, sin, cos
 from bisect import bisect_left, bisect_right

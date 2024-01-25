@@ -9,7 +9,7 @@ jobs:
   test:
     continue-on-error: ${{ matrix.experimental }}
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         experimental: [false]
         path: 

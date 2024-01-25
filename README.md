@@ -6,12 +6,12 @@
 
 | 問題名             | Writer   | 問題文 | テストケース | 想定解実装 | Tester AC | (Python AC) | 解説 |
 | :----------------- | :------- | :----: | :----------: | :--------: | :-------: | :---------: | :--: |
-| Straight Conditons | Ackvy    |        |              |            |           |             |      |
-| f(f(f(f(f(x)))))   | Kyo_s_s  |   ✔    |      ✔       |     ✔      |           |             |      |
+| Straight Conditons | Ackvy    |   ✔    |              |            |           |             |      |
+| f(f(f(f(f(x)))))   | Kyo_s_s  |   ✔    |      ✔       |     ✔      |           |             |  ✔   |
 | Unions             | yasunori |   ✔    |      △       |     ✔      |           |             |
 | X-word Database    | Kyo_s_s  |   ✔    |      ✔       |     ✔      |           |             |  ✔   |
 | Long Chess Board   | yasunori |        |              |            |           |             |      |
-| LCM and GCD        | yasunori |        |              |            |           |             |      |
+| LCM and GCD        | yasunori |   ✔    |      △       |     △      |           |             |      |
 | Range Rotate Query | loop0919 |   ✔    |              |            |           |             |      |
 |                    |          |        |              |            |           |             |      |
 
@@ -103,6 +103,17 @@ $ rime test . -k
   subtask_testset(name='task2', score=30, input_patterns=['task2_*.in'])
   subtask_testset(name='all', score=50, input_patterns=['*.in'])
   ```
+
+### MofeCoder へのアップロード
+
+```
+$ python3 export.py
+```
+
+をすると、`export-testcases`というフォルダが作成されて、その中の `.zip` がそのまま MofeCoder にアップロードできる
+
+サンプルとそれに対する説明の付与は自分でやらないとダメ
+問題文によって subtask2 に subtask1 が含まれている/いないがあるので、それぞれちゃんとしないとダメ
 
 ## TODO
 

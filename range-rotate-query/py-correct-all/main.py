@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from sys import stdin
 from math import radians, sin, cos
 from bisect import bisect_left, bisect_right

@@ -15,12 +15,12 @@
 #               mainclass='tmp/validator/Validator')
 #rust_validator(src='validator.rs')
 #go_validator(src='validator.go')
-#script_validator(src='validator.pl')
+script_validator(src='validator.py')
 
 ## Output judges.
 #c_judge(src='judge.c')
-cxx_judge(src='judge.cc', dependency=['testlib.h'],
-         variant=testlib_judge_runner)
+#cxx_judge(src='judge.cc', dependency=['testlib.h'],
+#          variant=testlib_judge_runner)
 #java_judge(src='Judge.java', encoding='UTF-8', mainclass='Judge')
 #rust_judge(src='judge.rs')
 #go_judge(src='judge.go')
@@ -44,8 +44,8 @@ cxx_judge(src='judge.cc', dependency=['testlib.h'],
 #gcj_merger(output_replace=casenum_replace('Case 1', 'Case {0}'))
 id='X'
 #merged_testset(name=id + '_Merged', input_pattern='*.in')
-subtask_testset(name='task1', score=20, input_patterns=['task1_*.in'])
-subtask_testset(name='task2', score=20, input_patterns=['task2_*.in'])
-subtask_testset(name='all', score=60, input_patterns=['*.in'])
+subtask_testset(name='task1', score=10, input_patterns=['task1_*.in'])
+subtask_testset(name='task2', score=40, input_patterns=['task2_*.in'])
+subtask_testset(name='all', score=50, input_patterns=['*.in'])
 # precisely scored by judge program like Jiyukenkyu (KUPC 2013)
 #scoring_judge()

@@ -7,10 +7,11 @@ on:
 
 jobs:
   test:
-    continue-on-error: ${{ matrix.path }}
+    continue-on-error: ${{ matrix.experimental }}
     strategy:
       fail-fast: true
       matrix:
+        experimental: [false]
         path: 
           - straight-conditions
           - fffffx

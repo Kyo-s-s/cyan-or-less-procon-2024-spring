@@ -25,20 +25,19 @@ rotates = [0] * N
 Q = int(input())
 for _ in range(Q):
     cmd, *query = list(map(int, input().split()))
-    match cmd:
-        case 1:
-            l, r, theta = query
-            
-            for i, (x, y) in enumerate(points):
-                if l <= x**2 + y**2 <= r:
-                    rotates[i] += theta
+    if cmd == 1:
+        l, r, theta = query
         
-        case 2:
-            a, b, c = query
-            a -= 1; b -= 1; c -= 1
-            A = rotate(rotates[a], points[a])
-            B = rotate(rotates[b], points[b])
-            C = rotate(rotates[c], points[c])
-            
-            print(area(A, B, C))
+        for i, (x, y) in enumerate(points):
+            if l <= x**2 + y**2 <= r:
+                rotates[i] += theta
+        
+    if cmd == 2:
+        a, b, c = query
+        a -= 1; b -= 1; c -= 1
+        A = rotate(rotates[a], points[a])
+        B = rotate(rotates[b], points[b])
+        C = rotate(rotates[c], points[c])
+        
+        print(area(A, B, C))
 

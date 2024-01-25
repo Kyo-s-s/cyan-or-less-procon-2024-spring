@@ -8,12 +8,15 @@ on:
 jobs:
   test:
     strategy:
-      matrix:
-        path: 
-          - fffffx
-          - unions
-          - x-word-database
-          - range-rotate-query 
+      fail-fast: false
+        matrix:
+          path: 
+            - straight-conditions
+            - fffffx
+            - unions
+            - x-word-database
+            - lcm-and-gcd
+            - range-rotate-query
         
     runs-on: ubuntu-latest
     steps:

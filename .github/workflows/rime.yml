@@ -13,6 +13,7 @@ jobs:
           - fffffx
           - unions
           - x-word-database
+          - range-rotate-query 
         
     runs-on: ubuntu-latest
     steps:

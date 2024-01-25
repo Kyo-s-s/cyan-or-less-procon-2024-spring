@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 # 三角形の面積
 def area(A, B, C):
     (A_X, A_Y), (B_X, B_Y), (C_X, C_Y) = A, B, C

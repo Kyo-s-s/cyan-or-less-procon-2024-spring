@@ -15,6 +15,7 @@ jobs:
           - unions
           - x-word-database
           - lcm-and-gcd
+          - range-rotate-query
         
     runs-on: ubuntu-latest
     steps:

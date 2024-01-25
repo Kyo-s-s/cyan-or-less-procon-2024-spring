@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
-from math import pi, sin, cos
+from math import radians, sin, cos
 
 # 回転移動
 def rotate(theta, point):
     x, y = point
-    rad = (theta % 360) * pi / 180
+    rad = radians(theta)
     return (cos(rad) * x - sin(rad) * y, sin(rad) * x + cos(rad) * y)
 
 # 三角形の面積

@@ -10,9 +10,11 @@ jobs:
     strategy:
       matrix:
         path: 
+          - straight-conditions
           - fffffx
           - unions
           - x-word-database
+          - lcm-and-gcd
         
     runs-on: ubuntu-latest
     steps:

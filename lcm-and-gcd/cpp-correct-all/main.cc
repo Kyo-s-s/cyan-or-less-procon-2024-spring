@@ -120,8 +120,6 @@ vector<pair<ll, int>> factorize(ll n) {
 
 int main() {
 
-    cout << "WA!!!!!!!!" << endl;
-
     int N; cin >> N;
     vector<ll> A(N); for (auto &a : A) cin >> a;
 

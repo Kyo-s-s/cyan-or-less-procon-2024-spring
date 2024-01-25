@@ -100,8 +100,6 @@ struct Parser {
 
 int main() {
 
-    cout << "WA!!!!!!!!" << endl;
-
     ll K; cin >> K;
     string S; cin >> S;
 

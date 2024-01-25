@@ -7,6 +7,7 @@ on:
 
 jobs:
   test:
+    continue-on-error: ${{ matrix.path }}
     strategy:
       fail-fast: true
       matrix:

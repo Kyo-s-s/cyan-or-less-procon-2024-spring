@@ -8,6 +8,7 @@ on:
 jobs:
   test:
     strategy:
+      fail-fast: true
       matrix:
         path: 
           - straight-conditions

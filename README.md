@@ -13,6 +13,7 @@
 | Long Chess Board   | yasunori |        |              |            |           |             |      |
 | LCM and GCD        | yasunori |   ✔    |      △       |     △      |           |             |      |
 | Range Rotate Query | loop0919 |   ✔    |       △      |      ✔     |           |             |      |
+| Deque Inversion    | Nichi10p |  WIP   |              |            |           |             |      |
 |                    |          |        |              |            |           |             |      |
 
 - 問題文: `statement.md` に記述、そのまま MofeCoder に登録できるようにする

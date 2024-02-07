@@ -25,6 +25,8 @@ for i in range(N):
 rotates = [0] * N
 
 Q = int(input())
+ans = list()
+
 for _ in range(Q):
     cmd, *query = list(map(int, input().split()))
     if cmd == 1:
@@ -41,5 +43,6 @@ for _ in range(Q):
         B = rotate(rotates[b], points[b])
         C = rotate(rotates[c], points[c])
         
-        print(area(A, B, C))
+        ans.append(str(area(A, B, C)))
 
+print('\n'.join(ans))

@@ -30,45 +30,45 @@ def print_data(N, A, Q, T, X, f):
   for t, x in zip(T, X):
     print(t, x, file=f)
 
-def set1():
+def task1():
   for i in range(10):
-    with open(f'./set1_random{i}.in', 'w') as f:
+    with open(f'./task1_random{i}.in', 'w') as f:
       N = randint(2, 100)
       Q = randint(1, 100)
       T, X = make_query(N, Q, ['push_back', 'pop_back'])
       print_data(N, make_A(N), Q, T, X, f)
 
-def set2():
+def task2():
   for i in range(10):
-    with open(f'./set2_random{i}.in', 'w') as f:
+    with open(f'./task2_random{i}.in', 'w') as f:
       N = randint(2, 100)
       Q = randint(1, 100)
       T, X = make_query(N, Q)
       print_data(N, make_A(N), Q, T, X, f)
 
-def set3():
+def task3():
   for i in range(7):
-    with open(f'./set3_random{i}.in', 'w') as f:
+    with open(f'./task3_random{i}.in', 'w') as f:
       N = randint(1000, 5000)
       Q = randint(1, 100)
       T, X = make_query(N, Q)
       print_data(N, make_A(N), Q, T, X, f)
   for i in range(3):
-    with open(f'./set3_max{i}.in', 'w') as f:
+    with open(f'./task3_max{i}.in', 'w') as f:
       N = 5000
       Q = 100
       T, X = make_query(N, Q)
       print_data(N, make_A(N), Q, T, X, f)
 
-def set4():
+def task4():
   for i in range(7):
-    with open(f'set4_random{i}.in', 'w') as f:
+    with open(f'task4_random{i}.in', 'w') as f:
       N = randint(10000, 100000)
       Q = randint(100, 100000)
       T, X = make_query(N, Q)
       print_data(N, make_A(N), Q, T, X, f)
   for i in range(3):
-    with open(f'set4_max{i}.in', 'w') as f:
+    with open(f'task4_max{i}.in', 'w') as f:
       N = 10**5
       Q = 10**5
       T, X = make_query(N, Q)
@@ -76,7 +76,7 @@ def set4():
 
 if __name__ == '__main__':
   seed(0)
-  set1()
-  set2()
-  set3()
-  set4()
+  task1()
+  task2()
+  task3()
+  task4()

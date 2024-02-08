@@ -40,9 +40,9 @@
 #gcj_merger(output_replace=casenum_replace('Case 1', 'Case {0}'))
 id='X'
 #merged_testset(name=id + '_Merged', input_pattern='*.in')
-subtask_testset(name='set1', score=10, input_patterns=['set1_*.in'])
-subtask_testset(name='set2', score=20, input_patterns=['set2_*.in'])
-subtask_testset(name='set3', score=20, input_patterns=['set3_*.in'])
-subtask_testset(name='set4', score=50, input_patterns=['set4_*.in'])
+subtask_testset(name='task1', score=10, input_patterns=['task1_*.in'])
+subtask_testset(name='task2', score=20, input_patterns=['task2_*.in'])
+subtask_testset(name='task3', score=20, input_patterns=['task3_*.in'])
+subtask_testset(name='task4', score=50, input_patterns=['task4_*.in'])
 # precisely scored by judge program like Jiyukenkyu (KUPC 2013)
 #scoring_judge()

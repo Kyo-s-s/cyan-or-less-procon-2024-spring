@@ -1,0 +1,26 @@
+21
+-157251 475176 -599305 723222 -336418 647037 -388202 -194501 979240 -875890 -562402 -919705 -339068 523497 566723 -476533 -280331 809764 -74747 401804 522108
+23
+push_front -715667
+push_back 638806
+pop_back 0
+push_back -506507
+push_back 711640
+push_back 593765
+pop_back 0
+pop_front 0
+push_back 319086
+pop_back 0
+push_front 291880
+push_front 104015
+pop_front 0
+pop_back 0
+pop_back 0
+pop_front 0
+push_front -538473
+push_back 385901
+pop_back 0
+pop_back 0
+pop_front 0
+push_front -456506
+push_back 267321

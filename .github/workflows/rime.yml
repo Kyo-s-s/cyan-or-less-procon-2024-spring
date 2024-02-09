@@ -17,7 +17,8 @@ jobs:
           - x-word-database
           - lcm-and-gcd
           - range-rotate-query
-        
+          - deque-inversion
+
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

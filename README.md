@@ -14,6 +14,7 @@
 | LCM and GCD        | yasunori |   ✔    |      △       |     △      |           |             |      |
 | Range Rotate Query | loop0919 |   ✔    |       ✔      |      ✔     |           |             |      |
 | Deque Inversion    | Nichi10p |   ✔    |              |            |           |             |      |
+| counting-zig-zag-sequence | Ackvy    |   △    |              |            |           |             |      |
 |                    |          |        |              |            |           |             |      |
 
 - 問題文: `statement.md` に記述、そのまま MofeCoder に登録できるようにする

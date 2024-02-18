@@ -17,6 +17,7 @@ jobs:
           - x-word-database
           - lcm-and-gcd
           - range-rotate-query
+          - long-chess-board
         
     runs-on: ubuntu-latest
     steps:

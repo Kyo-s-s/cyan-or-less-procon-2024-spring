@@ -11,12 +11,14 @@ jobs:
       fail-fast: false
       matrix:
         path: 
+          - cyan-or-less
           - straight-conditions
           - fffffx
           - unions
           - x-word-database
           - lcm-and-gcd
           - range-rotate-query
+          - long-chess-board
         
     runs-on: ubuntu-latest
     steps:

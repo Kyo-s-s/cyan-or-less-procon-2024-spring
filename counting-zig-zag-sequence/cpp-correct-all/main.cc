@@ -10,6 +10,18 @@ int main(){
 	cin >> N >> K;
 	vector<vector<ll>> dp(N, vector<ll>(K, 0));
 
+	// corner cases
+	if(N == 1){
+		cout << K << endl;
+		return 0;
+	}
+	if(N == 2){
+		ll ans = K * K;
+		ans %= MOD;
+		cout << ans << endl;
+		return 0;
+	}
+
 	// init dp table
 	for(int i = 0; i < K; i++){
 		dp[0][i] = 1;

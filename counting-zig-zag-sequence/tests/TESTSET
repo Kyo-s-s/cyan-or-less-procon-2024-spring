@@ -45,6 +45,7 @@
 id='X'
 #merged_testset(name=id + '_Merged', input_pattern='*.in')
 subtask_testset(name='task1', score=20, input_patterns=['task1_*.in'])
-subtask_testset(name='all', score=80, input_patterns=['*.in'])
+subtask_testset(name='task2', score=30, input_patterns=['task2_*.in'])
+subtask_testset(name='all', score=50, input_patterns=['*.in'])
 # precisely scored by judge program like Jiyukenkyu (KUPC 2013)
 #scoring_judge()

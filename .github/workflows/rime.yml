@@ -19,6 +19,7 @@ jobs:
           - lcm-and-gcd
           - range-rotate-query
           - long-chess-board
+          - counting-zig-zag-sequence
         
     runs-on: ubuntu-latest
     steps:

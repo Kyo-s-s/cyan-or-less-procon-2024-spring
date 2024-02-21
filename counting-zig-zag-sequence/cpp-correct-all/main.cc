@@ -16,8 +16,7 @@ int main(){
 		return 0;
 	}
 	if(N == 2){
-		ll ans = K * K;
-		ans %= MOD;
+		ll ans = (K * K) % MOD;
 		cout << ans << endl;
 		return 0;
 	}

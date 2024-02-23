@@ -14,6 +14,252 @@ let-math \mH a b =
   let b = ${#nil_#b} in
   let c = ${H} in ${#a #c #b}
 let-math \mod = ${\  \mathrm{mod} \ }
+let-block +ffffx id =
+  let id = embed-string id in
+    '<
+      +section ?:({ Writer: Kyo_s_s }) { |#id;: f(f(f(f(f(x)))))| } <
+        +frame ?:(2) {} <
+          +p {
+            整数 ${K \  ( 1 \leq K \leq 1 0^{1 8} )} と ${x} についての関数 ${f ( x )} が与えられる．
+            最初 ${x = 1} として，次の操作を ${K} 回繰り返す:
+            \listing { * ${x} を ${f ( x )} で更新する }
+            最終的な ${x}\emph { ${\mod 9 9 8} } は？
+          }
+          +block-skip (15pt);
+          +phantom (from 2) <
+            +p { 構文解析をがんばる必要がある...？ }
+            +p { ${\to} めちゃめちゃな式は与えられないため，そんなに頑張らなくてよい． }
+          >
+        >
+        +frame ?:(2) { 部分点1解法 } <
+          +listing { * ${K = 1 , \  \  f ( x ) \text!{に `*`, `^` は含まれない．}} }
+          +block-skip (5pt);
+          +phantom (from 2) <
+            +p { ${f ( x )} は， ${x} もしくは ${1} 以上 ${1 0^9} 未満の整数 の和で表されているので， }
+            +block-skip (5pt);
+            +enumerate ?:(let step idx =
+              let it =
+                idx
+                  |> arabic
+                  |> embed-string in { step #it;.\ } in EnumitemAlias.index-label step) {
+              * ${f ( x )} を `+` で分割する
+              * 分割したそれぞれの文字列を数値に変換する ( ${x} なら ${1} )
+              * すべて足し合わせる
+            }
+            +block-skip (5pt);
+            +p { を実装すればOK． }
+          >
+        >
+
+        +frame ?:(3) { 部分点2解法 } <
+          +listing { * ${K \leq 1 0^4 , \  \  f ( x ) \text!{に `^` は含まれない．}} }
+          +block-skip (5pt);
+          +phantom (from 2) <
+            +p { 部分点1解法で，「数値/ ${x} と演算子 `+`のみからなる数式」を計算した． }
+            +p { ${\to} 改造すると，「数値/ ${x} と 演算子 `*`のみからなる数式」を計算できる． }
+          >
+          +phantom (from 3) <
+            +enumerate ?:(let step idx =
+              let it =
+                idx
+                  |> arabic
+                  |> embed-string in { step #it;.\ } in EnumitemAlias.index-label step) {
+              * ${f ( x )} を `+` で分割する
+              * 分割したそれぞれの文字列は「数値/ ${x} と 演算子 `*`のみからなる数式」なので，
+              それぞれを計算する
+              * すべて足し合わせる
+            }
+            +block-skip (5pt);
+            +p { そのままだとオーバーフローするため，和/積の計算時に ${\mod 9 9 8} を取ればOK． }
+          >
+        >
+
+        +frame ?:(2) { 部分点3解法 } <
+          +listing { * ${K \leq 1 0^4} }
+          +block-skip (5pt);
+          +phantom (from 2) <
+            +p { 「数値/ ${x} と 演算子 `*`, `^`のみからなる数式」 を計算できればOK．これは， }
+            +enumerate ?:(let step idx =
+              let it =
+                idx
+                  |> arabic
+                  |> embed-string in { step #it;.\ } in
+              EnumitemAlias.with-depth [
+                EnumitemAlias.index-label step;
+                EnumitemAlias.bullet;
+              ]) {
+              * ${f ( x )} を `*` で分割する
+              * 分割したそれぞれの文字列は「数値/ ${x} もしくは，演算子 `^`のみからなる数式」なので，
+               ** `^` を含む: `(数値 or x)^(数値)` の形になっているので計算する
+               ** `^` を含まない: そのまま数値に変換する
+              * すべて掛け合わせる
+            }
+            +p { とすれば実装できる．愚直に ${K} 回シミュレーションすればOK． }
+          >
+        >
+
+        +frame ?:(3) { 満点解法 } <
+          +phantom (from 2) <
+            +p {
+              関数 ${f ( x )} の形から，
+              ${x} を更新するときに ${x \mod 9 9 8} で更新してもよい．
+              つまり，関数 ${f} は，
+            }
+            +eqn (${f : \mathbb{Z} / 9 9 8 \mathbb{Z} \to \mathbb{Z} / 9 9 8 \mathbb{Z}});
+            +p { とみなせる． ${\to} ダブリングできる！ }
+          >
+          +block-skip (5pt);
+          +phantom (from 3) <
+            +p {
+              前処理として ${x = 0 , 1 , \ldots , 9 9 7} に対する
+              ${f ( x )} を計算しておくことにより， ${x = 0 , 1 , \ldots , 9 9 7} に対する
+              ${f ( f ( x ) )} の値が計算でき，さらにこの値を用いて ${x} に対する ${f ( f ( f ( f ( x ) ) ) )} の値が計算でき， ${\ldots}
+            }
+            +p { これを繰り返し，必要な部分を適用することで ${K} 回操作した後の値を求めることができる！ }
+          >
+        >
+
+        +frame { 余談 } <
+          +block-skip (5pt);
+          +listing {
+            * 原案では 引き算 `-` と 括弧 `()` も含まれていたのですが，さすがにやりすぎということで無くしました．
+             ** 括弧が入ってくるとちゃんと再帰的な処理をする必要があります．
+          }
+          +block-skip (5pt);
+          +listing {
+            * `^` もなくていいじゃん，と言われていたのですが，
+            `^` が無いとPythonの`eval`を使うことで構文解析をサボれてしまうのでやむなく入れました．
+             ** 部分点2までは `eval` をやるだけで通せます．
+             ** 部分点3も，`re.sub(r'(x|\d+)\^(\d+)', r'pow(\1,\2,998)', S)` と置換することで，
+            構文解析パートは `eval` で済ませることができます(ダブリングはする必要があります)．
+          }
+        >
+      >
+    >
+let-block +x-word-database id =
+  let id = embed-string id in
+    '<
+      +section ?:({ Writer: Kyo_s_s }) { | #id;: X-word Database | } <
+        +frame ?:(2) {} <
+          +p { 整数 ${X \  \p{4 \leq X \leq 10^5}} と文字列 ${S \  ( 1 \leq \abs{S} \leq X )} が与えられる． }
+          +p {
+            以下の条件を満たす文字列を\emph { よい文字列 }と呼ぶ:
+            \listing {
+              * 文字列の長さが ${X} 以下
+              * 辞書順で ${S} 以下
+              * 連続部分列に`cyan`を含む
+            }
+            よい文字列は何個ある？
+          }
+          +block-skip (15pt);
+          +phantom (only 2) <
+            +p { ${X = 5 , \  S =} `cyanc` のとき，条件を満たす文字列は， }
+            +p { \fil; `acyan`, `bcyan`, `ccyan`, `cyan`, `cyana`, `cyanb`, `cyanc` }
+            +p { の${7}個． }
+          >
+        >
+        +frame ?:(3) { 部分点1解法 } <
+          +listing { * ${X \leq 8} }
+          +block-skip (5pt);
+          +phantom (from 2) <
+            +p { `cyan` を含む長さ ${8} 以下の文字列を全て試せばOK． }
+            +block-skip (10pt);
+            +p { たとえば長さが ${8} で `cyan` を含む文字列は， }
+            +p { \fil; `****cyan`, `***cyan*`, `**cyan**`, `*cyan***`, `cyan****` }
+            +p {
+              のどれかの形なので，`*` に入るアルファベットを全て試して
+              それぞれがよい文字列かどうかを判定すればよい！
+            }
+          >
+          +block-skip (15pt);
+          +phantom (from 3) <
+            +p { このままだと ${X = 8} で `cyancyan` を ${2} 回数えてしまうのでそこだけ注意． }
+          >
+        >
+        +frame ?:(4) { 部分点2解法 } <
+          +listing { * ${X \leq 1 0^3 , \  S} はすべて `z` で長さが ${X} の文字列 }
+          +block-skip (5pt);
+          +phantom (from 2) <
+            +p { 長さが ${X} 以下で `cyan` を含むような文字列はすべてよい文字列になる． }
+          >
+          +phantom (from 3) <
+            +p {
+              長さが ${K} で `cyan`を含む文字列の個数は，包除原理を使うと，
+              \eqn (${\sum_{i = 1}^{\floor{K/4}} ( - 1 )^{i + 1} \cdot 2 6^{K - 4 i} \cdot \mH{i+1}{K-4i}});
+              で求められる(ここで， ${\mH{n}{k}} は重複組合せ )．
+              \phantom (from 4) { よって，答えは， }
+            }
+          >
+          +phantom (from 4) <
+            +eqn (${\sum_{K = 4}^X \sum_{i = 1}^{\floor{K/4}} ( - 1 )^{i + 1} \cdot 2 6^{K - 4 i} \cdot \mH{i+1}{K-4i}});
+          >
+        >
+        +frame ?:(3) { 満点解法 } <
+          +phantom (from 2) <
+            +p { 桁DPで解ける！ }
+            +align [
+              ${\mathrm{dp} \pB{i} \pB{smaller} \pB{j} :=};
+              ${X \text!{の上から} i \text!{番目まで見て，}};
+              ${};
+              ${smaller = 0 : X \text!{と同じ} \/ \  1 : X \text!{より小さく，}};
+              ${};
+              ${\text!{`cyan`の} j \text!{文字目までを末尾に含む} \/ \text!{すでに`cyan`を含む}};
+              ${};
+              ${\text!{文字列の個数}};
+            ];
+          >
+          +phantom (from 3) <
+            +p { 上からDPをしていくことで， ${X} 字以下の文字列の個数も求められている． }
+            +eqn (${\sum_{i = 0}^X \p{\mathrm{dp} \pB{i} \pB{0} \pB{\text!{`cyan`を含む}} + \mathrm{dp} \pB{i} \pB{1} \pB{\text!{`cyan`を含む}}}});
+            +p { が答え． }
+          >
+        >
+      >
+    >
+let-block +cyan-or-less id =
+  let id = embed-string id in
+    '<
+      +section ?:({ Writer: Kyo_s_s }) { |#id;: Cyan or Less| } <
+        +frame {} <
+          +block-skip (10pt);
+          +p { カラーコードが文字列で与えられる． }
+          +block-skip (5pt);
+          +p {
+            \emph { 彩度 } を以下で定義する:
+            \listing { * ${r , g , b} をカラーコードのRGB値とする． }
+            \eqn (${\text!{彩度} = \frac{\max \p{r, g, b} - \min \p{r, g, b}}{\max \p{r, g, b}}});
+          }
+          +block-skip (5pt);
+          +p { 与えられたカラーコードが表す色は水色 `#00c0c0` の彩度以下か判定せよ． }
+        >
+        +frame ?:(3) { 解法 } <
+          +p { step1.\ 与えられたカラーコードをRGB値に変換する． }
+          +listing {
+            * 2桁の16進数を10進数に変換するには，1つ目の数字を16倍して2つ目の数字を足せばよい．
+             ** `a` は ${1 0} に，`b` は ${1 1} に，...，`f` は ${1 5} に変換してから足す．
+          }
+          +block-skip (5pt);
+          +phantom (from 2) <
+            +p { step2.\ 彩度を計算する． }
+            +listing { * 彩度の定義通りに計算すればOK． }
+          >
+          +block-skip (5pt);
+          +phantom (from 3) <
+            +p { step3.\ 彩度が水色の彩度以下か判定する． }
+            +listing { * 水色 `#00c0c0` も同じ方法で彩度を計算しておけば，大小関係を比較するだけ． }
+          >
+        >
+        +frame { 余談 } <
+          +block-skip (25pt);
+          +p { 実は，水色 `#00c0c0` の彩度は ${1} }
+          +p { ${\to} 彩度がこれより大きくなる色は存在しない！ }
+          +block-skip (10pt);
+          +p { このため，すべてのケースで `Yes` と正解すればよいです． }
+          +block-skip (20pt);
+          +p { 一旦没になったのですが，丁寧に書いてもよいし，気づけば1行で解けるので面白くない？となり出題されました． }
+        >
+      >
+    >
 in
 
 CyanTheme.document '<
@@ -23,202 +269,7 @@ CyanTheme.document '<
     date = { |2024/03/30| };
   |));
 
-  +section ?:({ Writer: Kyo_s_s }) { |X: f(f(f(f(f(x)))))| } <
-    +frame ?:(2) {} <
-      +p {
-        整数 ${K \  ( 1 \leq K \leq 1 0^{1 8} )} と ${x} についての関数 ${f ( x )} が与えられる．
-        最初 ${x = 1} として，次の操作を ${K} 回繰り返す:
-        \listing { * ${x} を ${f ( x )} で更新する }
-        最終的な ${x}\emph { ${\mod 9 9 8} } は？
-      }
-      +block-skip (15pt);
-      +phantom (from 2) <
-        +p { 構文解析をがんばる必要がある...？ }
-        +p { ${\to} めちゃめちゃな式は与えられないため，そんなに頑張らなくてよい． }
-      >
-    >
-    +frame ?:(2) { 部分点1解法 } <
-      +listing { * ${K = 1 , \  \  f ( x ) \text!{に `*`, `^` は含まれない．}} }
-      +block-skip (5pt);
-      +phantom (from 2) <
-        +p { ${f ( x )} は， ${x} もしくは ${1} 以上 ${1 0^9} 未満の整数 の和で表されているので， }
-        +block-skip (5pt);
-        +enumerate ?:(let step idx =
-          let it =
-            idx
-              |> arabic
-              |> embed-string in { step #it;.\ } in EnumitemAlias.index-label step) {
-          * ${f ( x )} を `+` で分割する
-          * 分割したそれぞれの文字列を数値に変換する ( ${x} なら ${1} )
-          * すべて足し合わせる
-        }
-        +block-skip (5pt);
-        +p { を実装すればOK． }
-      >
-    >
-
-    +frame ?:(3) { 部分点2解法 } <
-      +listing { * ${K \leq 1 0^4 , \  \  f ( x ) \text!{に `^` は含まれない．}} }
-      +block-skip (5pt);
-      +phantom (from 2) <
-        +p { 部分点1解法で，「数値/ ${x} と演算子 `+`のみからなる数式」を計算した． }
-        +p { ${\to} 改造すると，「数値/ ${x} と 演算子 `*`のみからなる数式」を計算できる． }
-      >
-      +phantom (from 3) <
-        +enumerate ?:(let step idx =
-          let it =
-            idx
-              |> arabic
-              |> embed-string in { step #it;.\ } in EnumitemAlias.index-label step) {
-          * ${f ( x )} を `+` で分割する
-          * 分割したそれぞれの文字列は「数値/ ${x} と 演算子 `*`のみからなる数式」なので，
-          それぞれを計算する
-          * すべて足し合わせる
-        }
-        +block-skip (5pt);
-        +p { そのままだとオーバーフローするため，和/積の計算時に ${\mod 9 9 8} を取ればOK． }
-      >
-    >
-
-    +frame ?:(2) { 部分点3解法 } <
-      +listing { * ${K \leq 1 0^4} }
-      +block-skip (5pt);
-      +phantom (from 2) <
-        +p { 「数値/ ${x} と 演算子 `*`, `^`のみからなる数式」 を計算できればOK．これは， }
-        +enumerate ?:(let step idx =
-          let it =
-            idx
-              |> arabic
-              |> embed-string in { step #it;.\ } in
-          EnumitemAlias.with-depth [
-            EnumitemAlias.index-label step;
-            EnumitemAlias.bullet;
-          ]) {
-          * ${f ( x )} を `*` で分割する
-          * 分割したそれぞれの文字列は「数値/ ${x} もしくは，演算子 `^`のみからなる数式」なので，
-           ** `^` を含む: `(数値 or x)^(数値)` の形になっているので計算する
-           ** `^` を含まない: そのまま数値に変換する
-          * すべて掛け合わせる
-        }
-        +p { とすれば実装できる．愚直に ${K} 回シミュレーションすればOK． }
-      >
-    >
-
-    +frame ?:(3) { 満点解法 } <
-      +phantom (from 2) <
-        +p {
-          関数 ${f ( x )} の形から，
-          ${x} を更新するときに ${x \mod 9 9 8} で更新してもよい．
-          つまり，関数 ${f} は，
-        }
-        +eqn (${f : \mathbb{Z} / 9 9 8 \mathbb{Z} \to \mathbb{Z} / 9 9 8 \mathbb{Z}});
-        +p { とみなせる． ${\to} ダブリングできる！ }
-      >
-      +block-skip (5pt);
-      +phantom (from 3) <
-        +p {
-          前処理として ${x = 0 , 1 , \ldots , 9 9 7} に対する
-          ${f ( x )} を計算しておくことにより， ${x = 0 , 1 , \ldots , 9 9 7} に対する
-          ${f ( f ( x ) )} の値が計算でき，さらにこの値を用いて ${x} に対する ${f ( f ( f ( f ( x ) ) ) )} の値が計算でき， ${\ldots}
-        }
-        +p { これを繰り返し，必要な部分を適用することで ${K} 回操作した後の値を求めることができる！ }
-      >
-    >
-
-    +frame { 余談 } <
-      +block-skip (5pt);
-      +listing {
-        * 原案では 引き算 `-` と 括弧 `()` も含まれていたのですが，さすがにやりすぎということで無くしました．
-         ** 括弧が入ってくるとちゃんと再帰的な処理をする必要があります．
-      }
-      +block-skip (5pt);
-      +listing {
-        * `^` もなくていいじゃん，と言われていたのですが，
-        `^` が無いとPythonの`eval`を使うことで構文解析をサボれてしまうのでやむなく入れました．
-         ** 部分点2までは `eval` をやるだけで通せます．
-         ** 部分点3も，`re.sub(r'(x|\d+)\^(\d+)', r'pow(\1,\2,998)', S)` と置換することで，
-        構文解析パートは `eval` で済ませることができます(ダブリングはする必要があります)．
-      }
-    >
-  >
-
-  +section ?:({ Writer: Kyo_s_s }) { | X: X-word Database | } <
-    +frame ?:(2) {} <
-      +p { 整数 ${X \  \p{4 \leq X \leq 10^5}} と文字列 ${S \  ( 1 \leq \abs{S} \leq X )} が与えられる． }
-      +p {
-        以下の条件を満たす文字列を\emph { よい文字列 }と呼ぶ:
-        \listing {
-          * 文字列の長さが ${X} 以下
-          * 辞書順で ${S} 以下
-          * 連続部分列に`cyan`を含む
-        }
-        よい文字列は何個ある？
-      }
-      +block-skip (15pt);
-      +phantom (only 2) <
-        +p { ${X = 5 , \  S =} `cyanc` のとき，条件を満たす文字列は， }
-        +p { \fil; `acyan`, `bcyan`, `ccyan`, `cyan`, `cyana`, `cyanb`, `cyanc` }
-        +p { の${7}個． }
-      >
-    >
-    +frame ?:(3) { 部分点1解法 } <
-      +listing { * ${X \leq 8} }
-      +block-skip (5pt);
-      +phantom (from 2) <
-        +p { `cyan` を含む長さ ${8} 以下の文字列を全て試せばOK． }
-        +block-skip (10pt);
-        +p { たとえば長さが ${8} で `cyan` を含む文字列は， }
-        +p { \fil; `****cyan`, `***cyan*`, `**cyan**`, `*cyan***`, `cyan****` }
-        +p {
-          のどれかの形なので，`*` に入るアルファベットを全て試して
-          それぞれがよい文字列かどうかを判定すればよい！
-        }
-      >
-      +block-skip (15pt);
-      +phantom (from 3) <
-        +p { このままだと ${X = 8} で `cyancyan` を ${2} 回数えてしまうのでそこだけ注意． }
-      >
-    >
-    +frame ?:(4) { 部分点2解法 } <
-      +listing { * ${X \leq 1 0^3 , \  S} はすべて `z` で長さが ${X} の文字列 }
-      +block-skip (5pt);
-      +phantom (from 2) <
-        +p { 長さが ${X} 以下で `cyan` を含むような文字列はすべてよい文字列になる． }
-      >
-      +phantom (from 3) <
-        +p {
-          長さが ${K} で `cyan`を含む文字列の個数は，包除原理を使うと，
-          \eqn (${\sum_{i = 1}^{\floor{K/4}} ( - 1 )^{i + 1} \cdot 2 6^{K - 4 i} \cdot \mH{i+1}{K-4i}});
-          で求められる(ここで， ${\mH{n}{k}} は重複組合せ )．
-          \phantom (from 4) { よって，答えは， }
-        }
-      >
-      +phantom (from 4) <
-        +eqn (${\sum_{K = 4}^X \sum_{i = 1}^{\floor{K/4}} ( - 1 )^{i + 1} \cdot 2 6^{K - 4 i} \cdot \mH{i+1}{K-4i}});
-      >
-    >
-    +frame ?:(3) { 満点解法 } <
-      +phantom (from 2) <
-        +p { 桁DPで解ける！ }
-        +align [
-          ${\mathrm{dp} \pB{i} \pB{smaller} \pB{j} :=};
-          ${X \text!{の上から} i \text!{番目まで見て，}};
-          ${};
-          ${smaller = 0 : X \text!{と同じ} \/ \  1 : X \text!{より小さく，}};
-          ${};
-          ${\text!{`cyan`の} j \text!{文字目までを末尾に含む} \/ \text!{すでに`cyan`を含む}};
-          ${};
-          ${\text!{文字列の個数}};
-        ];
-      >
-      +phantom (from 3) <
-        +p { 上からDPをしていくことで， ${X} 字以下の文字列の個数も求められている． }
-        +eqn (${\sum_{i = 0}^X \p{\mathrm{dp} \pB{i} \pB{0} \pB{\text!{`cyan`を含む}} + \mathrm{dp} \pB{i} \pB{1} \pB{\text!{`cyan`を含む}}}});
-        +p { が答え． }
-      >
-    >
-  >
-  +section { |X問題| } <
-    +frame {} <>
-  >
+  +cyan-or-less (`A`);
+  +ffffx (`X`);
+  +x-word-database (`X`);
 >

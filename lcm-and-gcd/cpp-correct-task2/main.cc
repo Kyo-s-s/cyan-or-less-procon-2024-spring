@@ -17,14 +17,14 @@ int main(){
     int N; cin >> N;
 
     if(N > 1000) return 0;
-    
+
     vector<int64_t> A(N);
     for(int i = 0; i < N; i++){
         cin >> A[i];
     }
 
     for(int i = 0; i < N; i++){
-        for(int j = i; j < N-1; j++){
+        for(int j = 0; j < N-i-1; j++){
             int64_t g = gcd(A[j], A[j+1]);
             int64_t l = lcm(A[j], A[j+1]);
             A[j] = g;

@@ -22,8 +22,7 @@ let-block +ffffx id =
           +p {
             整数 ${K \  ( 1 \leq K \leq 1 0^{1 8} )} と ${x} についての関数 ${f ( x )} が与えられる．
             最初 ${x = 1} として，次の操作を ${K} 回繰り返す:
-            \listing { * ${x} を ${f ( x )} で更新する }
-            最終的な ${x}\emph { ${\mod 9 9 8} } は？
+            \listing { * ${x} を ${f ( x )} で更新する } 最終的な ${x}\emph { ${\mod 9 9 8} } は？
           }
           +block-skip (15pt);
           +phantom (from 2) <
@@ -148,8 +147,7 @@ let-block +x-word-database id =
               * 文字列の長さが ${X} 以下
               * 辞書順で ${S} 以下
               * 連続部分列に`cyan`を含む
-            }
-            よい文字列は何個ある？
+            } よい文字列は何個ある？
           }
           +block-skip (15pt);
           +phantom (only 2) <
@@ -185,8 +183,7 @@ let-block +x-word-database id =
           +phantom (from 3) <
             +p {
               長さが ${K} で `cyan`を含む文字列の個数は，包除原理を使うと，
-              \eqn (${\sum_{i = 1}^{\floor{K/4}} ( - 1 )^{i + 1} \cdot 2 6^{K - 4 i} \cdot \mH{i+1}{K-4i}});
-              で求められる(ここで， ${\mH{n}{k}} は重複組合せ )．
+              \eqn (${\sum_{i = 1}^{\floor{K/4}} ( - 1 )^{i + 1} \cdot 2 6^{K - 4 i} \cdot \mH{i+1}{K-4i}}); で求められる(ここで， ${\mH{n}{k}} は重複組合せ )．
               \phantom (from 4) { よって，答えは， }
             }
           >
@@ -226,8 +223,7 @@ let-block +cyan-or-less id =
           +block-skip (5pt);
           +p {
             \emph { 彩度 } を以下で定義する:
-            \listing { * ${r , g , b} をカラーコードのRGB値とする． }
-            \eqn (${\text!{彩度} = \frac{\max \p{r, g, b} - \min \p{r, g, b}}{\max \p{r, g, b}}});
+            \listing { * ${r , g , b} をカラーコードのRGB値とする． } \eqn (${\text!{彩度} = \frac{\max \p{r, g, b} - \min \p{r, g, b}}{\max \p{r, g, b}}});
           }
           +block-skip (5pt);
           +p { 与えられたカラーコードが表す色は水色 `#00c0c0` の彩度以下か判定せよ． }
@@ -260,6 +256,80 @@ let-block +cyan-or-less id =
         >
       >
     >
+let-block +range-rotate-query id =
+  let id = embed-string id in
+    '<
+      +section ?:({ Writer: loop0919 }) { | #id;: Range Rotate Query| } <
+        +frame ?:(1) {} <
+          +block-skip (5pt);
+          +p { 二次元平面上に ${N \  ( 3 \leq N \leq 1 0^5 )} 個の点がある． }
+          +p {
+            以下のクエリを ${Q \  ( 1 \leq Q \leq 5 0 0 0 0 )} 個処理せよ:
+            \listing {
+              * 原点からのユークリッド距離が ${\sqrt{l}} 以上 ${\sqrt{r}} 以下の点
+              すべてを反時計回りに ${\theta} 度回転させる
+              * 点 ${a , b , c} を頂点とする三角形の面積を出力する
+            }
+          }
+        >
+        +frame ?:(3) { 部分点1解法 } <
+          +listing { * ${N \leq 1 0 0 , \  Q \leq 1 0 0 0 ,} 面積を求めるクエリのみ }
+          +block-skip (5pt);
+          +phantom (from 2) <
+            +p { ${3}点 ${\p{ x_1 , y_1 } , \p{ x_2 , y_2} , \p{ x_3 , y_3 }} を頂点とする三角形の面積を求めたい． }
+          >
+          +block-skip (5pt);
+          +phantom (from 3) <
+            +p {
+              このとき，三角形の面積は，
+              \eqn (${\frac{1}{2} \cdot \abs{x_1 y_2 + x_2 y_3 + x_3 y_1 - x_1 y_3 - x_2 y_1 - x_3 y_2}});
+              で求められる(証明はここでは略)．
+            }
+            +block-skip (5pt);
+            +p { クエリごとにこれを計算すればOK． }
+          >
+        >
+        +frame ?:(3) { 部分点2解法 } <
+          +listing { * ${N \leq 1 0 0 , \  Q \leq 1 0 0 0} }
+          +phantom (from 2) <
+            +p {
+              ある頂点 ${\p{x, y}} を ${\theta} 度反時計回りに回転させると，その座標は，
+              \eqn (let-math \th = ${\frac{\theta \pi}{180}} in ${\p{x \cos \th - y \sin \th,\ x \sin \th + y \cos \th}});
+              で求められる(証明はここでは略．回転行列を用いればよい)．
+            }
+          >
+          +phantom (from 3) <
+            +p { 各点について，何度回転したかを記録しておけば， }
+            +listing {
+              * 回転クエリ: 距離が ${\sqrt{l}}以上 ${\sqrt{r}} 以下の点の回転した度数を ${\theta} だけ増やす
+              * 面積クエリ: ${3} 点それぞれの今の座標を求めたのち，面積を計算する
+            }
+            +p { とすれば部分点2に正解できる． }
+            +p { 毎回回転させると誤差で落ちるので注意！ }
+          >
+        >
+        +frame ?:(3) { 満点解法 } <
+          +phantom (from 2) <
+            +p {
+              各点をユークリッド距離でソートしておくと，
+              回転クエリは，「ある区間に ${\theta} を加算する」という操作になる．
+            }
+            +p { 区間加算一点取得ができればよい． }
+            +p { ${\to} BITでできる！ }
+          >
+          +phantom (from 3) <
+            +listing {
+              * 区間 ${[ l , r )} に ${x} を加算:
+               ** ${l} 番目の要素に ${x} を加算， ${r} 番目の要素に ${- x} を加算
+              * ${i} 番目の要素を取得:
+               ** ${[ 0 , i )} の総和が求めたい値
+            }
+            +p { BIT上でimos法をするイメージ． }
+            +p { 双対セグ木/動的セグ木/遅延セグ木などを使ってもOK． }
+          >
+        >
+      >
+    >
 in
 
 CyanTheme.document '<
@@ -272,4 +342,5 @@ CyanTheme.document '<
   +cyan-or-less (`A`);
   +ffffx (`X`);
   +x-word-database (`X`);
+  +range-rotate-query (`X`);
 >

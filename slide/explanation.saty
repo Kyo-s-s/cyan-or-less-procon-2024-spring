@@ -347,7 +347,7 @@ in
 
 CyanTheme.document '<
   +make-title ((|
-    title = { |水以下コン(チーム戦) 解説| };
+    title = { |水以下コンテスト 解説| };
     author = { |運営メンバーのなまえ| };
     date = { |2024/03/30| };
   |));

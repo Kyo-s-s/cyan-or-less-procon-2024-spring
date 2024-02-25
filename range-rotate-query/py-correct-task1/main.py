@@ -15,6 +15,8 @@ for i in range(N):
     points.append((X, Y))
 
 Q = int(input())
+ans = list()
+
 for _ in range(Q):
     _, *query = list(map(int, input().split()))
 
@@ -24,5 +26,6 @@ for _ in range(Q):
     B = points[b]
     C = points[c]
     
-    print(area(A, B, C))
+    ans.append(str(area(A, B, C)))
 
+print('\n'.join(ans))

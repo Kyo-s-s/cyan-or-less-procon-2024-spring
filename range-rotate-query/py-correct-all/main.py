@@ -70,6 +70,8 @@ distinct_distances = sorted(set(distances))
 dual_bit = Dual_Fenwick_Tree(len(distinct_distances))
 
 Q = int(input())
+ans = list()
+
 for _ in range(Q):
     cmd, *query = list(map(int, input().split()))
     if cmd == 1:
@@ -86,5 +88,6 @@ for _ in range(Q):
         B = rotate(dual_bit.get(shrinked_distances[b]), points[b])
         C = rotate(dual_bit.get(shrinked_distances[c]), points[c])
         
-        print(area(A, B, C))
+        ans.append(str(area(A, B, C)))
 
+print('\n'.join(ans))

@@ -11,12 +11,15 @@ jobs:
       fail-fast: false
       matrix:
         path: 
+          - cyan-or-less
           - straight-conditions
           - fffffx
           - unions
           - x-word-database
           - lcm-and-gcd
           - range-rotate-query
+          - long-chess-board
+          - counting-zig-zag-sequence
           - deque-inversion
 
     runs-on: ubuntu-latest

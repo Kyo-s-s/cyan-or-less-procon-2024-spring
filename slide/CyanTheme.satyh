@@ -291,9 +291,14 @@ end = struct
 
   let frame-normal config =
     let f ctx content =
-      let (_, gr) =
-        frame-master-with-footer config
-          |> Frame.embed ctx () in
+      let gr =
+        let (_, gr) =
+          frame-master-with-footer config
+            |> Frame.embed ctx () in
+        let line =
+          [
+            stroke 0.5pt color-cyan (Gr.line (15pt, layout#paper-height -' 41pt) (layout#paper-width -' 15pt, layout#paper-height -' 41pt));
+          ] in List.concat [gr;line;] in
       let bb-title =
         let ctx-title =
           ctx

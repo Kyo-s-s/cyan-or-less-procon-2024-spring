@@ -20,6 +20,7 @@ jobs:
           - range-rotate-query
           - long-chess-board
           - counting-zig-zag-sequence
+          - subset-mex
         
     runs-on: ubuntu-latest
     steps:

@@ -22,14 +22,14 @@ class fenwick_tree:
     return self.__sum(r) - self.__sum(l)
 
 def count_inverse(A):
-  INF = 2 * 10**6 + 1
-  OFFSET = 10**6
+  INF = 2 * 10**5 + 1
+  OFFSET = 10**5
   cnt = fenwick_tree(INF)
-  ans = 0
+  answer = 0
   for a in A:
-    ans += cnt.sum(a+1 + OFFSET, INF)
+    answer += cnt.sum(a+1 + OFFSET, INF)
     cnt.add(a + OFFSET, 1)
-  return ans
+  return answer
 
 def main():
   N = int(input())

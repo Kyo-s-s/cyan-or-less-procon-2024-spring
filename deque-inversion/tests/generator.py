@@ -2,7 +2,7 @@
 from random import seed, randint, choice
 
 def make_A(n: int):
-  return [randint(-10**6, 10**6) for _ in range(n)]
+  return [randint(-10**5, 10**5) for _ in range(n)]
 
 def make_query(n: int, q: int, t: 'list[str]' = None):
   if t is None:
@@ -17,7 +17,7 @@ def make_query(n: int, q: int, t: 'list[str]' = None):
       T.append(choice(t))
     if 'push' in T[-1]:
       n += 1
-      X.append(randint(-10**6, 10**6))
+      X.append(randint(-10**5, 10**5))
     else:
       n -= 1
       X.append(0)

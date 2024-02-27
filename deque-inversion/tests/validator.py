@@ -5,14 +5,14 @@ def main():
   N = int(input())
   A = deque(map(int, input().split()))
   assert 2 <= N <= 10**5
-  assert all(-10**6 <= a <= 10**6 for a in A)
+  assert all(-10**5 <= a <= 10**5 for a in A)
   Q = int(input())
   assert 1 <= Q <= 10**5
   for _ in range(Q):
     T, X = input().split()
     X = int(X)
     assert T in ['push_front', 'push_back', 'pop_front', 'pop_back']
-    assert -10**6 <= X <= 10**6
+    assert -10**5 <= X <= 10**5
     if 'pop' in T:
       assert X == 0
     if T == 'push_front':

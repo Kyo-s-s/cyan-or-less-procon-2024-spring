@@ -25,8 +25,8 @@ def main():
   N = int(input())
   A = deque(map(int, input().split()))
 
-  INF = 2 * 10**6 + 1
-  OFFSET = 10**6
+  INF = 2 * 10**5 + 1
+  OFFSET = 10**5
   answer = 0
   cnt = fenwick_tree(INF)
   for a in A:

@@ -33,15 +33,15 @@ class fenwick_tree {
 };
 
 int count_inverse(deque<int> const &A) {
-  constexpr int inf = 2000001;
-  constexpr int offset = 1000000;
-  fenwick_tree cnt(inf);
-  int ans = 0;
+  constexpr int INF = 200000 + 1;
+  constexpr int OFFSET = 100000;
+  fenwick_tree cnt(INF);
+  int answer = 0;
   for (int const a : A) {
-    ans += cnt.sum(a+1 + offset, inf);
-    cnt.add(a + offset, 1);
+    answer += cnt.sum(a+1 + OFFSET, INF);
+    cnt.add(a + OFFSET, 1);
   }
-  return ans;
+  return answer;
 }
 
 int main() {

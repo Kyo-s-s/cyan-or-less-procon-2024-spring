@@ -12,13 +12,13 @@ class fenwick_tree:
       r -= r & -r
     return s
   def add(self, i, x):
-    assert 0 <= i < self.__n
+    # assert 0 <= i < self.__n
     i += 1
     while i <= self.__n:
       self.__dat[i-1] += x
       i += i & -i
   def sum(self, l, r):
-    assert 0 <= l <= r <= self.__n
+    # assert 0 <= l <= r <= self.__n
     return self.__sum(r) - self.__sum(l)
 
 def count_inverse(A):
@@ -38,14 +38,12 @@ def main():
 
   Q = int(input())
   assert Q <= 100
-  for _ in range(Q):
-    T, X = input().split()
-    X = int(X)
+  for T, X in [input().split() for _ in range(Q)]:
 
     if T == 'push_front':
-      A.appendleft(X)
+      A.appendleft(int(X))
     if T == 'push_back':
-      A.append(X)
+      A.append(int(X))
     if T == 'pop_front':
       A.popleft()
     if T == 'pop_back':

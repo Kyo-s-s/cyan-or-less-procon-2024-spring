@@ -8,7 +8,7 @@ def main():
     line = re.match(r'(\d+)$', sys.stdin.readline())
     assert line, 'Does not match with regexp'
     N = int(line.groups()[0])
-    assert 2 <= N <= 30000, 'N out of range: %d' % N
+    assert 2 <= N <= 100000, 'N out of range: %d' % N
 
     line = re.match(r'(([\d ]+)+)$', sys.stdin.readline())
     assert line, 'Does not match with regexp'

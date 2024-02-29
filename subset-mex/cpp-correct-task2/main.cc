@@ -110,7 +110,9 @@ int main() {
     int N; cin >> N;        
     vector<int> cnt(1010, 0);
     for (int i = 0; i < N; i++) {
-        int a; cin >> a; cnt[a]++;
+        int a; cin >> a; 
+        assert(a <= 1000);
+        cnt[a]++;
     }
 
     Mint ans = 0;

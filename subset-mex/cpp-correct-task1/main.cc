@@ -11,6 +11,8 @@ int main() {
     vector<int> A(N);
     for (auto &a : A) cin >> a;
 
+    assert(N <= 17);
+
     ll ans = 0;
 
 

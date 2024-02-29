@@ -1,6 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+#include<bits/stdc++.h>
+using namespace std;
+
 
 template<int m> struct StaticModint{
     using mint = StaticModint;
@@ -105,20 +108,26 @@ using Mint = Modint998244353;
 int main() {
 
     int N; cin >> N;        
-    vector<int> cnt(201010, 0);
+    vector<int> cnt(1010, 0);
     for (int i = 0; i < N; i++) {
         int a; cin >> a; cnt[a]++;
     }
 
     Mint ans = 0;
+    for (int m = 0; m < 1010; m++) {
+        // mex = m となるとき
+        // - m 未満の数がそれぞれ1つ以上ある
+        Mint c = 1;
+        for (int i = 0; i < m; i++) {
+            c *= Mint(2).pow(cnt[i]) - 1;
+        }
+        // - m がない
+        // - m + 1 以上の数はなんでもよい
+        for (int i = m + 1; i < 1010; i++) {
+            c *= Mint(2).pow(cnt[i]);
+        }
 
-    Mint ones = 1; // m未満の要素を各値1以上選ぶ個数
-    int big = N; // m より大きい数の個数
-    for (int m = 0; m < 200010; m++) {
-        // mex が m になるものを数える
-        big -= cnt[m];
-        ans += m * ones * Mint(2).pow(big);
-        ones *= Mint(2).pow(cnt[m]) - 1;
+        ans += c * m;
     }
 
     cout << ans << endl;

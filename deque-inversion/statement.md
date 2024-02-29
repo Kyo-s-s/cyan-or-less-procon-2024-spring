@@ -24,6 +24,10 @@ $1 \leq i < j \leq N$ かつ $A_i > A_j$ を満たす、整数の組 $(i, j)$ �
 - $-10^5 \leq A_i \leq 10^5, ~~ A_i$ は整数
 - $1 \leq Q \leq 10^5, ~~ Q$ は整数
 - $T$ は `push_front`, `push_back`, `pop_front`, `pop_back` のいずれか
+  - 1, 2, 3, 4 と置換
+  ```
+  find ./ -type f -name "*.in" | xargs sed -i -e "s/push_front/1"
+  ```
 - $-10^5 \leq X \leq 10^5, ~~ X$ は整数
 - $A$ の長さが 2 より小さくなるようなクエリは与えられない
 

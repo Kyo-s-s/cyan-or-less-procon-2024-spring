@@ -1,17 +1,17 @@
 12
 44382 9248 94216 -62702 54947 10674 -21874 66976 -7054 -77835 -34973 16604
 14
-pop_back 0
-push_back -1280
-push_back -67171
-push_back -17191
-push_back -37962
-push_back -23701
-pop_back 0
-pop_back 0
-push_back -65336
-push_back 3232
-push_back 84069
-push_back -65392
-pop_back 0
-pop_back 0
+4 0
+2 -1280
+2 -67171
+2 -17191
+2 -37962
+2 -23701
+4 0
+4 0
+2 -65336
+2 3232
+2 84069
+2 -65392
+4 0
+4 0

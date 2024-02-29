@@ -11,17 +11,18 @@ def main():
   for _ in range(Q):
     T, X = input().split()
     X = int(X)
-    assert T in ['push_front', 'push_back', 'pop_front', 'pop_back']
+    # assert T in ['push_front', 'push_back', 'pop_front', 'pop_back']
+    assert T in ['1', '2', '3', '4']
     assert -10**5 <= X <= 10**5
     if 'pop' in T:
       assert X == 0
-    if T == 'push_front':
+    if T == '1':
       A.appendleft(X)
-    if T == 'push_back':
+    if T == '2':
       A.append(X)
-    if T == 'pop_front':
+    if T == '3':
       A.popleft()
-    if T == 'pop_back':
+    if T == '4':
       A.pop()
     assert len(A) >= 2
 

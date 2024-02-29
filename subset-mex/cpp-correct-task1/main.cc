@@ -12,6 +12,7 @@ int main() {
     for (auto &a : A) cin >> a;
 
     assert(N <= 17);
+    assert(all_of(A.begin(), A.end(), [](int a) { return 0 <= a && a <= 1000; }));
 
     ll ans = 0;
 

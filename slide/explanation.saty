@@ -8,6 +8,12 @@ open SlydifiOverlay
 open CyanTheme
 let-block ctx +block-skip v = block-skip v
 let-inline ctx \fil = inline-fil
+let gen-iop it =
+  let iop =
+    text-in-math MathOp (fun ctx -> (let size = get-font-size ctx in
+      raise-inline (size *' 0.12) (read-inline (ctx
+        |> set-font-size (size *' 0.7)) { ${#it} }))) in iop
+let-math \isum = gen-iop ${\sum}
 let-math \mH a b =
   let nil = text-in-math MathOrd (fun ctx -> inline-nil) in
   let a = ${#nil_#a} in
@@ -256,6 +262,83 @@ let-block +cyan-or-less id =
         >
       >
     >
+let-block +unions id =
+  let id = embed-string id in
+    '<
+      +section ?:({ Writer: yasunori }) { |#id;: Unions| } <
+        +frame {} <
+          +p {
+            ${N} 個の国と，複数の国で構成される同盟が ${M} 個ある．
+            ${i} 個目の同盟には ${C_i} 個の国
+            ${A_{i , 1} , A_{i , 2} , \ldots , A_{i , C_i}} の国が所属している．
+          }
+          +p {
+            同じ同盟に所属している国同士は直接行き来でき，同盟 ${i} に属している国同士は ${D_i} 分で移動できる．
+            同じ同盟に属していない国同士は直接行き来できない．
+          }
+          +p { 国 ${2 , 3 , \ldots , N} について，国 ${1} から移動するのにかかる時間の最小値を求めよ． }
+          +block-skip (5pt);
+          +listing {
+            * ${2 \leq N \leq 1 0^5}
+            * ${1 \leq M \leq 1 0^5}
+            * ${\isum_{i = 1}^M C_i \leq 1 0^5}
+          }
+        >
+        +frame ?:(3) { 部分点1解法 } <
+          +listing { * ${C_i = 2 \  ( 1 \leq i \leq M )} }
+          +block-skip (5pt);
+          +phantom (from 2) <
+            +p {
+              すべての同盟がちょうど ${2} 個の国からなるため，
+              同盟 ${i} は「${A_{i , 1}} と ${A_{i , 2}} は移動に ${D_i} 分かかる道でつながっている」と言い換えることができる．
+            }
+          >
+          +block-skip (10pt);
+          +phantom (from 3) <
+            +p { つまり，国 ${1} から国 ${2 , 3 , \ldots , N} への最短距離を求める問題に帰着できる． }
+            +p { ${\to} このグラフは頂点の数が ${N} ，辺の数が ${M} であるため，ダイクストラ法で解ける！ }
+            +block-skip (10pt);
+            +p { 国 ${1} を始点として，ダイクストラ法を使って各国への最短距離を求めることで，部分点1に正解できる． }
+          >
+        >
+        +frame ?:(3) { 部分点2解法 } <
+          +listing { * ${\isum_{i = 1}^M C_i \leq 1 0^3} }
+          +block-skip (5pt);
+          +phantom (from 2) <
+            +p { 同じ同盟に属する国同士は「${D_i} 分かかる道でつながっている」と言い換えることができる． }
+          >
+          +phantom (from 3) <
+            +p {
+              ${\isum_{i = 1}^M C_i \leq 1 0^3} の制約から，
+              同じ同盟に属する国同士のペアすべてに ${D_i} の重みを持つ辺を張っても十分間に合う．
+              実際，辺数を ${\abs{E}} とすると，
+            }
+            +eqn (${\abs{E} = \sum_{i = 1}^M \frac{C_i (C_i - 1)}{2} < \frac{1}{2} \sum_{i = 1}^M C_i^2 \leq \frac{1}{2} \p{\sum_{i=1}^M C_i}^2 \leq 5 \times 1 0^5});
+            +p { となる． }
+            +p { 部分点1と同様にダイクストラ法を用いれば，部分点2に正解できる． }
+          >
+        >
+        +frame ?:(3) { 満点解法 } <
+          +phantom (from 2) <
+            +p { 部分点2の方法だと，張る辺の本数が多すぎて間に合わない． }
+            +p { \emph { 超頂点 } を導入することで間に合う！ }
+          >
+          +block-skip (2pt);
+          +phantom (from 3) <
+            +p { 各国 ${1 , 2 , \ldots , N} と，同盟 ${1 , 2 , \ldots , M} を頂点とするグラフを考える． }
+            +p {
+              ${i = 1 , 2 , \ldots , M , \  j = 1 , 2 , \ldots , C_i} について，
+              \listing {
+                * 国 ${A_{i , j}} から 同盟 ${i} に，重み ${D_i} の辺を張る
+                * 同盟 ${i} から 国 ${A_{i , j}} に，重み ${0} の辺を張る
+              }
+            }
+            +p { とすると，同じ同盟に属する国同士は同盟の頂点を経由することで ${D_i} 分のコストで移動できる． }
+            +p { このグラフの辺数は ${2 \times \isum_{i = 1}^M C_i} であるため，このグラフ上でダイクストラ法をすればよい． }
+          >
+        >
+      >
+    >
 let-block +range-rotate-query id =
   let id = embed-string id in
     '<
@@ -334,13 +417,14 @@ in
 
 CyanTheme.document '<
   +make-title ((|
-    title = { |水以下コン(チーム戦) 解説| };
+    title = { |水以下コンテスト 解説| };
     author = { |運営メンバーのなまえ| };
     date = { |2024/03/30| };
   |));
 
   +cyan-or-less (`A`);
   +ffffx (`X`);
+  +unions (`X`);
   +x-word-database (`X`);
   +range-rotate-query (`X`);
 >

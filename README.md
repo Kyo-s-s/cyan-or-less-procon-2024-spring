@@ -12,7 +12,7 @@
 | Unions                    | yasunori |   ✔    |      ✔       |     ✔      |           |             |  ✔   |
 | X-word Database           | Kyo_s_s  |   ✔    |      ✔       |     ✔      |           |             |  ✔   |
 | Long Chess Board          | yasunori |        |              |            |           |             |      |
-| LCM and GCD               | yasunori |   ✔    |      △       |     △      |           |             |      |
+| LCM and GCD               | yasunori |   ✔    |      △       |     ✔      |           |      ✔      |      |
 | Range Rotate Query        | loop0919 |   ✔    |      ✔       |     ✔      |           |      ✔      |      |
 | Deque Inversion           | Nichi10p |   ✔    |              |            |           |             |      |
 | Counting Zig Zag Sequence | Ackvy    |   △    |      ✔       |     ✔      |           |             |      |

@@ -14,16 +14,15 @@ def main():
 
   Q = int(input())
   for _ in range(Q):
-    T, X = input().split()
-    X = int(X)
+    T, X = map(int, input().split())
 
-    if T == 'push_front':
+    if T == 1:
       A.insert(0, X)
-    if T == 'push_back':
+    if T == 2:
       A.append(X)
-    if T == 'pop_front':
+    if T == 3:
       A.pop(0)
-    if T == 'pop_back':
+    if T == 4:
       A.pop()
 
     print(count_inverse(A))

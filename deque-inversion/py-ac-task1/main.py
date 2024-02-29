@@ -16,12 +16,11 @@ def main():
   Q = int(input())
   assert Q <= 100
   for _ in range(Q):
-    T, X = input().split()
-    X = int(X)
-    assert T == 'push_back' or T == 'pop_back'
-    if T == 'push_back':
+    T, X = map(int, input().split())
+    assert T == 2 or T == 4
+    if T == 2:
       A.append(X)
-    if T == 'pop_back':
+    if T == 4:
       A.pop()
     print(count_inverse(A))
 

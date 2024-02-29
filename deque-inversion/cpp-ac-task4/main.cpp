@@ -53,25 +53,25 @@ int main() {
 
   cin >> Q;
   while (Q--) {
-    string T; int X;
+    int T; int X;
     cin >> T >> X;
 
-    if (T == "push_front") {
+    if (T == 1) {
       answer += cnt.sum(0, X + OFFSET);
       cnt.add(X + OFFSET, 1);
       A.push_front(X);
     }
-    if (T == "push_back") {
+    if (T == 2) {
       answer += cnt.sum(X+1 + OFFSET, INF);
       cnt.add(X + OFFSET, 1);
       A.push_back(X);
     }
-    if (T == "pop_front") {
+    if (T == 3) {
       answer -= cnt.sum(0, A.front() + OFFSET);
       cnt.add(A.front() + OFFSET, -1);
       A.pop_front();
     }
-    if (T == "pop_back") {
+    if (T == 4) {
       answer -= cnt.sum(A.back()+1 + OFFSET, INF);
       cnt.add(A.back() + OFFSET, -1);
       A.pop_back();

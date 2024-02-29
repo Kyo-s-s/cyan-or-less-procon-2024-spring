@@ -24,12 +24,12 @@ int main() {
   cin >> Q;
   assert(Q <= 100);
   while (Q--) {
-    string T; int X;
+    int T; int X;
     cin >> T >> X;
-    assert(T == "push_back" or T == "pop_back");
-    if (T == "push_back")
+    assert(T == 2 or T == 4);
+    if (T == 2)
       A.push_back(X);
-    if (T == "pop_back")
+    if (T == 4)
       A.pop_back();
     cout << count_inverse(A) << endl;
   }

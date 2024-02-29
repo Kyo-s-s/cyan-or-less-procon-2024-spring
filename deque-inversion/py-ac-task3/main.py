@@ -38,15 +38,15 @@ def main():
 
   Q = int(input())
   assert Q <= 100
-  for T, X in [input().split() for _ in range(Q)]:
+  for T, X in [map(int, input().split()) for _ in range(Q)]:
 
-    if T == 'push_front':
-      A.appendleft(int(X))
-    if T == 'push_back':
-      A.append(int(X))
-    if T == 'pop_front':
+    if T == 1:
+      A.appendleft(X)
+    if T == 2:
+      A.append(X)
+    if T == 3:
       A.popleft()
-    if T == 'pop_back':
+    if T == 4:
       A.pop()
 
     print(count_inverse(A))

@@ -113,13 +113,16 @@ int64_t f(int H, int W, int r_k, int c_k, int r_b, int c_b){
 }
 
 int main(){
-    int H, W;
-    int r_k, c_k, r_b, c_b;
-    cin >> H >> W >> r_k >> c_k >> r_b >> c_b;
-    r_k--; c_k--; r_b--; c_b--;
+    int T; cin >> T;
+    for(int i = 0; i < T; i++){
+        int H, W;
+        int r_k, c_k, r_b, c_b;
+        cin >> H >> W >> r_k >> c_k >> r_b >> c_b;
+        r_k--; c_k--; r_b--; c_b--;
 
-    int64_t ans = f(H, W, r_k, c_k, r_b, c_b);
-    if(ans == INF) ans = -1;
+        int64_t ans = f(H, W, r_k, c_k, r_b, c_b);
+        if(ans == INF) ans = -1;
 
-    cout << ans << endl;
+        cout << ans << endl;
+    }
 }

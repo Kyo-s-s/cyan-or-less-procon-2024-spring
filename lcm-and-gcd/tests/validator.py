@@ -15,7 +15,7 @@ def main():
     A = list(map(int, line.groups()[0].split()))
     assert len(A) == N, 'len(A) out of range: %d' % len(A)
     for a in A:
-        assert 1 <= a < 998244353, 'A out of range: %d' % a
+        assert 1 <= a <= 200000, 'A out of range: %d' % a
 
     assert sys.stdin.read() == '', 'Extra lines'
 

@@ -7,6 +7,10 @@ while IFS= read -r -d '' file; do
         continue
     fi
 
+    if [[ "${file##*.}" == "pdf" ]]; then
+        continue
+    fi
+
     if [[ $(tail -c 1 "$file" | wc -l) != $'1' ]]; then
         echo "'$file' does not end with a newline."
         fall=true

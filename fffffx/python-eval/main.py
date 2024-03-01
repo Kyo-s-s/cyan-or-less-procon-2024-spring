@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env pypy3
 
 K = int(input())
 S = '(' + input().replace('^', '**') + ')%998'

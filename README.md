@@ -16,7 +16,7 @@
 | Range Rotate Query        | loop0919 |   ✔    |      ✔       |     ✔      |           |      ✔      |  ✔   |
 | Deque Inversion           | Nichi10p |   ✔    |              |            |           |             |      |
 | Counting Zig Zag Sequence | Ackvy    |   △    |      ✔       |     ✔      |           |             |      |
-| Subset Mex                | Kyo_s_s  |   △    |              |            |           |             |      |
+| Subset Mex                | Kyo_s_s  |   △    |      ✔       |     ✔      |           |      ✔      |      |
 
 - 問題文: `statement.md` に記述、そのまま MofeCoder に登録できるようにする
 - テストケース: validator を書き、通ることを確認する

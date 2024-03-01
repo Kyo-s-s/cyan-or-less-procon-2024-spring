@@ -5,6 +5,8 @@ class fenwick_tree:
   def __init__(self, n):
     self.__n = n
     self.__dat = [0] * n
+  def reset(self):
+    self.__dat = [0] * self.__n
   def __sum(self, r):
     s = 0
     while r > 0:
@@ -21,14 +23,15 @@ class fenwick_tree:
     assert 0 <= l <= r <= self.__n
     return self.__sum(r) - self.__sum(l)
 
+INF = 2 * 10**5 + 1
+OFFSET = 10**5
+CNT = fenwick_tree(INF)
 def count_inverse(A):
-  INF = 2 * 10**5 + 1
-  OFFSET = 10**5
-  cnt = fenwick_tree(INF)
+  CNT.reset()
   answer = 0
   for a in A:
-    answer += cnt.sum(a+1 + OFFSET, INF)
-    cnt.add(a + OFFSET, 1)
+    answer += CNT.sum(a+1 + OFFSET, INF)
+    CNT.add(a + OFFSET, 1)
   return answer
 
 def main():

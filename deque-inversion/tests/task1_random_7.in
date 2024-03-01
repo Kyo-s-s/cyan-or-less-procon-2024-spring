@@ -1,0 +1,8 @@
+7
+-33816 -10806 93466 92077 -1299 -92853 64040
+5
+pop_back 0
+push_back 100000
+pop_back 0
+pop_back 0
+push_back 100000

@@ -7,7 +7,7 @@ while IFS= read -r -d '' file; do
         continue
     fi
 
-    if [[ $file =~ \.pdf]]; then
+    if [[ "${file##*.}" == "pdf" ]]; then
         continue
     fi
 

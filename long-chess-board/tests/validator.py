@@ -7,7 +7,7 @@ def main():
     line = re.match(r'^(\d+)$', sys.stdin.readline())
     assert line, 'Does not match with regexp'
     T = int(line.groups()[0])
-    assert 1 <= T <= 100000, 'T out of range: %d' % T
+    assert 1 <= T <= 10000, 'T out of range: %d' % T
 
     for _ in range(T):
         line = re.match(r'^(\d+) (\d+)$', sys.stdin.readline())

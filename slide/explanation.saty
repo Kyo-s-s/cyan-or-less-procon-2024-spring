@@ -339,6 +339,80 @@ let-block +unions id =
         >
       >
     >
+let-block +range-rotate-query id =
+  let id = embed-string id in
+    '<
+      +section ?:({ Writer: loop0919 }) { | #id;: Range Rotate Query| } <
+        +frame ?:(1) {} <
+          +block-skip (5pt);
+          +p { 二次元平面上に ${N \  ( 3 \leq N \leq 1 0^5 )} 個の点がある． }
+          +p {
+            以下のクエリを ${Q \  ( 1 \leq Q \leq 5 0 0 0 0 )} 個処理せよ:
+            \listing {
+              * 原点からのユークリッド距離が ${\sqrt{l}} 以上 ${\sqrt{r}} 以下の点
+              すべてを反時計回りに ${\theta} 度回転させる
+              * 点 ${a , b , c} を頂点とする三角形の面積を出力する
+            }
+          }
+        >
+        +frame ?:(3) { 部分点1解法 } <
+          +listing { * ${N \leq 1 0 0 , \  Q \leq 1 0 0 0 ,} 面積を求めるクエリのみ }
+          +block-skip (5pt);
+          +phantom (from 2) <
+            +p { ${3}点 ${\p{ x_1 , y_1 } , \p{ x_2 , y_2} , \p{ x_3 , y_3 }} を頂点とする三角形の面積を求めたい． }
+          >
+          +block-skip (5pt);
+          +phantom (from 3) <
+            +p {
+              このとき，三角形の面積は，
+              \eqn (${\frac{1}{2} \cdot \abs{x_1 y_2 + x_2 y_3 + x_3 y_1 - x_1 y_3 - x_2 y_1 - x_3 y_2}});
+              で求められる(証明はここでは略)．
+            }
+            +block-skip (5pt);
+            +p { クエリごとにこれを計算すればOK． }
+          >
+        >
+        +frame ?:(3) { 部分点2解法 } <
+          +listing { * ${N \leq 1 0 0 , \  Q \leq 1 0 0 0} }
+          +phantom (from 2) <
+            +p {
+              ある頂点 ${\p{x, y}} を ${\theta} 度反時計回りに回転させると，その座標は，
+              \eqn (let-math \th = ${\frac{\theta \pi}{180}} in ${\p{x \cos \th - y \sin \th,\ x \sin \th + y \cos \th}});
+              で求められる(証明はここでは略．回転行列を用いればよい)．
+            }
+          >
+          +phantom (from 3) <
+            +p { 各点について，何度回転したかを記録しておけば， }
+            +listing {
+              * 回転クエリ: 距離が ${\sqrt{l}}以上 ${\sqrt{r}} 以下の点の回転した度数を ${\theta} だけ増やす
+              * 面積クエリ: ${3} 点それぞれの今の座標を求めたのち，面積を計算する
+            }
+            +p { とすれば部分点2に正解できる． }
+            +p { 毎回回転させると誤差で落ちるので注意！ }
+          >
+        >
+        +frame ?:(3) { 満点解法 } <
+          +phantom (from 2) <
+            +p {
+              各点をユークリッド距離でソートしておくと，
+              回転クエリは，「${\sqrt{l}} 以上 ${\sqrt{r}} 以下の区間に ${\theta} を加算する」という操作になる．
+            }
+            +listing { * 実際に加算する区間は二分探索をしたりすれば求められる． }
+            +p { 区間加算一点取得ができればよい． }
+            +p { ${\to} BITでできる！ }
+          >
+          +phantom (from 3) <
+            +listing {
+              * 区間 ${[ l , r )} に ${x} を加算:
+               ** ${l} 番目の要素に ${x} を加算， ${r} 番目の要素に ${- x} を加算
+              * ${i} 番目の要素を取得:
+               ** ${[ 0 , i )} の総和が求めたい値
+            }
+            +p { BIT上でimos法をするイメージ． }
+          >
+        >
+      >
+    >
 in
 
 CyanTheme.document '<
@@ -352,4 +426,5 @@ CyanTheme.document '<
   +ffffx (`X`);
   +unions (`X`);
   +x-word-database (`X`);
+  +range-rotate-query (`X`);
 >

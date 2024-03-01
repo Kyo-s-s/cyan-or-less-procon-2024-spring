@@ -31,7 +31,7 @@ jobs:
         run: pip install rime
 
       - name: Install pypy
-        run: apt-get install pypy3
+        run: sudo apt-get install pypy3
 
       - name: Rime test
         run: rime test ${{ matrix.path }} -k

@@ -42,7 +42,7 @@ int64_t f_dijkstra(int H, int W, int r_k, int c_k, int r_b, int c_b){
 
     queue<pair<int,int>> q_k;
     q_k.push({r_k, c_k});
-    D_k[r_k][c_k] = 0;
+    D_k[r_k][c_k-L] = 0;
     while(q_k.size()){
         auto[x, y] = q_k.front();
         q_k.pop();
@@ -56,7 +56,7 @@ int64_t f_dijkstra(int H, int W, int r_k, int c_k, int r_b, int c_b){
 
     queue<pair<int,int>> q_b;
     q_b.push({r_b, c_b});
-    D_b[r_b][c_b] = 0;
+    D_b[r_b][c_b-L] = 0;
     while(q_b.size()){
         auto[x, y] = q_b.front();
         q_b.pop();

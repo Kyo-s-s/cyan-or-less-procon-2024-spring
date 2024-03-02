@@ -111,8 +111,7 @@ int main() {
     }
 
     if (N == 2) {
-        // ? 
-        cout << Mint(K) * Mint(K) << endl;
+        cout << Mint(K) * Mint(K - 1) << endl;
         exit(0);
     }
 

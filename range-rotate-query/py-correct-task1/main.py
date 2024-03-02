@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env pypy3
 
 # 三角形の面積
 def area(A, B, C):

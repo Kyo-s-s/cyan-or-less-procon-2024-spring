@@ -78,7 +78,7 @@ end = struct
         font-footnote = SlydifiScheme.apply-font-cfg [
           default-font-conf 12pt;
         ];
-        color-bg = Color.of-css `#ffffff`;
+        color-bg = Color.of-css `#FEFFFF`;
       |)
   let config = SlydifiParam.make default-config
   let color-cyan = Color.of-css `#00c0c0`
@@ -123,6 +123,48 @@ end = struct
         ]
           |> List.concat) in Frame.make layout f
 
+  let gr-background =
+    let h = layout#paper-height in
+    let w = layout#paper-width in
+    let gray = Color.of-css `#D6D6D6` in
+    let brown = Color.of-css `#EBC9B6` in
+    let green = Color.of-css `#D7FFD0` in
+    let cyan = Color.of-css `#CAF5FF` in
+      [
+        fill cyan (start-path (0pt, h)
+          |> line-to (0pt, h -' 210pt)
+          |> line-to (210pt, h)
+          |> close-with-line);
+        fill brown (start-path (0pt, h -' 100pt)
+          |> line-to (0pt, h)
+          |> line-to (250pt, h)
+          |> close-with-line);
+        fill green (start-path (0pt, h -' 250pt)
+          |> line-to (0pt, h)
+          |> line-to (100pt, h)
+          |> close-with-line);
+        fill gray (start-path (0pt, h -' 100pt)
+          |> line-to (0pt, h)
+          |> line-to (100pt, h)
+          |> close-with-line);
+        fill cyan (start-path (w, 0pt)
+          |> line-to (w, 210pt)
+          |> line-to (w -' 210pt, 0pt)
+          |> close-with-line);
+        fill green (start-path (w, 0pt)
+          |> line-to (w, 250pt)
+          |> line-to (w -' 100pt, 0pt)
+          |> close-with-line);
+        fill brown (start-path (w, 0pt)
+          |> line-to (w, 100pt)
+          |> line-to (w -' 250pt, 0pt)
+          |> close-with-line);
+        fill gray (start-path (w, 0pt)
+          |> line-to (w, 100pt)
+          |> line-to (w -' 100pt, 0pt)
+          |> close-with-line);
+      ]
+
   let frame-slide-title config =
     let f ctx content =
       let (_, gr-frame-master) =
@@ -132,7 +174,7 @@ end = struct
       let gr-title =
         let ctx = config#font-slide-title ctx in
         let iblst = List.map (read-inline ctx) content#title in
-        let pos = (xrel 0.1, yrel 0.45 +' title-mgn) in
+        let pos = (xrel 0.13, yrel 0.45 +' title-mgn) in
           SlydifiGraphics.put-texts (|
             align = (0.0, 0.0);
             text-align = 0.5;
@@ -141,7 +183,7 @@ end = struct
       let gr-author =
         let ctx = config#font-slide-author ctx in
         let iblst = List.map (read-inline ctx) content#author in
-        let pos = (xrel 0.1, yrel 0.45 -' title-mgn) in
+        let pos = (xrel 0.13, yrel 0.45 -' title-mgn) in
           SlydifiGraphics.put-texts (|
             align = (0.0, 1.0);
             text-align = 0.5;
@@ -150,7 +192,7 @@ end = struct
       let gr-date =
         let ctx = config#font-slide-date ctx in
         let iblst = List.map (read-inline ctx) content#date in
-        let pos = (xrel 0.1, yrel 0.35 -' title-mgn) in
+        let pos = (xrel 0.13, yrel 0.35 -' title-mgn) in
           SlydifiGraphics.put-texts (|
             align = (0.0, 1.0);
             text-align = 0.5;
@@ -158,10 +200,11 @@ end = struct
           |) pos iblst in
       let gr-line =
         [
-          stroke 1pt color-cyan (Gr.line ((xrel 0.07), (yrel 0.45)) ((xrel 0.93), (yrel 0.45)));
+          stroke 1pt color-cyan (Gr.line ((xrel 0.1), (yrel 0.45)) ((xrel 0.9), (yrel 0.45)));
         ] in
         (block-nil, [
           gr-frame-master;
+          gr-background;
           gr-title;
           gr-author;
           gr-date;
@@ -224,6 +267,7 @@ end = struct
             |) pos [subtitle;] in
         (block-nil, [
           gr-frame-master;
+          gr-background;
           gr-title;
           gr-line;
           gr-subtitle;
@@ -247,9 +291,14 @@ end = struct
 
   let frame-normal config =
     let f ctx content =
-      let (_, gr) =
-        frame-master-with-footer config
-          |> Frame.embed ctx () in
+      let gr =
+        let (_, gr) =
+          frame-master-with-footer config
+            |> Frame.embed ctx () in
+        let line =
+          [
+            stroke 0.5pt color-cyan (Gr.line (15pt, layout#paper-height -' 41pt) (layout#paper-width -' 15pt, layout#paper-height -' 41pt));
+          ] in List.concat [gr;line;] in
       let bb-title =
         let ctx-title =
           ctx

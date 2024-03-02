@@ -8,3 +8,5 @@ Thumbs.db
 *.out
 target
 export-testcases
+slide/explanation.pdf
+*.pdf

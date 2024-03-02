@@ -12,7 +12,6 @@ jobs:
       matrix:
         path: 
           - cyan-or-less
-          - straight-conditions
           - fffffx
           - unions
           - x-word-database
@@ -20,6 +19,7 @@ jobs:
           - range-rotate-query
           - long-chess-board
           - counting-zig-zag-sequence
+          - subset-mex
         
     runs-on: ubuntu-latest
     steps:
@@ -28,6 +28,9 @@ jobs:
 
       - name: Install Rime
         run: pip install rime
+
+      - name: Install pypy
+        run: sudo apt-get install pypy3
 
       - name: Rime test
         run: rime test ${{ matrix.path }} -k

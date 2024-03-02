@@ -121,6 +121,8 @@ int main(){
         cin >> H >> W >> r_k >> c_k >> r_b >> c_b;
         r_k--; c_k--; r_b--; c_b--;
 
+        assert(H == 3);
+
         int64_t ans = f(H, W, r_k, c_k, r_b, c_b);
         if(ans == INF) ans = -1;
         

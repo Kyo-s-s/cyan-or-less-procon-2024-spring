@@ -7,7 +7,7 @@ using namespace std;
 class fenwick_tree {
  public:
   explicit fenwick_tree(int n) : _n(n), _dat(n) {}
-  void add(int i, int x) {
+  void add(int i, long long x) {
     assert(0 <= i && i < _n);
     ++i;
     while (i <= _n) {
@@ -15,15 +15,15 @@ class fenwick_tree {
       i += i & -i;
     }
   }
-  int sum(int l, int r) {
+  long long sum(int l, int r) {
     assert(0 <= l && l <= r && r <= _n);
     return _sum(r) - _sum(l);
   }
  private:
   int const _n;
-  vector<int> _dat;
-  int _sum(int r) {
-    int s = 0;
+  vector<long long> _dat;
+  long long _sum(int r) {
+    long long s = 0;
     while (r > 0) {
       s += _dat[r-1];
       r -= r & -r;
@@ -32,11 +32,11 @@ class fenwick_tree {
   }
 };
 
-int count_inverse(deque<int> const &A) {
+long long count_inverse(deque<int> const &A) {
   constexpr int INF = 200000 + 1;
   constexpr int OFFSET = 100000;
   fenwick_tree cnt(INF);
-  int answer = 0;
+  long long answer = 0;
   for (int const a : A) {
     answer += cnt.sum(a+1 + OFFSET, INF);
     cnt.add(a + OFFSET, 1);
@@ -50,7 +50,6 @@ int main() {
 
   int N, Q;
   cin >> N;
-  assert(N <= 5000);
   deque<int> A(N);
   for (int i = 0; i < N; ++i)
     cin >> A[i];

@@ -23,14 +23,11 @@ class Task2(Constraints):
 
 @dataclass
 class Task3(Constraints):
-  N_MIN: int = 100
-  N_MAX: int = 5000
-  Q_MAX: int = 100
+  Q_MAX: int = 10
 
 @dataclass
 class Task4(Constraints):
-  N_MIN: int = 5000
-  Q_MIN: int = 100
+  pass
 
 def type_is_push(t: str):
   return t.startswith('push')

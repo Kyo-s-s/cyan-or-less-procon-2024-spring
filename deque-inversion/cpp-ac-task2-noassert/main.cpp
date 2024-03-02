@@ -3,8 +3,8 @@
 #include <vector>
 using namespace std;
 
-int count_inverse(vector<int> const &A) {
-  int cnt = 0;
+long long count_inverse(vector<int> const &A) {
+  long long cnt = 0;
   for (size_t i = 0; i < A.size(); ++i)
     for (size_t j = i+1; j < A.size(); ++j)
       if (A[i] > A[j])

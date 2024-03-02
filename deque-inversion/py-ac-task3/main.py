@@ -34,7 +34,6 @@ def count_inverse(A):
 def main():
   N = int(input())
   A = deque(map(int, input().split()))
-  assert N <= 5000
 
   Q = int(input())
   assert Q <= 100

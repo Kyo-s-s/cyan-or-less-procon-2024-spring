@@ -1,46 +1,6 @@
-41
-39025 -24443 44296 22923 -90844 39406 49552 44728 -31202 80051 -89960 19516 3563 89107 -68539 5848 -9144 30024 -86591 -94578 -28422 93975 -91016 -33437 78448 78361 52568 84210 -24037 79859 99775 -45711 99910 38745 35334 -10798 1206 -34298 -45220 -69593 48383
-43
-push_back -32317
-pop_front 0
-push_back 38219
-push_back 45374
-pop_front 0
-push_front -10278
-push_front -50196
-push_back 84961
-pop_front 0
-pop_front 0
-pop_front 0
-pop_front 0
-pop_front 0
-pop_back 0
-pop_back 0
-pop_back 0
-push_back 47661
-push_front 701
-push_back -5382
-push_front 21669
-pop_back 0
-push_back 47219
-pop_front 0
-push_front 66897
-pop_back 0
-pop_front 0
-push_back -40152
-push_front -95887
-pop_back 0
-pop_front 0
-push_back -58446
-push_back 78325
-push_front -49011
-push_back 65388
-push_front -7077
-pop_back 0
-pop_back 0
-pop_front 0
-pop_front 0
-pop_front 0
-push_front 92743
-pop_back 0
-pop_front 0
+17
+7199 2314 -55091 -99185 31217 -63765 63012 73533 34724 92003 83396 -61159 -79121 -13480 -37773 -53791 -35305
+3
+push_back 100000
+push_back -100000
+push_front 100000

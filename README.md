@@ -10,7 +10,7 @@
 | f(f(f(f(f(x)))))          | Kyo_s_s  |   ✔    |      ✔       |     ✔      |           |      ✔      |  ✔   |
 | Unions                    | yasunori |   ✔    |      ✔       |     ✔      |           |             |  ✔   |
 | X-word Database           | Kyo_s_s  |   ✔    |      ✔       |     ✔      |           |     ✔     |  ✔   |
-| Long Chess Board          | yasunori |   ✔    |      ✔       |            |           |             |      |
+| Long Chess Board          | yasunori |   ✔    |      ✔       |     ✔      |           |             |      |
 | LCM and GCD               | yasunori |   ✔    |      △       |     ✔      |           |      ✔      |      |
 | Range Rotate Query        | loop0919 |   ✔    |      ✔       |     ✔      |           |      ✔      |  ✔   |
 | Deque Inversion           | Nichi10p |   ✔    |              |            |           |             |      |

@@ -12,7 +12,6 @@ jobs:
       matrix:
         path: 
           - cyan-or-less
-          - straight-conditions
           - fffffx
           - unions
           - x-word-database

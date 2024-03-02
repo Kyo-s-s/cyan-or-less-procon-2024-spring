@@ -125,12 +125,26 @@ int main() {
 
     for (int x = 2; x < N; x++) {
         vector<Mint> ninc(K), ndec(K);
-        for (int a = 0; a < K; a++) {
-            for (int b = 0; b < K; b++) {
-                if (a > b) ndec[b] += inc[a];
-                if (a < b) ninc[b] += dec[a];
-            }
+
+        vector<Mint> cinc(K + 1), cdec(K + 1);
+        for (int k = 0; k < K; k++) {
+            cinc[k + 1] = cinc[k] + inc[k];
+            cdec[k + 1] = cdec[k] + dec[k];
         }
+
+        for (int k = 0; k < K; k++) {
+            ninc[k] = cdec[k];
+            ndec[k] = cinc[K] - cinc[k + 1];
+        }
+
+        // for (int a = 0; a < K; a++) {
+        //     for (int b = 0; b < K; b++) {
+        //         if (a > b) ndec[b] += inc[a];
+        //         if (a < b) ninc[b] += dec[a];
+        //     }
+        // }
+
+
         swap(inc, ninc);
         swap(dec, ndec);
     }

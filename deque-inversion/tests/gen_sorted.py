@@ -8,21 +8,20 @@ def _make_query(a: 'list[int]', rev: int, q: int, cons: Constraints):
   T = [choice(cons.T_LIST) for _ in range(q)]
   X: 'list[int]' = []
   for i in range(q):
-    if len(_A) == 2 and T[i].startswith('pop'):
-      T[i] = T[i].replace('pop', 'push')
-    match T[i]:
-      case 'push_front':
-        X.append(randint(_A[0], cons.X_MAX) if rev else randint(cons.X_MIN, _A[0]))
-        _A.appendleft(X[-1])
-      case 'push_back':
-        X.append(randint(cons.X_MIN, _A[-1]) if rev else randint(_A[-1], cons.X_MAX))
-        _A.append(X[-1])
-      case 'pop_front':
-        X.append(0)
-        _A.popleft()
-      case 'pop_back':
-        X.append(0)
-        _A.pop()
+    if len(_A) == 2 and type_is_pop(T[i]):
+      T[i] = pop_to_push(T[i])
+    if type_is_push(T[i]) and type_is_front(T[i]):
+      X.append(randint(_A[0], cons.X_MAX) if rev else randint(cons.X_MIN, _A[0]))
+      _A.appendleft(X[-1])
+    if type_is_push(T[i]) and type_is_back(T[i]):
+      X.append(randint(cons.X_MIN, _A[-1]) if rev else randint(_A[-1], cons.X_MAX))
+      _A.append(X[-1])
+    if type_is_pop(T[i]) and type_is_front(T[i]):
+      X.append(0)
+      _A.popleft()
+    if type_is_pop(T[i]) and type_is_back(T[i]):
+      X.append(0)
+      _A.pop()
   return T, X
 
 def make(name: str, cons: Constraints, rev: bool, nq_max = False):

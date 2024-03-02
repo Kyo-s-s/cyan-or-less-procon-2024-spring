@@ -32,6 +32,21 @@ class Task4(Constraints):
   N_MIN: int = 5000
   Q_MIN: int = 100
 
+def type_is_push(t: str):
+  return t.startswith('push')
+
+def type_is_pop(t: str):
+  return t.startswith('pop')
+
+def type_is_front(t: str):
+  return t.endswith('front')
+
+def type_is_back(t: str):
+  return t.endswith('back')
+
+def pop_to_push(t: str):
+  return t.replace('pop', 'push')
+
 def fprintATX(fptr, A: 'list[int]', T: 'list[str]', X: 'list[int]'):
   print(len(A), file=fptr)
   print(*A, file=fptr)

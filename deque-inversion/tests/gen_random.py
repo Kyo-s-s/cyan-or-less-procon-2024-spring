@@ -20,23 +20,21 @@ def _make_query(n: int, q: int, cons: Constraints):
       X[choice(_I)] = cons.X_MAX
   return T, X
 
-def make(name: str, cons: Constraints, nq_max = False):
+def make(name: str, cons: Constraints):
   with open(name, 'w') as f:
-    N = randint(cons.N_MAX-10, cons.N_MAX) if nq_max else randint(cons.N_MIN, cons.N_MAX)
+    N = randint(cons.N_MIN, cons.N_MAX)
     A = [randint(cons.X_MIN, cons.X_MAX) for _ in range(N)]
-    Q = randint(cons.Q_MAX-10, cons.Q_MAX) if nq_max else randint(cons.Q_MIN, cons.Q_MAX)
+    Q = randint(cons.Q_MIN, cons.Q_MAX)
     T, X = _make_query(N, Q, cons)
     fprintATX(f, A, T, X)
 
-def make_n(task_class: str, n: int, cons: Constraints, nq_max = False):
+def make_n(task_class: str, n: int, cons: Constraints):
   for i in range(n):
-    make(f'{task_class}_{i}.in', cons, nq_max)
+    make(f'{task_class}_{i}.in', cons)
 
 def main():
   seed(0)
-  make_n('task1_random', 8, Task1())
-  make_n('task2_random', 8, Task2())
-  make_n('task3_random', 4, Task3())
-  make_n('task3_max', 3, Task3(), True)
-  make_n('task4_random', 4, Task4())
-  make_n('task4_max', 3, Task4(), True)
+  make_n('task1_random', 6, Task1())
+  make_n('task2_random', 6, Task2())
+  make_n('task3_random', 6, Task3())
+  make_n('task4_random', 6, Task4())

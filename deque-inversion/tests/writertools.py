@@ -23,7 +23,8 @@ class Task2(Constraints):
 
 @dataclass
 class Task3(Constraints):
-  Q_MAX: int = 10
+  N_MAX: int = 2 * 10**4
+  Q_MAX: int = 100
 
 @dataclass
 class Task4(Constraints):

@@ -10,7 +10,7 @@
 | Straight Conditons        | Ackvy    |   ✔    |              |            |           |             |      |
 | f(f(f(f(f(x)))))          | Kyo_s_s  |   ✔    |      ✔       |     ✔      |           |      ✔      |  ✔   |
 | Unions                    | yasunori |   ✔    |      ✔       |     ✔      |           |             |  ✔   |
-| X-word Database           | Kyo_s_s  |   ✔    |      ✔       |     ✔      |           |             |  ✔   |
+| X-word Database           | Kyo_s_s  |   ✔    |      ✔       |     ✔      |           |     ✔     |  ✔   |
 | Long Chess Board          | yasunori |   ✔    |      ✔       |            |           |             |      |
 | LCM and GCD               | yasunori |   ✔    |      △       |     ✔      |           |      ✔      |      |
 | Range Rotate Query        | loop0919 |   ✔    |      ✔       |     ✔      |           |      ✔      |  ✔   |

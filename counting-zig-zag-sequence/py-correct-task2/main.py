@@ -8,20 +8,20 @@ if N == 1:
     print(K)
     exit()
 
-if N == 2:
-    print(K * (K - 1) % mod)
-    exit()
+# if N == 2:
+#     print(K * (K - 1) % mod)
+#     exit()
 
-inc = [0 for _ in range(K)]
-dec = [0 for _ in range(K)]
-for a in range(K):
-    for b in range(K):
-        if a > b:
-            dec[b] += 1
-        if a < b:
-            inc[b] += 1
+inc = [1 for _ in range(K)]
+dec = [1 for _ in range(K)]
+# for a in range(K):
+#     for b in range(K):
+#         if a > b:
+#             dec[b] += 1
+#         if a < b:
+#             inc[b] += 1
 
-for _ in range(2, N):
+for _ in range(1, N):
     ninc = [0 for _ in range(K)]
     ndec = [0 for _ in range(K)]
 

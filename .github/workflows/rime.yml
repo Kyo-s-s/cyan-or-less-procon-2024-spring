@@ -30,7 +30,7 @@ jobs:
         uses: technote-space/get-diff-action@v6
         id: diff-check
         with:
-          FILES: ${{ matrix.path }}
+          PATTERNS: ${{ matrix.path }}/*
 
       - name: Install Rime
         if: steps.diff-check.outputs.diff 

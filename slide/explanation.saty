@@ -451,7 +451,7 @@ let-block +counting-zig-zag-sequence id =
           +phantom (from 2) <
             +p {
               ${N = 1} のとき，定義よりジグザグ数列は ${K} 個．
-              ${N \leq 2} について考える．
+              ${N \geq 2} について考える．
             }
           >
           +phantom (from 3) <

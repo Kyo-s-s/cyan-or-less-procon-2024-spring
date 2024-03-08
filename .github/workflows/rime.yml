@@ -19,8 +19,8 @@ jobs:
           - range-rotate-query
           - long-chess-board
           - counting-zig-zag-sequence
+          - deque-inversion
           - subset-mex
-        
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

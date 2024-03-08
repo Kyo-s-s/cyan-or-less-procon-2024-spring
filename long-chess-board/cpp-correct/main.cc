@@ -23,7 +23,7 @@ int64_t INF = 1001002003004;
 vector<pair<int,int>> dir_k = {{2, 1}, {1, 2}, {-1, 2}, {-2, 1}, {-2, -1}, {-1, -2}, {1, -2}, {2, -1}};
 vector<pair<int,int>> dir_b = {{1, 1}, {2, 2}, {-1, 1}, {-2, 2}, {-1, -1}, {-2, -2}, {1, -1}, {2, -2}};
 
-int64_t f_dijkstra(int H, int W, int r_k, int c_k, int r_b, int c_b){
+int64_t f_bfs(int H, int W, int r_k, int c_k, int r_b, int c_b){
     //これを使うのは (H==3 && dy < 5) のとき
     //そのため2つのコマは3*4の長方形に収まっている
     //盤が3*4のときナイトは任意のマスから任意のマスへ5回以下で移動できる
@@ -108,7 +108,7 @@ int64_t f(int H, int W, int r_k, int c_k, int r_b, int c_b){
     //dy>=5のとき1つの例外を除いてans=ceil(dy/2) (ビショップの横方向の移動距離が3以下で実現できる)
     //int dx = abs(r_b-r_k);
     int dy = abs(c_b-c_k);
-    if(dy < 5) return f_dijkstra(H, W, r_k, c_k, r_b, c_b);
+    if(dy < 5) return f_bfs(H, W, r_k, c_k, r_b, c_b);
     if(r_b == 1 && ((r_k == 1 && dy % 4 == 2) || (r_k != 1 && dy % 4 == 0))) return (dy+1)/2 + 1;
     return (dy+1)/2;
 }
@@ -123,7 +123,7 @@ int main(){
 
         int64_t ans = f(H, W, r_k, c_k, r_b, c_b);
         if(ans == INF) ans = -1;
-
+        
         cout << ans << endl;
     }
 }

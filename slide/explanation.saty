@@ -7,6 +7,7 @@
 open SlydifiOverlay
 open CyanTheme
 let-block ctx +block-skip v = block-skip v
+let-inline ctx \inline-skip v = inline-skip v
 let-inline ctx \fil = inline-fil
 let gen-iop it =
   let iop =
@@ -201,10 +202,10 @@ let-block +x-word-database id =
           +phantom (from 2) <
             +p { 桁DPで解ける！ }
             +align [
-              ${\mathrm{dp} \pB{i} \pB{smaller} \pB{j} :=};
+              ${\mathrm{dp} \pB{i} \pB{\mathrm{smaller}} \pB{j} :=};
               ${X \text!{の上から} i \text!{番目まで見て，}};
               ${};
-              ${smaller = 0 : X \text!{と同じ} \/ \  1 : X \text!{より小さく，}};
+              ${\mathrm{smaller} = 0 : X \text!{と同じ} \/ \  1 : X \text!{より小さく，}};
               ${};
               ${\text!{`cyan`の} j \text!{文字目までを末尾に含む} \/ \text!{すでに`cyan`を含む}};
               ${};
@@ -365,8 +366,7 @@ let-block +range-rotate-query id =
           +phantom (from 3) <
             +p {
               このとき，三角形の面積は，
-              \eqn (${\frac{1}{2} \cdot \abs{x_1 y_2 + x_2 y_3 + x_3 y_1 - x_1 y_3 - x_2 y_1 - x_3 y_2}});
-              で求められる(証明はここでは略)．
+              \eqn (${\frac{1}{2} \cdot \abs{x_1 y_2 + x_2 y_3 + x_3 y_1 - x_1 y_3 - x_2 y_1 - x_3 y_2}}); で求められる(証明はここでは略)．
             }
             +block-skip (5pt);
             +p { クエリごとにこれを計算すればOK． }
@@ -377,8 +377,7 @@ let-block +range-rotate-query id =
           +phantom (from 2) <
             +p {
               ある頂点 ${\p{x, y}} を ${\theta} 度反時計回りに回転させると，その座標は，
-              \eqn (let-math \th = ${\frac{\theta \pi}{180}} in ${\p{x \cos \th - y \sin \th,\ x \sin \th + y \cos \th}});
-              で求められる(証明はここでは略．回転行列を用いればよい)．
+              \eqn (let-math \th = ${\frac{\theta \pi}{180}} in ${\p{x \cos \th - y \sin \th,\ x \sin \th + y \cos \th}}); で求められる(証明はここでは略．回転行列を用いればよい)．
             }
           >
           +phantom (from 3) <
@@ -413,6 +412,106 @@ let-block +range-rotate-query id =
         >
       >
     >
+let-block +counting-zig-zag-sequence id =
+  let id = embed-string id in
+    '<
+      +section ?:({ Writer: Ackvy }) { |#id;: Counting Zig Zag Sequence | } <
+        +frame {} <
+          +p { 正整数 ${N \  ( 1 \leq N \leq 5 0 0 0 ) , \  K \  ( 1 \leq K \leq 5 0 0 0 )} が与えられる． }
+          +p {
+            次のような数列を \emph { ジグザグ数列 }と呼ぶ:
+            \listing {
+              * 連続する ${2} 項が異なる
+              * 各 ${i \  ( 1 \leq i \leq N - 2 )} について， ${\p{A_i - A_{i + 1}} \p{A_{i + 1} - A_{i + 2}} \leq 0}
+              を満たす
+               ** 増加 ${\to} 減少 ${\to} 増加 ${\to \cdots} または 減少 ${\to} 増加 ${\to} 減少 ${\to \cdots}
+            }
+          }
+          +p { 長さが ${N} ，各要素が ${1} 以上 ${K} 以下の整数からなるジグザグ数列の個数を求めよ． }
+          +block-skip (10pt);
+          +p {
+            たとえば， ${( 2 , 7 , 1 , 8 , 2 , 8 )} はジグザグ数列だが，
+            ${( 3 , 1 , 4 , 1 , 5 , 9 )} はジグザグ数列ではない．
+          }
+        >
+        +frame ?:(2) { 部分点1解法 } <
+          +listing { * ${N \leq 5 , \  K \leq 5} }
+          +block-skip (5pt);
+          +phantom (from 2) <
+            +p { 長さが ${N}，各要素が ${K} 以下の正整数からなる数列を全探索し，ジグザグ数列かどうかを判定すればOK． }
+            +p { 長さが ${N}，各要素が ${K} 以下の正整数からなる数列は合計で ${K^N} 個あり， }
+            +p { ${N \leq 5 , \  K \leq 5} の制約であればすべての数列を試すことができる． }
+            +block-skip (5pt);
+            +p { ${0} から ${K^N} まで， ${K} 進数として考えると実装が楽． }
+          >
+        >
+        +frame ?:(3) { 部分点2解法 } <
+          +listing { * ${N \leq 5 0 0 0 , \  K \leq 5 0} }
+          +block-skip (5pt);
+          +phantom (from 2) <
+            +p {
+              ${N = 1} のとき，定義よりジグザグ数列は ${K} 個．
+              ${N \geq 2} について考える．
+            }
+          >
+          +phantom (from 3) <
+            +block-skip (5pt);
+            +p {
+              次のようなDPを考える:
+              \align (let-math \inc = ${\text!{\inline-skip(6pt); 減少}} in
+              let-math \dec = ${\text!{\inline-skip(6pt);増加}} in
+                [
+                  ${\mathrm{dp} [ i ] [ j ] [ \mathrm{increased} ] :=};
+                  ${i \text!{番目の要素が} j \text!{で，}};
+                  ${};
+                  ${\text!{次の要素が} \mathrm{increased} = 0 : \inc \/ \  1 : \dec};
+                  ${};
+                  ${\text!{するべきなジグザグ数列の個数}};
+                ]);
+              初期値は ${\mathrm{dp} [ 1 ] [ \star ] [ \star ] = 1} ．
+            }
+          >
+        >
+        +frame ?:(2) { 部分点2解法 } <
+          +listing { * ${N \leq 5 0 0 0 , \  K \leq 5 0} }
+          +block-skip (5pt);
+          +p {
+            ${\mathrm{dp} [ i + 1 ] [ j ] [ 0 ]} は，
+            「 ${i} 番目の要素が ${j} より小さく，次に増加する」ような ${\mathrm{dp}} 配列の要素の和で求められる．
+            \listing {
+              * 「 ${i} 番目の要素が ${j} より小さく，次に増加する」ような数列は，
+              ${i + 1} 番目の要素を ${j} にしてもジグザグ数列を保つ．
+            }
+          }
+          +phantom (from 2) <
+            +p {
+              ${\mathrm{dp} [ i + 1 ] [ j ] [ 1 ]} も同様に考えると，遷移は，
+              \eqn (${\mathrm{dp} [ i + 1 ] [ j ] [ 0 ] = \isum_{k = 1}^{j - 1} \mathrm{dp} [ i ] [ k ] [ 1 ]}); \eqn (${\mathrm{dp} [ i + 1 ] [ j ] [ 1 ] = \isum_{k = j + 1}^{K} \mathrm{dp} [ i ] [ k ] [ 0 ]});
+            }
+            +p { となる．答えは， ${\isum_{j = 1}^K \p{\mathrm{dp} [ N ] [ j ] [ 0 ] + \mathrm{dp} [ N ] [ j ] [ 1 ]}} ． }
+          >
+        >
+        +frame ?:(2) { 満点解法 } <
+          +p {
+            部分点2解法のDP:
+            \eqn (${\mathrm{dp} [ i + 1 ] [ j ] [ 0 ] = \isum_{k = 1}^{j - 1} \mathrm{dp} [ i ] [ k ] [ 1 ]}); \eqn (${\mathrm{dp} [ i + 1 ] [ j ] [ 1 ] = \isum_{k = j + 1}^{K} \mathrm{dp} [ i ] [ k ] [ 0 ]});
+            を愚直に書くとTLEしてしまうが， ${\isum} の部分を累積和で前計算しておくことにより，
+            ${N \leq 5 0 0 0 , \  K \leq 5 0 0 0} の制約で高速に答えを求めることができる．
+          }
+          +block-skip (5pt);
+          +phantom (from 2) <
+            +p {
+              増加 ${\to} 減少 ${\to} 増加 ${\to \cdots} となるようなジグザグ数列の個数を求めたのち，
+              答えを ${2} 倍してもよい．
+              \listing {
+                * こうすると，次に増加/減少する を状態として持たなくてもよくなる．
+                * 偶奇で場合分けすればOK．
+              }
+            }
+          >
+        >
+      >
+    >
 in
 
 CyanTheme.document '<
@@ -427,4 +526,5 @@ CyanTheme.document '<
   +unions (`X`);
   +x-word-database (`X`);
   +range-rotate-query (`X`);
+  +counting-zig-zag-sequence (`X`);
 >

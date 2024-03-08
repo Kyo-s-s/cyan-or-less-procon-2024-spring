@@ -26,19 +26,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
-      - name: Diff Check
+      - name: Diff check
         uses: technote-space/get-diff-action@v6
+        id: diff-check
         with:
           FILES: ${{ matrix.path }}
 
       - name: Install Rime
-        if: env.GIT_DIFF
+        if: steps.diff-check.outputs.diff 
         run: pip install rime
 
       - name: Install pypy
-        if: env.GIT_DIFF
+        if: steps.diff-check.outputs.diff 
         run: sudo apt-get install pypy3
 
       - name: Rime test
-        if: env.GIT_DIFF
+        if: steps.diff-check.outputs.diff 
         run: rime test ${{ matrix.path }} -k

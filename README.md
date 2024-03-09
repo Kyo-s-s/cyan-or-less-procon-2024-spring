@@ -14,8 +14,8 @@
 | LCM and GCD                                                            | yasunori |   ✔    |      △       |     ✔      |      ✔      |      |             |
 | [Range Rotate Query](https://mofecoder.com/manage/problems/162)        | loop0919 |   ✔    |      ✔       |     ✔      |      ✔      |  ✔   |      ✔      |
 | Deque Inversion                                                        | Nichi10p |   ✔    |              |            |             |      |             |
-| [Counting Zig Zag Sequence](https://mofecoder.com/manage/problems/142) | Ackvy    |   △    |      ✔       |     ✔      |      ✔      |  ✔   |     △     |
-| [Subset Mex](https://mofecoder.com/manage/problems/161)                | Kyo_s_s  |   △    |      ✔       |     ✔      |      ✔      |      |      ✔      |
+| [Counting Zig Zag Sequence](https://mofecoder.com/manage/problems/142) | Ackvy    |   △    |      ✔       |     ✔      |      ✔      |  ✔   |      △      |
+| [Subset Mex](https://mofecoder.com/manage/problems/161)                | Kyo_s_s  |   △    |      ✔       |     ✔      |      ✔      |  ✔   |      ✔      |
 
 - 問題文: `statement.md` に記述、そのまま MofeCoder に登録できるようにする
 - テストケース: validator を書き、通ることを確認する

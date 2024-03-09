@@ -1,0 +1,8 @@
+## Solution
+script_solution(
+  src='main.py',
+  challenge_cases=[]
+)
+
+## Score
+expected_score(30)

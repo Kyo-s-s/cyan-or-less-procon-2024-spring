@@ -13,7 +13,7 @@
 | Long Chess Board                                                       | yasunori |   ✔    |      ✔       |     ✔      |             |      |             |
 | LCM and GCD                                                            | yasunori |   ✔    |      △       |     ✔      |      ✔      |      |             |
 | [Range Rotate Query](https://mofecoder.com/manage/problems/162)        | loop0919 |   ✔    |      ✔       |     ✔      |      ✔      |  ✔   |      ✔      |
-| Deque Inversion                                                        | Nichi10p |   ✔    |              |            |             |      |             |
+| Deque Inversion                                                        | Nichi10p |   ✔    |      △       |     ✔      |      ✔      |      |             |
 | [Counting Zig Zag Sequence](https://mofecoder.com/manage/problems/142) | Ackvy    |   △    |      ✔       |     ✔      |      ✔      |  ✔   |      △      |
 | [Subset Mex](https://mofecoder.com/manage/problems/161)                | Kyo_s_s  |   △    |      ✔       |     ✔      |      ✔      |  ✔   |      ✔      |
 

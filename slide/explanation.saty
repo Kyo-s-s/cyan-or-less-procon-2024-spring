@@ -15,6 +15,7 @@ let gen-iop it =
       raise-inline (size *' 0.12) (read-inline (ctx
         |> set-font-size (size *' 0.7)) { ${#it} }))) in iop
 let-math \isum = gen-iop ${\sum}
+let-math \iprod = gen-iop ${\prod}
 let-math \mH a b =
   let nil = text-in-math MathOrd (fun ctx -> inline-nil) in
   let a = ${#nil_#a} in
@@ -535,15 +536,79 @@ let-block +subset-mex id =
             このほか，すべての選び方についての ${\mex} の総和は ${1 7} となる．
           }
         >
-        +frame ?:(1) { 部分点1解法 } <
+        +frame ?:(3) { 部分点1解法 } <
           +listing { * ${N \leq 1 7 , \  A_i \leq 1 0 0 0} }
           +block-skip (5pt);
+          +phantom (from 2) <
+            +p {
+              ${N} 枚のカードから ${1} 枚以上選ぶ方法は
+              ${2^N - 1} 通り． ${N = 1 7} のとき ${1 3 1 0 7 1} 通りしかないので，
+              すべての選び方を試して ${\mex} の総和を求めればOK．
+            }
+          >
+          +phantom (from 3) <
+            +block-skip (10pt);
+            +p { すべての選び方を列挙するには bit 全探索をすればよい． }
+            +block-skip (5pt);
+            +p {
+              ${1} から ${2^N} までをループで回し，
+              立っているビットに対応するカードを選んでいるとすれば実装が楽．
+            }
+          >
         >
         +frame ?:(1) { 部分点2解法 } <
           +listing { * ${A_i \leq 1 0 0 0} }
           +block-skip (5pt);
+          +p {
+            ${A_i \leq 1 0 0 0} の制約から，どのようなカードの選び方をしても
+            ${\mex} の最大値は ${1 0 0 1} 以下である．
+          }
+          +p {
+            ${\to x = 1 , 2 , \ldots , 1 0 0 1} に対して，
+            ${\mex} が ${x} になるようなカードの選び方が何通りあるか求められればよい．
+          }
+          +block-skip (5pt);
+          +p {
+            ${\mex} が ${x} になるためには ${\ldots} \listing {
+              * ${0 , 1 , \ldots , x - 1} がそれぞれ ${1} 枚以上選ばれている
+              * ${x} が選ばれていない
+              * ${x + 1} 以上の数は選ばれているか選ばれていないかは関係ない
+            }
+          }
         >
-        % +frame ?:(1) { 満点解法 } <>
+        +frame ?:(1) { 部分点2解法 } <
+          +p {
+            ${c ( x )} を ${A} の中に含まれる ${x} の個数 とすると，
+            ${\mex} が ${x} になるようなカードの選び方の個数は，
+            \listing {
+              * ${0 , 1 , \ldots , x - 1} がそれぞれ ${1} 枚以上選ばれている \br;
+              ${\to \p{2^{c(0)} - 1} \times \p{2^{c(1)} - 1} \times \cdots \times \p{2^{c(x - 1)} - 1}} 通り
+              * ${x} が選ばれていない \br;
+              ${\to 1} 通り
+              * ${x + 1} 以上の数は選ばれているか選ばれていないかは関係ない \br;
+              ${\to 2^{c ( x + 1 )} \times 2^{c ( x + 2 )} \times \cdots \times 2^{c ( 1 0 0 2 )}} 通り
+            }
+            これらの積が，${\mex} が ${x} になるようなカードの選び方の個数．
+          }
+          +p { 各 ${x} についてこの値を求め， ${x} を掛けたのちに足し合わせればよい． }
+        >
+        +frame ?:(2) { 満点解法 } <
+          +p { 部分点2解法の方法を高速化することを考える． }
+          +p {
+            ${x = 1 , 2 , \ldots , 2 \times 1 0^5 + 1} に対して，以下を求めたい:
+            \eqn (${f ( x ) := \prod_{i = 0}^{x - 1} \p{2^{c(i) - 1}} \times \prod_{i = x + 1}^{2 \times 1 0^5 + 2} 2^{c ( i )}});
+          }
+          +phantom (from 2) <
+            +listing {
+              * ${S_i = \prod_{j = 0}^i \p{2^{c ( j )}-1} \ } とすると，これは前から順に求めれば高速．
+              * ${T_i = \prod_{j = i}^{2 \times 1 0^5 + 2} 2^{c ( j )} \ } とすると，これは後ろから順に求めれば高速．
+            }
+            +p {
+              これより， ${f ( x )} は ${S_{x - 1} \times T_{x + 1}} で求められる．
+              答えは ${\isum_{x = 1}^{2 \times 1 0^5 + 1} \p{x \times f ( x )}} ．
+            }
+          >
+        >
       >
     >
 in
@@ -555,7 +620,7 @@ CyanTheme.document '<
     date = { |2024/03/30| };
   |));
 
-  % +cyan-or-less (`A`);
+  +cyan-or-less (`A`);
   +ffffx (`X`);
   % TODO: 制約を問題文中に埋め込む
   +unions (`X`);

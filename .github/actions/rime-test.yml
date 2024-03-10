@@ -5,6 +5,7 @@ inputs:
     required: true
 
 runs:
+  using: "composite"
   steps:
     - name: Diff check
       uses: technote-space/get-diff-action@v6

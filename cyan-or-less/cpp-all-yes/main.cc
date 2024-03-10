@@ -1,5 +1,5 @@
 #include<bits/stdc++.h>
 
 int main() {
-    std::cout << "Yes" << std::endl;
+    std::cout << "Yess" << std::endl;
 }

@@ -1,0 +1,19 @@
+name: "Rime test"
+inputs:
+  problem:
+    type: string
+    required: true
+
+runs:
+  steps:
+    - name: Diff check
+      uses: technote-space/get-diff-action@v6
+      id: diff-check
+      with:
+        PATTERNS: |
+          ${{ inputs.problem }}/**/*.*
+          ${{ inputs.problem }}/**/*
+
+    - name: Rime test
+      if: steps.diff-check.outputs.diff
+      run: rime test ${{ inputs.problem }} -k

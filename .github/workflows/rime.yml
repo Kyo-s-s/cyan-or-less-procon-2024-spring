@@ -9,39 +9,54 @@ jobs:
   test:
     strategy:
       fail-fast: false
-      matrix:
-        path: 
-          - cyan-or-less
-          - fffffx
-          - unions
-          - x-word-database
-          - lcm-and-gcd
-          - range-rotate-query
-          - long-chess-board
-          - counting-zig-zag-sequence
-          - deque-inversion
-          - subset-mex
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
-      - name: Diff check
-        uses: technote-space/get-diff-action@v6
-        id: diff-check
-        with:
-          PATTERNS: |
-            ${{ matrix.path }}/**/*.*
-            ${{ matrix.path }}/**/*
 
       - name: Install Rime
-        if: steps.diff-check.outputs.diff 
         run: pip install rime
 
       - name: Install pypy
-        if: steps.diff-check.outputs.diff 
         run: sudo apt-get install pypy3
 
-      - name: Rime test
-        if: steps.diff-check.outputs.diff 
-        run: rime test ${{ matrix.path }} -k
+      - uses: ./.github/actions/rime-test
+        with:
+          problem: cyan-or-less
+
+      - uses: ./.github/actions/rime-test
+        with:
+          problem: fffffx
+
+      - uses: ./.github/actions/rime-test
+        with:
+          problem: unions
+
+      - uses: ./.github/actions/rime-test
+        with:
+          problem: x-word-database
+
+      - uses: ./.github/actions/rime-test
+        with:
+          problem: lcm-and-gcd
+
+      - uses: ./.github/actions/rime-test
+        with:
+          problem: range-rotate-query
+
+      - uses: ./.github/actions/rime-test
+        with:
+          problem: long-chess-board
+
+      - uses: ./.github/actions/rime-test
+        with:
+          problem: counting-zig-zag-sequence
+
+      - uses: ./.github/actions/rime-test
+        with:
+          problem: deque-inversion
+
+      - uses: ./.github/actions/rime-test
+        with:
+          problem: subset-mex
+

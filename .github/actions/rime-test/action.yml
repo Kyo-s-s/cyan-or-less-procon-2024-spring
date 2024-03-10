@@ -17,4 +17,5 @@ runs:
 
     - name: Rime test
       if: steps.diff-check.outputs.diff
+      shell: bash
       run: rime test ${{ inputs.problem }} -k

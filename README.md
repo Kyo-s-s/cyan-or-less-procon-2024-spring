@@ -10,7 +10,7 @@
 | [f(f(f(f(f(x)))))](https://mofecoder.com/manage/problems/159)          | Kyo_s_s  |   ✔    |      ✔       |     ✔      |      ✔      |  ✔   |      ✔      |
 | [Unions](https://mofecoder.com/manage/problems/143)                    | yasunori |   ✔    |      ✔       |     ✔      |             |  ✔   |      ✔      |
 | [X-word Database](https://mofecoder.com/manage/problems/141)           | Kyo_s_s  |   ✔    |      ✔       |     ✔      |      ✔      |  ✔   |      ✔      |
-| [Long Chess Board](https://mofecoder.com/manage/problems/144)          | yasunori |   ✔    |      ✔       |     ✔      |             |      |      ✔      |
+| [Long Chess Board](https://mofecoder.com/manage/problems/144)          | yasunori |   ✔    |      ✔       |     ✔      |             |  ✔   |      ✔      |
 | [LCM and GCD](https://mofecoder.com/manage/problems/155)               | yasunori |   ✔    |      △       |     ✔      |      ✔      |      |      ✔      |
 | [Range Rotate Query](https://mofecoder.com/manage/problems/162)        | loop0919 |   ✔    |      ✔       |     ✔      |      ✔      |  ✔   |      ✔      |
 | [Deque Inversion](https://mofecoder.com/manage/problems/170)           | Nichi10p |   ✔    |      △       |     ✔      |      ✔      |      |      ✔      |

@@ -7,6 +7,7 @@
 open SlydifiOverlay
 open CyanTheme
 let-block ctx +block-skip v = block-skip v
+let-inline ctx \inline-skip v = inline-skip v
 let-inline ctx \fil = inline-fil
 let gen-iop it =
   let iop =
@@ -14,6 +15,7 @@ let gen-iop it =
       raise-inline (size *' 0.12) (read-inline (ctx
         |> set-font-size (size *' 0.7)) { ${#it} }))) in iop
 let-math \isum = gen-iop ${\sum}
+let-math \iprod = gen-iop ${\prod}
 let-math \mH a b =
   let nil = text-in-math MathOrd (fun ctx -> inline-nil) in
   let a = ${#nil_#a} in
@@ -201,10 +203,10 @@ let-block +x-word-database id =
           +phantom (from 2) <
             +p { 桁DPで解ける！ }
             +align [
-              ${\mathrm{dp} \pB{i} \pB{smaller} \pB{j} :=};
+              ${\mathrm{dp} \pB{i} \pB{\mathrm{smaller}} \pB{j} :=};
               ${X \text!{の上から} i \text!{番目まで見て，}};
               ${};
-              ${smaller = 0 : X \text!{と同じ} \/ \  1 : X \text!{より小さく，}};
+              ${\mathrm{smaller} = 0 : X \text!{と同じ} \/ \  1 : X \text!{より小さく，}};
               ${};
               ${\text!{`cyan`の} j \text!{文字目までを末尾に含む} \/ \text!{すでに`cyan`を含む}};
               ${};
@@ -365,8 +367,7 @@ let-block +range-rotate-query id =
           +phantom (from 3) <
             +p {
               このとき，三角形の面積は，
-              \eqn (${\frac{1}{2} \cdot \abs{x_1 y_2 + x_2 y_3 + x_3 y_1 - x_1 y_3 - x_2 y_1 - x_3 y_2}});
-              で求められる(証明はここでは略)．
+              \eqn (${\frac{1}{2} \cdot \abs{x_1 y_2 + x_2 y_3 + x_3 y_1 - x_1 y_3 - x_2 y_1 - x_3 y_2}}); で求められる(証明はここでは略)．
             }
             +block-skip (5pt);
             +p { クエリごとにこれを計算すればOK． }
@@ -377,8 +378,7 @@ let-block +range-rotate-query id =
           +phantom (from 2) <
             +p {
               ある頂点 ${\p{x, y}} を ${\theta} 度反時計回りに回転させると，その座標は，
-              \eqn (let-math \th = ${\frac{\theta \pi}{180}} in ${\p{x \cos \th - y \sin \th,\ x \sin \th + y \cos \th}});
-              で求められる(証明はここでは略．回転行列を用いればよい)．
+              \eqn (let-math \th = ${\frac{\theta \pi}{180}} in ${\p{x \cos \th - y \sin \th,\ x \sin \th + y \cos \th}}); で求められる(証明はここでは略．回転行列を用いればよい)．
             }
           >
           +phantom (from 3) <
@@ -413,6 +413,204 @@ let-block +range-rotate-query id =
         >
       >
     >
+let-block +counting-zig-zag-sequence id =
+  let id = embed-string id in
+    '<
+      +section ?:({ Writer: Ackvy }) { |#id;: Counting Zig Zag Sequence | } <
+        +frame {} <
+          +p { 正整数 ${N \  ( 1 \leq N \leq 5 0 0 0 ) , \  K \  ( 1 \leq K \leq 5 0 0 0 )} が与えられる． }
+          +p {
+            次のような数列を \emph { ジグザグ数列 }と呼ぶ:
+            \listing {
+              * 連続する ${2} 項が異なる
+              * 各 ${i \  ( 1 \leq i \leq N - 2 )} について， ${\p{A_i - A_{i + 1}} \p{A_{i + 1} - A_{i + 2}} \leq 0}
+              を満たす
+               ** 増加 ${\to} 減少 ${\to} 増加 ${\to \cdots} または 減少 ${\to} 増加 ${\to} 減少 ${\to \cdots}
+            }
+          }
+          +p { 長さが ${N} ，各要素が ${1} 以上 ${K} 以下の整数からなるジグザグ数列の個数を求めよ． }
+          +block-skip (10pt);
+          +p {
+            たとえば， ${( 2 , 7 , 1 , 8 , 2 , 8 )} はジグザグ数列だが，
+            ${( 3 , 1 , 4 , 1 , 5 , 9 )} はジグザグ数列ではない．
+          }
+        >
+        +frame ?:(2) { 部分点1解法 } <
+          +listing { * ${N \leq 5 , \  K \leq 5} }
+          +block-skip (5pt);
+          +phantom (from 2) <
+            +p { 長さが ${N}，各要素が ${K} 以下の正整数からなる数列を全探索し，ジグザグ数列かどうかを判定すればOK． }
+            +p { 長さが ${N}，各要素が ${K} 以下の正整数からなる数列は合計で ${K^N} 個あり， }
+            +p { ${N \leq 5 , \  K \leq 5} の制約であればすべての数列を試すことができる． }
+            +block-skip (5pt);
+            +p { ${0} から ${K^N} まで， ${K} 進数として考えると実装が楽． }
+          >
+        >
+        +frame ?:(3) { 部分点2解法 } <
+          +listing { * ${N \leq 5 0 0 0 , \  K \leq 5 0} }
+          +block-skip (5pt);
+          +phantom (from 2) <
+            +p {
+              ${N = 1} のとき，定義よりジグザグ数列は ${K} 個．
+              ${N \geq 2} について考える．
+            }
+          >
+          +phantom (from 3) <
+            +block-skip (5pt);
+            +p {
+              次のようなDPを考える:
+              \align (let-math \inc = ${\text!{\inline-skip(6pt); 減少}} in
+              let-math \dec = ${\text!{\inline-skip(6pt);増加}} in
+                [
+                  ${\mathrm{dp} [ i ] [ j ] [ \mathrm{increased} ] :=};
+                  ${i \text!{番目の要素が} j \text!{で，}};
+                  ${};
+                  ${\text!{次の要素が} \mathrm{increased} = 0 : \inc \/ \  1 : \dec};
+                  ${};
+                  ${\text!{するべきなジグザグ数列の個数}};
+                ]);
+              初期値は ${\mathrm{dp} [ 1 ] [ \star ] [ \star ] = 1} ．
+            }
+          >
+        >
+        +frame ?:(2) { 部分点2解法 } <
+          +listing { * ${N \leq 5 0 0 0 , \  K \leq 5 0} }
+          +block-skip (5pt);
+          +p {
+            ${\mathrm{dp} [ i + 1 ] [ j ] [ 0 ]} は，
+            「 ${i} 番目の要素が ${j} より小さく，次に増加する」ような ${\mathrm{dp}} 配列の要素の和で求められる．
+            \listing {
+              * 「 ${i} 番目の要素が ${j} より小さく，次に増加する」ような数列は，
+              ${i + 1} 番目の要素を ${j} にしてもジグザグ数列を保つ．
+            }
+          }
+          +phantom (from 2) <
+            +p {
+              ${\mathrm{dp} [ i + 1 ] [ j ] [ 1 ]} も同様に考えると，遷移は，
+              \eqn (${\mathrm{dp} [ i + 1 ] [ j ] [ 0 ] = \isum_{k = 1}^{j - 1} \mathrm{dp} [ i ] [ k ] [ 1 ]}); \eqn (${\mathrm{dp} [ i + 1 ] [ j ] [ 1 ] = \isum_{k = j + 1}^{K} \mathrm{dp} [ i ] [ k ] [ 0 ]});
+            }
+            +p { となる．答えは， ${\isum_{j = 1}^K \p{\mathrm{dp} [ N ] [ j ] [ 0 ] + \mathrm{dp} [ N ] [ j ] [ 1 ]}} ． }
+          >
+        >
+        +frame ?:(2) { 満点解法 } <
+          +p {
+            部分点2解法のDP:
+            \eqn (${\mathrm{dp} [ i + 1 ] [ j ] [ 0 ] = \isum_{k = 1}^{j - 1} \mathrm{dp} [ i ] [ k ] [ 1 ]}); \eqn (${\mathrm{dp} [ i + 1 ] [ j ] [ 1 ] = \isum_{k = j + 1}^{K} \mathrm{dp} [ i ] [ k ] [ 0 ]});
+            を愚直に書くとTLEしてしまうが， ${\isum} の部分を累積和で前計算しておくことにより，
+            ${N \leq 5 0 0 0 , \  K \leq 5 0 0 0} の制約で高速に答えを求めることができる．
+          }
+          +block-skip (5pt);
+          +phantom (from 2) <
+            +p {
+              増加 ${\to} 減少 ${\to} 増加 ${\to \cdots} となるようなジグザグ数列の個数を求めたのち，
+              答えを ${2} 倍してもよい．
+              \listing {
+                * こうすると，次に増加/減少する を状態として持たなくてもよくなる．
+                * 偶奇で場合分けすればOK．
+              }
+            }
+          >
+        >
+      >
+    >
+let-inline ctx \br = inline-fil ++ embed-block-breakable ctx (block-skip (get-natural-width (read-inline ctx { m })))
+let-block +subset-mex id =
+  let-math \mex = ${\mathrm{mex}} in
+  let id = embed-string id in
+    '<
+      +section ?:({ Writer: Kyo_s_s }) { |#id;: Subset Mex | } <
+        +frame {} <
+          +p {
+            ${N \  \p{1 \leq N \leq  2 \times 10^5}} 枚のカードがあり，
+            ${i} 番目のカードには \br;
+            整数 ${A_i \  \p{0 \leq A_i \leq 2 \times 10^5}} が書かれている．
+          }
+          +p { ${N} 枚のカードの中から ${1} 枚以上カードを選ぶ方法をすべて考え，それぞれの選び方の ${\mex} の総和を求めよ． }
+          +block-skip (10pt);
+          +p {
+            たとえば， ${A = \p{0, 1, 1, 2}} で，
+            \listing {
+              * ${\p{1, 3 }} 枚目のカードを選んだとき， ${\mex \p{A_1, A_3} = \mex \p{0, 1} = 2} ．
+              * ${\p{1, 2, 4}} 枚目のカードを選んだとき， ${\mex \p{A_1, A_2,A_4} = \mex \p{0, 1, 2} = 3} ．
+            }
+            このほか，すべての選び方についての ${\mex} の総和は ${1 7} となる．
+          }
+        >
+        +frame ?:(3) { 部分点1解法 } <
+          +listing { * ${N \leq 1 7 , \  A_i \leq 1 0 0 0} }
+          +block-skip (5pt);
+          +phantom (from 2) <
+            +p {
+              ${N} 枚のカードから ${1} 枚以上選ぶ方法は
+              ${2^N - 1} 通り． ${N = 1 7} のとき ${1 3 1 0 7 1} 通りしかないので，
+              すべての選び方を試して ${\mex} の総和を求めればOK．
+            }
+          >
+          +phantom (from 3) <
+            +block-skip (10pt);
+            +p { すべての選び方を列挙するには bit 全探索をすればよい． }
+            +block-skip (5pt);
+            +p {
+              ${1} から ${2^N} までをループで回し，
+              立っているビットに対応するカードを選んでいるとすれば実装が楽．
+            }
+          >
+        >
+        +frame ?:(1) { 部分点2解法 } <
+          +listing { * ${A_i \leq 1 0 0 0} }
+          +block-skip (5pt);
+          +p {
+            ${A_i \leq 1 0 0 0} の制約から，どのようなカードの選び方をしても
+            ${\mex} の最大値は ${1 0 0 1} 以下である．
+          }
+          +p {
+            ${\to x = 1 , 2 , \ldots , 1 0 0 1} に対して，
+            ${\mex} が ${x} になるようなカードの選び方が何通りあるか求められればよい．
+          }
+          +block-skip (5pt);
+          +p {
+            ${\mex} が ${x} になるためには ${\ldots} \listing {
+              * ${0 , 1 , \ldots , x - 1} がそれぞれ ${1} 枚以上選ばれている
+              * ${x} が選ばれていない
+              * ${x + 1} 以上の数は選ばれているか選ばれていないかは関係ない
+            }
+          }
+        >
+        +frame ?:(1) { 部分点2解法 } <
+          +p {
+            ${c ( x )} を ${A} の中に含まれる ${x} の個数 とすると，
+            ${\mex} が ${x} になるようなカードの選び方の個数は，
+            \listing {
+              * ${0 , 1 , \ldots , x - 1} がそれぞれ ${1} 枚以上選ばれている \br;
+              ${\to \p{2^{c(0)} - 1} \times \p{2^{c(1)} - 1} \times \cdots \times \p{2^{c(x - 1)} - 1}} 通り
+              * ${x} が選ばれていない \br;
+              ${\to 1} 通り
+              * ${x + 1} 以上の数は選ばれているか選ばれていないかは関係ない \br;
+              ${\to 2^{c ( x + 1 )} \times 2^{c ( x + 2 )} \times \cdots \times 2^{c ( 1 0 0 2 )}} 通り
+            }
+            これらの積が，${\mex} が ${x} になるようなカードの選び方の個数．
+          }
+          +p { 各 ${x} についてこの値を求め， ${x} を掛けたのちに足し合わせればよい． }
+        >
+        +frame ?:(2) { 満点解法 } <
+          +p { 部分点2解法の方法を高速化することを考える． }
+          +p {
+            ${x = 1 , 2 , \ldots , 2 \times 1 0^5 + 1} に対して，以下を求めたい:
+            \eqn (${f ( x ) := \prod_{i = 0}^{x - 1} \p{2^{c(i) - 1}} \times \prod_{i = x + 1}^{2 \times 1 0^5 + 2} 2^{c ( i )}});
+          }
+          +phantom (from 2) <
+            +listing {
+              * ${S_i = \prod_{j = 0}^i \p{2^{c ( j )}-1} \ } とすると，これは前から順に求めれば高速．
+              * ${T_i = \prod_{j = i}^{2 \times 1 0^5 + 2} 2^{c ( j )} \ } とすると，これは後ろから順に求めれば高速．
+            }
+            +p {
+              これより， ${f ( x )} は ${S_{x - 1} \times T_{x + 1}} で求められる．
+              答えは ${\isum_{x = 1}^{2 \times 1 0^5 + 1} \p{x \times f ( x )}} ．
+            }
+          >
+        >
+      >
+    >
 in
 
 CyanTheme.document '<
@@ -424,7 +622,10 @@ CyanTheme.document '<
 
   +cyan-or-less (`A`);
   +ffffx (`X`);
+  % TODO: 制約を問題文中に埋め込む
   +unions (`X`);
   +x-word-database (`X`);
   +range-rotate-query (`X`);
+  +counting-zig-zag-sequence (`X`);
+  +subset-mex (`X`);
 >

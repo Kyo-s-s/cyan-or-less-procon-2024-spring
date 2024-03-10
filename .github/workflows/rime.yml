@@ -19,18 +19,29 @@ jobs:
           - range-rotate-query
           - long-chess-board
           - counting-zig-zag-sequence
+          - deque-inversion
           - subset-mex
-        
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      
+      - name: Diff check
+        uses: technote-space/get-diff-action@v6
+        id: diff-check
+        with:
+          PATTERNS: |
+            ${{ matrix.path }}/**/*.*
+            ${{ matrix.path }}/**/*
 
       - name: Install Rime
+        if: steps.diff-check.outputs.diff 
         run: pip install rime
 
       - name: Install pypy
+        if: steps.diff-check.outputs.diff 
         run: sudo apt-get install pypy3
 
       - name: Rime test
+        if: steps.diff-check.outputs.diff 
         run: rime test ${{ matrix.path }} -k

@@ -1,0 +1,23 @@
+11
+68268 86324 85345 78473 -79599 11523 42845 90371 45205 -63746 -55637
+20
+push_back -9161
+push_back -100000
+push_back 100000
+push_front -100000
+push_back 100000
+pop_back 0
+pop_front 0
+pop_front 0
+pop_front 0
+push_front -59627
+pop_back 0
+pop_front 0
+push_back 100000
+pop_front 0
+pop_front 0
+push_back 84669
+pop_back 0
+pop_front 0
+push_back -100000
+pop_back 0

@@ -6,9 +6,7 @@ on:
   pull_request:
 
 jobs:
-  test:
-    strategy:
-      fail-fast: false
+  setup:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,51 +18,91 @@ jobs:
       - name: Install pypy
         run: sudo apt-get install pypy3
 
+  cyan-or-less:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
       - name: cyan-or-less
         uses: ./.github/actions/rime-test
         with:
           problem: cyan-or-less
 
+  fffffx:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
       - name: fffffx
         uses: ./.github/actions/rime-test
         with:
           problem: fffffx
 
+  unions:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
       - name: unions
         uses: ./.github/actions/rime-test
         with:
           problem: unions
 
+  x-word-database:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
       - name: x-word-database
         uses: ./.github/actions/rime-test
         with:
           problem: x-word-database
 
+  lcm-and-gcd:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
       - name: lcm-and-gcd
         uses: ./.github/actions/rime-test
         with:
           problem: lcm-and-gcd
 
+  range-rotate-query:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
       - name: range-rotate-query
         uses: ./.github/actions/rime-test
         with:
           problem: range-rotate-query
 
+  long-chess-board:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
       - name: long-chess-board
         uses: ./.github/actions/rime-test
         with:
           problem: long-chess-board
 
+  counting-zig-zag-sequence:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
       - name: counting-zig-zag-sequence
         uses: ./.github/actions/rime-test
         with:
           problem: counting-zig-zag-sequence
 
+  deque-inversion:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
       - name: deque-inversion
         uses: ./.github/actions/rime-test
         with:
           problem: deque-inversion
 
+  subset-mex:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
       - name: subset-mex
         uses: ./.github/actions/rime-test
         with:

@@ -20,43 +20,53 @@ jobs:
       - name: Install pypy
         run: sudo apt-get install pypy3
 
-      - uses: ./.github/actions/rime-test
+      - name: cyan-or-less
+        uses: ./.github/actions/rime-test
         with:
           problem: cyan-or-less
 
-      - uses: ./.github/actions/rime-test
+      - name: fffffx
+        uses: ./.github/actions/rime-test
         with:
           problem: fffffx
 
-      - uses: ./.github/actions/rime-test
+      - name: unions
+        uses: ./.github/actions/rime-test
         with:
           problem: unions
 
-      - uses: ./.github/actions/rime-test
+      - name: x-word-database
+        uses: ./.github/actions/rime-test
         with:
           problem: x-word-database
 
-      - uses: ./.github/actions/rime-test
+      - name: lcm-and-gcd
+        uses: ./.github/actions/rime-test
         with:
           problem: lcm-and-gcd
 
-      - uses: ./.github/actions/rime-test
+      - name: range-rotate-query
+        uses: ./.github/actions/rime-test
         with:
           problem: range-rotate-query
 
-      - uses: ./.github/actions/rime-test
+      - name: long-chess-board
+        uses: ./.github/actions/rime-test
         with:
           problem: long-chess-board
 
-      - uses: ./.github/actions/rime-test
+      - name: counting-zig-zag-sequence
+        uses: ./.github/actions/rime-test
         with:
           problem: counting-zig-zag-sequence
 
-      - uses: ./.github/actions/rime-test
+      - name: deque-inversion
+        uses: ./.github/actions/rime-test
         with:
           problem: deque-inversion
 
-      - uses: ./.github/actions/rime-test
+      - name: subset-mex
+        uses: ./.github/actions/rime-test
         with:
           problem: subset-mex
 

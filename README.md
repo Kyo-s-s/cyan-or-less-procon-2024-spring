@@ -8,7 +8,7 @@
 | :--------------------------------------------------------------------- | :------- | :----: | :----------: | :--------: | :---------: | :--: | :---------: |
 | [Cyan or Less](https://mofecoder.com/manage/problems/160)              | Kyo_s_s  |   ✔    |      ✔       |     ✔      |      ✔      |  ✔   |      ✔      |
 | [f(f(f(f(f(x)))))](https://mofecoder.com/manage/problems/159)          | Kyo_s_s  |   ✔    |      ✔       |     ✔      |      ✔      |  ✔   |      ✔      |
-| [Unions](https://mofecoder.com/manage/problems/143)                    | yasunori |   ✔    |      ✔       |     ✔      |             |  ✔   |      ✔      |
+| [Unions](https://mofecoder.com/manage/problems/143)                    | yasunori |   ✔    |      ✔       |     ✔      |      ✔      |  ✔   |      ✔      |
 | [X-word Database](https://mofecoder.com/manage/problems/141)           | Kyo_s_s  |   ✔    |      ✔       |     ✔      |      ✔      |  ✔   |      ✔      |
 | [Long Chess Board](https://mofecoder.com/manage/problems/144)          | yasunori |   ✔    |      ✔       |     ✔      |             |      |      ✔      |
 | [LCM and GCD](https://mofecoder.com/manage/problems/155)               | yasunori |   ✔    |      △       |     ✔      |      ✔      |      |      ✔      |

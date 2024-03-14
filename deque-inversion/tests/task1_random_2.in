@@ -1,102 +1,102 @@
 44
 -57877 -60988 71988 20778 -2661 32382 199 38885 31708 -91188 50437 -76238 77883 35790 98664 57323 -79984 95812 11769 97818 -45971 -24067 40356 56923 9534 26409 1861 59234 53718 -38771 -94631 72224 -99937 94181 -52298 -20717 32869 49491 -33295 -12789 -82798 29370 -31317 -20622
 99
-pop_back 0
-pop_back 0
-pop_back 0
-push_back 76621
-push_back 91916
-push_back -67707
-push_back 96077
-pop_back 0
-pop_back 0
-push_back -3235
-push_back 80739
-pop_back 0
-pop_back 0
-push_back -38957
-pop_back 0
-push_back -50982
-push_back 19025
-pop_back 0
-pop_back 0
-push_back -100000
-pop_back 0
-pop_back 0
-pop_back 0
-push_back -92677
-push_back -45443
-pop_back 0
-push_back -12179
-push_back 24091
-push_back -23289
-push_back -22315
-pop_back 0
-push_back 66701
-pop_back 0
-push_back -51754
-pop_back 0
-pop_back 0
-push_back -73110
-push_back 39782
-pop_back 0
-pop_back 0
-push_back -59000
-pop_back 0
-push_back -61485
-pop_back 0
-pop_back 0
-push_back -17191
-push_back 33256
-push_back -36342
-pop_back 0
-pop_back 0
-pop_back 0
-push_back -23701
-pop_back 0
-pop_back 0
-push_back 73852
-push_back -87875
-push_back 100000
-pop_back 0
-pop_back 0
-push_back 3232
-push_back -79574
-push_back 84069
-push_back -80809
-pop_back 0
-pop_back 0
-push_back -21518
-push_back 44382
-pop_back 0
-pop_back 0
-push_back -62702
-push_back 54947
-pop_back 0
-push_back -21874
-push_back -100000
-pop_back 0
-push_back -77835
-push_back -34973
-pop_back 0
-pop_back 0
-pop_back 0
-push_back 66997
-pop_back 0
-pop_back 0
-pop_back 0
-push_back 7118
-pop_back 0
-push_back 9373
-push_back 100000
-pop_back 0
-push_back 15683
-pop_back 0
-pop_back 0
-push_back -23111
-push_back 23440
-push_back -76131
-pop_back 0
-push_back -71528
-push_back 100000
-push_back -70599
+2
+2
+2
+1 76621
+1 91916
+1 -67707
+1 96077
+2
+2
+1 -3235
+1 80739
+2
+2
+1 -38957
+2
+1 -50982
+1 19025
+2
+2
+1 -100000
+2
+2
+2
+1 -92677
+1 -45443
+2
+1 -12179
+1 24091
+1 -23289
+1 -22315
+2
+1 66701
+2
+1 -51754
+2
+2
+1 -73110
+1 39782
+2
+2
+1 -59000
+2
+1 -61485
+2
+2
+1 -17191
+1 33256
+1 -36342
+2
+2
+2
+1 -23701
+2
+2
+1 73852
+1 -87875
+1 100000
+2
+2
+1 3232
+1 -79574
+1 84069
+1 -80809
+2
+2
+1 -21518
+1 44382
+2
+2
+1 -62702
+1 54947
+2
+1 -21874
+1 -100000
+2
+1 -77835
+1 -34973
+2
+2
+2
+1 66997
+2
+2
+2
+1 7118
+2
+1 9373
+1 100000
+2
+1 15683
+2
+2
+1 -23111
+1 23440
+1 -76131
+2
+1 -71528
+1 100000
+1 -70599

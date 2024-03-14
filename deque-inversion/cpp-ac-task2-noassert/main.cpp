@@ -21,16 +21,19 @@ int main() {
 
   cin >> Q;
   while (Q--) {
-    string T; int X;
-    cin >> T >> X;
+    int T; cin >> T;
 
-    if (T == "push_front")
+    if (T == 3) {
+      int X; cin >> X;
       A.insert(A.begin(), X);
-    if (T == "push_back")
+    }
+    if (T == 1) {
+      int X; cin >> X;
       A.push_back(X);
-    if (T == "pop_front")
+    }
+    if (T == 4)
       A.erase(A.begin());
-    if (T == "pop_back")
+    if (T == 2)
       A.pop_back();
 
     cout << count_inverse(A) << endl;

@@ -1,82 +1,82 @@
 28
 -51026 16424 -8468 1941 12011 28963 2114 91308 -42287 -48569 15152 -46453 53755 86121 -86947 1802 -91277 -38651 65983 -77808 -51044 -4682 -85061 94815 67267 77600 -54552 -38904
 79
-pop_back 0
-push_back 97873
-pop_back 0
-pop_back 0
-pop_back 0
-pop_back 0
-push_back 28454
-pop_back 0
-pop_back 0
-pop_back 0
-pop_back 0
-pop_back 0
-push_back 13991
-pop_back 0
-pop_back 0
-push_back -25157
-push_back 59929
-push_back 41839
-push_back -47261
-pop_back 0
-push_back -22238
-pop_back 0
-push_back 34751
-push_back 58510
-push_back 21130
-pop_back 0
-push_back 66292
-pop_back 0
-push_back -28554
-pop_back 0
-push_back -95660
-pop_back 0
-push_back 61184
-push_back 86622
-pop_back 0
-pop_back 0
-pop_back 0
-pop_back 0
-pop_back 0
-push_back -42836
-push_back -25406
-push_back 92959
-pop_back 0
-push_back -98312
-push_back 94490
-pop_back 0
-push_back 35078
-push_back 12268
-pop_back 0
-pop_back 0
-pop_back 0
-pop_back 0
-pop_back 0
-pop_back 0
-pop_back 0
-push_back 48024
-push_back -5916
-pop_back 0
-push_back 76916
-push_back 87839
-pop_back 0
-pop_back 0
-pop_back 0
-push_back -26032
-pop_back 0
-pop_back 0
-pop_back 0
-pop_back 0
-push_back 35830
-push_back -19386
-push_back 76854
-push_back -14198
-push_back -38763
-push_back -2169
-pop_back 0
-push_back 25899
-pop_back 0
-push_back 52583
-pop_back 0
+2
+1 97873
+2
+2
+2
+2
+1 28454
+2
+2
+2
+2
+2
+1 13991
+2
+2
+1 -25157
+1 59929
+1 41839
+1 -47261
+2
+1 -22238
+2
+1 34751
+1 58510
+1 21130
+2
+1 66292
+2
+1 -28554
+2
+1 -95660
+2
+1 61184
+1 86622
+2
+2
+2
+2
+2
+1 -42836
+1 -25406
+1 92959
+2
+1 -98312
+1 94490
+2
+1 35078
+1 12268
+2
+2
+2
+2
+2
+2
+2
+1 48024
+1 -5916
+2
+1 76916
+1 87839
+2
+2
+2
+1 -26032
+2
+2
+2
+2
+1 35830
+1 -19386
+1 76854
+1 -14198
+1 -38763
+1 -2169
+2
+1 25899
+2
+1 52583
+2

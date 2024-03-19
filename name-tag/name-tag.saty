@@ -35,50 +35,53 @@ let tag-base data =
   let icon-pos-x = 70pt in
   let icon-pos-y = 60pt in
   let icon-radius = 50pt in
-  let name-pos = (150pt, 60pt) in
+  let name-pos-c = 180pt in
+  let name-pos-y = 60pt in
   let x = 45pt in
-    from-graphics-given-context (w, h) (fun ctx -> [
-      draw-text (icon-pos-x -' icon-radius, icon-pos-y -' icon-radius) (use-image-by-width (load-image icon) (icon-radius *' 2.));
-      fill bg-color ((Gr.rectangle (0pt, 0pt) (w, h))
-        |> unite-path (Gr.circle (icon-pos-x, icon-pos-y) icon-radius));
-      draw-text (120pt, 115pt) (use-image-by-width (load-image `contest-title.jpg`) 130pt);
-      stroke 0.5pt Color.black (Gr.rectangle (0pt, 0pt) (w, h));
-      fill cyan (start-path (0pt, h)
-        |> line-to (0pt, h -' x *' 2.)
-        |> line-to (x *' 2., h)
-        |> close-with-line);
-      fill brown (start-path (0pt, h)
-        |> line-to (0pt, h -' x)
-        |> line-to (x *' 2.5, h)
-        |> close-with-line);
-      fill green (start-path (0pt, h)
-        |> line-to (0pt, h -' x *' 2.5)
-        |> line-to (x, h)
-        |> close-with-line);
-      fill gray (start-path (0pt, h)
-        |> line-to (0pt, h -' x)
-        |> line-to (x, h)
-        |> close-with-line);
-      fill cyan (start-path (w, 0pt)
-        |> line-to (w, x *' 2.)
-        |> line-to (w -' x *' 2., 0pt)
-        |> close-with-line);
-      fill green (start-path (w, 0pt)
-        |> line-to (w, x *' 2.5)
-        |> line-to (w -' x, 0pt)
-        |> close-with-line);
-      fill brown (start-path (w, 0pt)
-        |> line-to (w, x)
-        |> line-to (w -' x *' 2.5, 0pt)
-        |> close-with-line);
-      fill gray (start-path (w, 0pt)
-        |> line-to (w, x)
-        |> line-to (w -' x, 0pt)
-        |> close-with-line);
-      draw-text name-pos (read-inline (ctx
-        |> set-font-size 16pt) { #name; });
-      stroke 0.5pt Color.black (Gr.rectangle (0pt, 0pt) (w, h));
-    ])
+    from-graphics-given-context (w, h) (fun ctx -> (let name =
+      (read-inline (ctx
+        |> set-font-size 16pt) { #name; }) in
+      [
+        draw-text (icon-pos-x -' icon-radius, icon-pos-y -' icon-radius) (use-image-by-width (load-image icon) (icon-radius *' 2.));
+        fill bg-color ((Gr.rectangle (0pt, 0pt) (w, h))
+          |> unite-path (Gr.circle (icon-pos-x, icon-pos-y) icon-radius));
+        draw-text (120pt, 115pt) (use-image-by-width (load-image `contest-title.jpg`) 130pt);
+        stroke 0.5pt Color.black (Gr.rectangle (0pt, 0pt) (w, h));
+        fill cyan (start-path (0pt, h)
+          |> line-to (0pt, h -' x *' 2.)
+          |> line-to (x *' 2., h)
+          |> close-with-line);
+        fill brown (start-path (0pt, h)
+          |> line-to (0pt, h -' x)
+          |> line-to (x *' 2.5, h)
+          |> close-with-line);
+        fill green (start-path (0pt, h)
+          |> line-to (0pt, h -' x *' 2.5)
+          |> line-to (x, h)
+          |> close-with-line);
+        fill gray (start-path (0pt, h)
+          |> line-to (0pt, h -' x)
+          |> line-to (x, h)
+          |> close-with-line);
+        fill cyan (start-path (w, 0pt)
+          |> line-to (w, x *' 2.)
+          |> line-to (w -' x *' 2., 0pt)
+          |> close-with-line);
+        fill green (start-path (w, 0pt)
+          |> line-to (w, x *' 2.5)
+          |> line-to (w -' x, 0pt)
+          |> close-with-line);
+        fill brown (start-path (w, 0pt)
+          |> line-to (w, x)
+          |> line-to (w -' x *' 2.5, 0pt)
+          |> close-with-line);
+        fill gray (start-path (w, 0pt)
+          |> line-to (w, x)
+          |> line-to (w -' x, 0pt)
+          |> close-with-line);
+        draw-text (name-pos-c -' (get-natural-width name) *' 0.5, name-pos-y) name;
+        stroke 0.5pt Color.black (Gr.rectangle (0pt, 0pt) (w, h));
+      ]))
 let-block +name-tag name =
   let tag =
     tag-base (|

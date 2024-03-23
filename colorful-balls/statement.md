@@ -40,7 +40,7 @@ $\mathrm{query}_Q$
 
 <div class="code-math">
 
-$t x c$
+$t$ $x$ $c$
 
 </div>
 

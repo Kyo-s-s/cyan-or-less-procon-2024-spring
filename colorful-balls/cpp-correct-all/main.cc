@@ -8,7 +8,7 @@ int main(){
 	cin >> Q;
 
 	int next = 1;
-	vector<int> C(Q)
+	vector<int> C(Q);
 	vector<ll> A(Q), S(Q);
 	C[0] = 0;
 	A[0] = 0;

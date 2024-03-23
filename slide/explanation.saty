@@ -1145,14 +1145,14 @@ CyanTheme.document '<
     date = { |2024/03/30| };
   |));
 
-  % +cyan-or-less (`A`);
-  % +ffffx (`X`);
-  % +unions (`X`);
-  % +x-word-database (`X`);
-  % +range-rotate-query (`X`);
-  % +counting-zig-zag-sequence (`X`);
-  % +subset-mex (`X`);
-  % +long-chess-board (`X`);
-  % +lcm-and-gcd (`X`);
-  +deque-inversion (`X`);
+  +cyan-or-less (`A`);
+  +ffffx (`B`);
+  +unions (`C`);
+  +x-word-database (`D`);
+  +range-rotate-query (`E`);
+  +subset-mex (`F`);
+  +long-chess-board (`G`);
+  +lcm-and-gcd (`H`);
+  +deque-inversion (`I`);
+  +counting-zig-zag-sequence (`J`);
 >

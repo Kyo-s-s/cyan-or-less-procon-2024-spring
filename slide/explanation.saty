@@ -272,6 +272,24 @@ let-block +unions id =
       +section ?:({ Writer: yasunori }) { |#id;: Unions| } <
         +frame {} <
           +p {
+            ${N \  ( 2 \leq N \leq 1 0^5 )} 個の国と， 複数の国による同盟が
+            ${M \  ( 1 \leq M \leq 1 0^5 )} 個あり，
+          }
+          +p {
+            ${i} 個目の同盟には ${C_i} 個の国
+            ${A_{i , 1} , A_{i , 2} , \ldots , A_{i , C_i}} の国が所属している．\br;
+            (ここで， ${C_i} は ${\isum_{i = 0}^M C_i \leq 1 0^5} を満たす．)
+          }
+          +block-skip (5pt);
+          +p {
+            同じ同盟に所属している国同士は直接行き来でき，同盟 ${i} に属している国同士は ${D_i} 分で移動できる．
+            同じ同盟に属していない国同士は直接行き来できない．
+          }
+          +block-skip (5pt);
+          +p { 国 ${2 , 3 , \ldots , N} について，国 ${1} から移動するのにかかる時間の最小値を求めよ． }
+        >
+        +frame {} <
+          +p {
             ${N} 個の国と，複数の国で構成される同盟が ${M} 個ある．
             ${i} 個目の同盟には ${C_i} 個の国
             ${A_{i , 1} , A_{i , 2} , \ldots , A_{i , C_i}} の国が所属している．
@@ -1050,14 +1068,14 @@ CyanTheme.document '<
     date = { |2024/03/30| };
   |));
 
-  +cyan-or-less (`A`);
-  +ffffx (`X`);
+  % +cyan-or-less (`A`);
+  % +ffffx (`X`);
   % TODO: 制約を問題文中に埋め込む
   +unions (`X`);
-  +x-word-database (`X`);
-  +range-rotate-query (`X`);
-  +counting-zig-zag-sequence (`X`);
-  +subset-mex (`X`);
-  +long-chess-board (`X`);
-  +lcm-and-gcd (`X`);
+  % +x-word-database (`X`);
+  % +range-rotate-query (`X`);
+  % +counting-zig-zag-sequence (`X`);
+  % +subset-mex (`X`);
+  % +long-chess-board (`X`);
+  % +lcm-and-gcd (`X`);
 >

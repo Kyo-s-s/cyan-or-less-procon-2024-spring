@@ -15,10 +15,12 @@ int main(){
 	S[0] = 0;
 
 	for(int q = 0; q < Q; q++){
-		int t, c;
+		int t;
 		ll x;
-		cin >> t >> x >> c;
+		cin >> t >> x;
 		if(t == 1){
+			int c;
+			cin >> c;
 			C[next] = c;
 			A[next] = x;
 			S[next] = S[next - 1] + A[next];

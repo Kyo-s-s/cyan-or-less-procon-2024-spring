@@ -12,10 +12,12 @@ int main(){
 	C[0] = 0;
 
 	for(int q = 0; q < Q; q++){
-		int t, c;
+		int t;
 		ll x;
-		cin >> t >> x >> c;
+		cin >> t >> x;
 		if(t == 1){
+			int c;
+			cin >> c;
 			C[next] = c;
 			next++;
 		}else if(t == 2){

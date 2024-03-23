@@ -30,10 +30,10 @@
 <div class="code-math">
 
 $Q$
-$\mathrm{Query}$
+$\mathrm{query}_1$
+$\mathrm{query}_2$
 $\vdots$
-$\mathrm{Query}$
-
+$\mathrm{query}_Q$
 </div>
 
 各クエリは、次の形式で与えられます。

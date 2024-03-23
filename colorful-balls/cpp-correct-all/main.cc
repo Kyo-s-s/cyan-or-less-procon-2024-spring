@@ -31,7 +31,7 @@ int main(){
 			int right = next - 1;
 			while(right - left > 1){
 				int mid = (left + right) / 2;
-				if(S[mid] >= req){
+				if(S[mid] > req){
 					right = mid;
 				}else{
 					left = mid;
@@ -39,9 +39,12 @@ int main(){
 			}
 
 			if(t == 2){
-				A[left] -= x - (S[next - 1] - S[right]);
-				S[left] -= x - (S[next - 1] - S[right]);
-				next = left + 1;
+				A[right] -= x - (S[next - 1] - S[right]);
+				S[right] -= x - (S[next - 1] - S[right]);
+				next = right + 1;
+				if(A[right] == 0){
+					next--;
+				}
 			}else{
 				cout << C[right] << endl;
 			}

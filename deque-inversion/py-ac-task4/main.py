@@ -35,22 +35,21 @@ def main():
 
   Q = int(input())
   for _ in range(Q):
-    T, X = input().split()
-    X = int(X)
+    T, *q = list(map(int, input().split()))
 
-    if T == 'push_front':
-      answer += cnt.sum(0, X + OFFSET)
-      cnt.add(X + OFFSET, 1)
-      A.appendleft(X)
-    if T == 'push_back':
-      answer += cnt.sum(X+1 + OFFSET, INF)
-      cnt.add(X + OFFSET, 1)
-      A.append(X)
-    if T == 'pop_front':
+    if T == 3:
+      answer += cnt.sum(0, q[0] + OFFSET)
+      cnt.add(q[0] + OFFSET, 1)
+      A.appendleft(q[0])
+    if T == 1:
+      answer += cnt.sum(q[0]+1 + OFFSET, INF)
+      cnt.add(q[0] + OFFSET, 1)
+      A.append(q[0])
+    if T == 4:
       answer -= cnt.sum(0, A[0] + OFFSET)
       cnt.add(A[0] + OFFSET, -1)
       A.popleft()
-    if T == 'pop_back':
+    if T == 2:
       answer -= cnt.sum(A[-1]+1 + OFFSET, INF)
       cnt.add(A[-1] + OFFSET, -1)
       A.pop()

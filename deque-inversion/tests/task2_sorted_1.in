@@ -1,45 +1,45 @@
 45
 82554 74027 69075 66070 62763 61486 60311 59770 55647 47999 41419 34321 30773 28564 27974 19773 16136 12163 11978 4486 1619 -325 -3010 -6481 -9372 -15120 -16432 -19225 -26441 -27632 -28285 -31318 -50329 -60157 -65003 -67941 -68154 -68782 -72715 -73726 -76857 -78510 -78887 -82191 -83082
 42
-push_back -88441
-pop_back 0
-push_front 89130
-pop_back 0
-pop_front 0
-push_front 88703
-pop_back 0
-pop_front 0
-pop_back 0
-push_back -91010
-pop_back 0
-pop_back 0
-pop_back 0
-push_back -93229
-pop_front 0
-pop_back 0
-pop_front 0
-push_back -97088
-pop_back 0
-pop_back 0
-pop_back 0
-push_back -92421
-pop_front 0
-pop_front 0
-push_back -99203
-push_front 89017
-push_back -99768
-push_back -99969
-pop_back 0
-push_back -99914
-push_front 91775
-pop_back 0
-push_back -99888
-pop_back 0
-push_front 95875
-pop_back 0
-pop_front 0
-pop_front 0
-push_front 92278
-pop_back 0
-pop_back 0
-push_front 97115
+1 -88441
+2
+3 89130
+2
+4
+3 88703
+2
+4
+2
+1 -91010
+2
+2
+2
+1 -93229
+4
+2
+4
+1 -97088
+2
+2
+2
+1 -92421
+4
+4
+1 -99203
+3 89017
+1 -99768
+1 -99969
+2
+1 -99914
+3 91775
+2
+1 -99888
+2
+3 95875
+2
+4
+4
+3 92278
+2
+2
+3 97115

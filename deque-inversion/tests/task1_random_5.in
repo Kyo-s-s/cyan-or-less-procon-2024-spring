@@ -1,50 +1,50 @@
 3
 44997 32343 -14047
 47
-push_back 76051
-push_back 100000
-pop_back 0
-push_back -95550
-push_back -6583
-push_back 50363
-push_back 41430
-push_back -84748
-pop_back 0
-push_back 65265
-push_back -60360
-push_back -7354
-push_back -94237
-pop_back 0
-pop_back 0
-push_back -83925
-pop_back 0
-push_back -36701
-push_back -88214
-pop_back 0
-pop_back 0
-pop_back 0
-pop_back 0
-push_back -100000
-push_back -83641
-push_back -9580
-pop_back 0
-pop_back 0
-pop_back 0
-push_back -43240
-pop_back 0
-push_back 100000
-pop_back 0
-push_back -6144
-pop_back 0
-pop_back 0
-pop_back 0
-push_back -13804
-push_back -100000
-push_back -100000
-pop_back 0
-push_back 314
-pop_back 0
-pop_back 0
-push_back 100000
-pop_back 0
-pop_back 0
+1 76051
+1 100000
+2
+1 -95550
+1 -6583
+1 50363
+1 41430
+1 -84748
+2
+1 65265
+1 -60360
+1 -7354
+1 -94237
+2
+2
+1 -83925
+2
+1 -36701
+1 -88214
+2
+2
+2
+2
+1 -100000
+1 -83641
+1 -9580
+2
+2
+2
+1 -43240
+2
+1 100000
+2
+1 -6144
+2
+2
+2
+1 -13804
+1 -100000
+1 -100000
+2
+1 314
+2
+2
+1 100000
+2
+2

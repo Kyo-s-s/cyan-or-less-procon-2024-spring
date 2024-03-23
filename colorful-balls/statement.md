@@ -30,30 +30,19 @@
 <div class="code-math">
 
 $Q$
-$\mathrm{TestCase}$
+$\mathrm{Query}$
 $\vdots$
-$\mathrm{TestCase}$
+$\mathrm{Query}$
 
 </div>
 
-各テストケースは、以下のいずれかの形式で与えられます。
+各クエリは、次の形式で与えられます。
 
 <div class="code-math">
 
-$1 x c$
+$t x c$
 
 </div>
-<div class="code-math">
-
-$2 x c$
-
-</div>
-<div class="code-math">
-
-$3 x c$
-
-</div>
-
 
 ## 出力
 

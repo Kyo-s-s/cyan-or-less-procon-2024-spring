@@ -1068,14 +1068,13 @@ CyanTheme.document '<
     date = { |2024/03/30| };
   |));
 
-  % +cyan-or-less (`A`);
-  % +ffffx (`X`);
-  % TODO: 制約を問題文中に埋め込む
+  +cyan-or-less (`A`);
+  +ffffx (`X`);
   +unions (`X`);
-  % +x-word-database (`X`);
-  % +range-rotate-query (`X`);
-  % +counting-zig-zag-sequence (`X`);
-  % +subset-mex (`X`);
-  % +long-chess-board (`X`);
-  % +lcm-and-gcd (`X`);
+  +x-word-database (`X`);
+  +range-rotate-query (`X`);
+  +counting-zig-zag-sequence (`X`);
+  +subset-mex (`X`);
+  +long-chess-board (`X`);
+  +lcm-and-gcd (`X`);
 >

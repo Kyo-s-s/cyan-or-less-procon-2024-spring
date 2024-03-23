@@ -14,7 +14,7 @@ let standalone bt =
       |> set-space-ratio-between-scripts 0.0 0.0 0.0 Latin Kana in
   let bb = read-block ctx bt in
     page-break A4Paper (fun _ -> (|
-      text-origin = (80pt, 20pt);
+      text-origin = (80pt, 8pt);
       text-height = 630pt;
     |)) (fun _ -> (|
       header-origin = (0pt, 0pt);
@@ -22,30 +22,32 @@ let standalone bt =
       footer-origin = (0pt, 0pt);
       footer-content = block-nil;
     |)) bb
-let h = 55mm
-let w = 91mm
+let h = 58mm
+let w = 93mm
 let gray = Color.of-css `#D6D6D6`
 let brown = Color.of-css `#EBC9B6`
 let green = Color.of-css `#D7FFD0`
 let cyan = Color.of-css `#CAF5FF`
 let bg-color = Color.of-css `#EBFEFE`
-let tag-base data =
+let tag-base data is-staff =
   let name = data#name in
   let icon = data#icon in
-  let icon-pos-x = 70pt in
+  let icon-pos-x = 73pt in
   let icon-pos-y = 60pt in
-  let icon-radius = 50pt in
-  let name-pos-c = 180pt in
+  let icon-radius = 53pt in
+  let name-pos-c = 190pt in
   let name-pos-y = 60pt in
-  let x = 45pt in
+  let x = 42pt in
     from-graphics-given-context (w, h) (fun ctx -> (let name =
       (read-inline (ctx
-        |> set-font-size 16pt) { #name; }) in
+        |> set-font-size 16pt
+        |> set-text-color (Color.of-css `#316F63`)) { #name; }) in
+    let base-design =
       [
         draw-text (icon-pos-x -' icon-radius, icon-pos-y -' icon-radius) (use-image-by-width (load-image icon) (icon-radius *' 2.));
         fill bg-color ((Gr.rectangle (0pt, 0pt) (w, h))
           |> unite-path (Gr.circle (icon-pos-x, icon-pos-y) icon-radius));
-        draw-text (120pt, 115pt) (use-image-by-width (load-image `contest-title.jpg`) 130pt);
+        draw-text (w *' 0.5 -' 150pt *' 0.5 +' 10pt, 115pt) (use-image-by-width (load-image `contest-title.jpg`) 150pt);
         stroke 0.5pt Color.black (Gr.rectangle (0pt, 0pt) (w, h));
         fill cyan (start-path (0pt, h)
           |> line-to (0pt, h -' x *' 2.)
@@ -79,16 +81,40 @@ let tag-base data =
           |> line-to (w, x)
           |> line-to (w -' x, 0pt)
           |> close-with-line);
+        fill Color.white (Gr.rectangle (name-pos-c -' (get-natural-width name) *' 0.5 -' 5pt, name-pos-y -' 3pt) (name-pos-c +' (get-natural-width name) *' 0.5 +' 5pt, name-pos-y +' 3pt));
         draw-text (name-pos-c -' (get-natural-width name) *' 0.5, name-pos-y) name;
         stroke 0.5pt Color.black (Gr.rectangle (0pt, 0pt) (w, h));
+      ] in
+    let staff-design =
+      if is-staff
+      then
+        [
+          fill (Color.of-css `#316F63`) (start-path (w, h)
+            |> line-to (w, h -' x -' 20pt)
+            |> line-to (w -' x -' 20pt, h)
+            |> close-with-line);
+          draw-text (37pt, 186pt) (read-inline (ctx
+            |> set-font-size 11pt
+            |> set-text-color Color.white) { Staff })
+            |> linear-transform-graphics 1. 1. (0. -. 1.) 1.;
+        ]
+      else
+        [] in
+      List.concat [
+        base-design;
+        staff-design;
       ]))
-let-block +name-tag name =
+let-block ctx +name-tag ?:is-staff name =
+  let is-staff =
+    match is-staff with
+      | Some b -> b
+      | None -> false in
   let tag =
     tag-base (|
       name = embed-string name;
       icon = `icon/` ^ name ^ `.jpg`;
-    |) in
-    '<
+    |) is-staff in
+    read-block ctx '<
       +fig-center (vconcat [
         hconcat [tag;tag;];
       ]);
@@ -97,15 +123,15 @@ let-block ctx +newpage = clear-page
 in
 
 standalone '<
-  +name-tag (`Kyo_s_s`);
-  +name-tag (`えくと`);
-  +name-tag (`Ackvy`);
-  +name-tag (`yasunori`);
-  +name-tag (`Blueberry1001`);
+  +name-tag ?:(true) (`Kyo_s_s`);
+  +name-tag (`じゅーすいそ`);
+  +name-tag ?:(true) (`えくと`);
+  +name-tag ?:(true) (`Ackvy`);
+  +name-tag ?:(true) (`yasunori`);
 
   +newpage;
-
-  +name-tag (`forループ`);
-  +name-tag (`ragna`);
-  +name-tag (`Nichi10p`);
+  +name-tag ?:(true) (`Blueberry1001`);
+  +name-tag ?:(true) (`forループ`);
+  +name-tag ?:(true) (`ragna`);
+  +name-tag ?:(true) (`Nichi10p`);
 >

@@ -1059,6 +1059,83 @@ let-block +lcm-and-gcd id =
         >
       >
     >
+let-block +deque-inversion id =
+  let id = embed-string id in
+    '<
+      +section ?:({ Writer: Nichi10p }) { |#id;: Deque Inversion| } <
+        +frame {} <
+          +p { 最初，長さ ${N \  ( 2 \times N \leq 1 0^5 )} の数列 ${A \  ( - 1 0^5 \leq A_i \leq 1 0^5 )} がある． }
+          +p { 以下のクエリが ${Q \  ( 1 \leq Q \leq 1 0^5 )} 個来るので，各クエリ操作後の ${A} の転倒数を求めよ． }
+          +listing {
+            * `1 x` : ${A} の\emph { 末尾 }に ${x}を追加する．
+            * `2` : ${A} の\emph { 末尾 }を取り除く．
+            * `3 x` : ${A} の\emph { 先頭 }に ${x} を追加する．
+            * `4` : ${A} の \emph { 先頭 } を取り除く．
+          }
+          +block-skip (5pt);
+          +p { ここで，操作の途中で ${A} の長さは ${2} より小さくなることはない． }
+        >
+        +frame ?:(3) { 部分点1, 2解法 } <
+          +listing { * ${N \leq 1 0 0 , \  Q \leq 1 0 0} \phantom (until 2) { ${, \  \text!{クエリは 1, 2 のみ}} } }
+          +block-skip (5pt);
+          +phantom (from 2) <
+            +p { \emph { 末尾 }に追加 or 削除 クエリが飛んでくる \br; ${\to} 可変長配列で管理可能！ }
+            +listing {
+              * C++ : `vector` の `push_back` と `pop_back`
+              * Python: `list` の `append` と `pop`
+            }
+            +p { 各クエリに従って配列 ${A} を更新後，愚直に転倒数を求めれば間に合う． }
+          >
+          +block-skip (5pt);
+          +phantom (from 3) <
+            +p { \emph { 先頭 } への操作が来ても... 配列 ${A} を新たに作り直したりすればOK． }
+            +p { 転倒数を求めるパートで毎回数列 ${A} の要素の個数の ${2} 乗回程度計算が行われるため，全体で計算量は悪化しない． }
+          >
+        >
+        +frame ?:(3) { 部分点3解法 } <
+          +listing { * ${N \leq 2 \times 1 0^4 , \  Q \leq 1 0 0} }
+          +block-skip (5pt);
+          +phantom (from 2) <
+            +p { 転倒数を高速に求めたい ${\to} BIT で求められる！ }
+            +p { 転倒数とは，「"自分より左にある，自分より大きな数の個数" の総和」 }
+          >
+          +block-skip (2pt);
+          +phantom (from 3) <
+            +p {
+              ${i = 1 , 2 , \ldots , \mathrm{len} ( A )} について，
+              \listing {
+                * ${A_i} より大きい数の個数をBITにより求める．
+                 ** いま BIT で管理しているのは「自分より左にある数」
+                * BITの ${A_i} の値を ${1} 増やす．
+              }
+              とすれば，転倒数が求められる．
+            }
+            +p { このままだと負の数が出てくるが，あらかじめ ${1 0^6} を足しておけばよい． }
+          >
+        >
+        +frame ?:(3) { 満点解法 } <
+          +phantom (from 2) <
+            +p {
+              操作により転倒数がどう変化するかを考える．
+              \listing {
+                * ある数 ${x} が ${A} の\emph { 末尾 }に追加されるとき\br;
+                ${\to} 転倒数は「 ${A} のうち ${x} より大きい数の個数」ぶん増える．
+                * ある数 ${x} が ${A} の\emph { 末尾 }から取り除かれるとき\br;
+                ${\to} 転倒数は「 ${A} のうち ${x} より大きい数の個数」ぶん減る．
+                * ある数 ${x} が ${A} の\emph { 先頭 }に追加されるとき \br;
+                ${\to} 転倒数は「 ${A} の ${x} より小さい数の個数」ぶん増える．
+                * ある数 ${x} が ${A} の\emph { 先頭 } から取り除かれるとき\br;
+                ${\to} 転倒数は「 ${A} の ${x} より小さい数の個数」ぶん減る．
+              }
+            }
+          >
+        >
+        +block-skip (2pt);
+        +phantom (from 3) <
+          +p { ${A} の各値の個数をBITを使って管理すれば，高速にこの問題をACできる！ }
+        >
+      >
+    >
 in
 
 CyanTheme.document '<
@@ -1068,13 +1145,14 @@ CyanTheme.document '<
     date = { |2024/03/30| };
   |));
 
-  +cyan-or-less (`A`);
-  +ffffx (`X`);
-  +unions (`X`);
-  +x-word-database (`X`);
-  +range-rotate-query (`X`);
-  +counting-zig-zag-sequence (`X`);
-  +subset-mex (`X`);
-  +long-chess-board (`X`);
-  +lcm-and-gcd (`X`);
+  % +cyan-or-less (`A`);
+  % +ffffx (`X`);
+  % +unions (`X`);
+  % +x-word-database (`X`);
+  % +range-rotate-query (`X`);
+  % +counting-zig-zag-sequence (`X`);
+  % +subset-mex (`X`);
+  % +long-chess-board (`X`);
+  % +lcm-and-gcd (`X`);
+  +deque-inversion (`X`);
 >

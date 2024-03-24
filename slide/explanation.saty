@@ -277,8 +277,7 @@ let-block +unions id =
           }
           +p {
             ${i} 個目の同盟には ${C_i} 個の国
-            ${A_{i , 1} , A_{i , 2} , \ldots , A_{i , C_i}} の国が所属している．\br;
-            (ここで， ${C_i} は ${\isum_{i = 0}^M C_i \leq 1 0^5} を満たす．)
+            ${A_{i , 1} , A_{i , 2} , \ldots , A_{i , C_i}} の国が所属している．\br; (ここで， ${C_i} は ${\isum_{i = 0}^M C_i \leq 1 0^5} を満たす．)
           }
           +block-skip (5pt);
           +p {
@@ -419,7 +418,7 @@ let-block +range-rotate-query id =
             }
             +listing { * 実際に加算する区間は二分探索をしたりすれば求められる． }
             +p { 区間加算一点取得ができればよい． }
-            +p { ${\to} BITでできる！ }
+            +p { ${\to} BIT(fenwick tree)でできる！ }
           >
           +phantom (from 3) <
             +listing {
@@ -443,8 +442,7 @@ let-block +counting-zig-zag-sequence id =
             次のような数列を \emph { ジグザグ数列 }と呼ぶ:
             \listing {
               * 連続する ${2} 項が異なる
-              * 各 ${i \  ( 1 \leq i \leq N - 2 )} について， ${\p{A_i - A_{i + 1}} \p{A_{i + 1} - A_{i + 2}} \leq 0}
-              を満たす
+              * 各 ${i \  ( 1 \leq i \leq N - 2 )} について， ${\p{A_i - A_{i + 1}} \p{A_{i + 1} - A_{i + 2}} \leq 0} を満たす
                ** 増加 ${\to} 減少 ${\to} 増加 ${\to \cdots} または 減少 ${\to} 増加 ${\to} 減少 ${\to \cdots}
             }
           }
@@ -488,8 +486,7 @@ let-block +counting-zig-zag-sequence id =
                   ${\text!{次の要素が} \mathrm{increased} = 0 : \inc \/ \  1 : \dec};
                   ${};
                   ${\text!{するべきなジグザグ数列の個数}};
-                ]);
-              初期値は ${\mathrm{dp} [ 1 ] [ \star ] [ \star ] = 1} ．
+                ]); 初期値は ${\mathrm{dp} [ 1 ] [ \star ] [ \star ] = 1} ．
             }
           >
         >
@@ -515,8 +512,7 @@ let-block +counting-zig-zag-sequence id =
         +frame ?:(2) { 満点解法 } <
           +p {
             部分点2解法のDP:
-            \eqn (${\mathrm{dp} [ i + 1 ] [ j ] [ 0 ] = \isum_{k = 1}^{j - 1} \mathrm{dp} [ i ] [ k ] [ 1 ]}); \eqn (${\mathrm{dp} [ i + 1 ] [ j ] [ 1 ] = \isum_{k = j + 1}^{K} \mathrm{dp} [ i ] [ k ] [ 0 ]});
-            を愚直に書くとTLEしてしまうが， ${\isum} の部分を累積和で前計算しておくことにより，
+            \eqn (${\mathrm{dp} [ i + 1 ] [ j ] [ 0 ] = \isum_{k = 1}^{j - 1} \mathrm{dp} [ i ] [ k ] [ 1 ]}); \eqn (${\mathrm{dp} [ i + 1 ] [ j ] [ 1 ] = \isum_{k = j + 1}^{K} \mathrm{dp} [ i ] [ k ] [ 0 ]}); を愚直に書くとTLEしてしまうが， ${\isum} の部分を累積和で前計算しておくことにより，
             ${N \leq 5 0 0 0 , \  K \leq 5 0 0 0} の制約で高速に答えを求めることができる．
           }
           +block-skip (5pt);
@@ -542,8 +538,7 @@ let-block +subset-mex id =
         +frame {} <
           +p {
             ${N \  \p{1 \leq N \leq  2 \times 10^5}} 枚のカードがあり，
-            ${i} 番目のカードには \br;
-            整数 ${A_i \  \p{0 \leq A_i \leq 2 \times 10^5}} が書かれている．
+            ${i} 番目のカードには \br; 整数 ${A_i \  \p{0 \leq A_i \leq 2 \times 10^5}} が書かれている．
           }
           +p { ${N} 枚のカードの中から ${1} 枚以上カードを選ぶ方法をすべて考え，それぞれの選び方の ${\mex} の総和を求めよ． }
           +block-skip (10pt);
@@ -552,8 +547,7 @@ let-block +subset-mex id =
             \listing {
               * ${\p{1, 3 }} 枚目のカードを選んだとき， ${\mex \p{A_1, A_3} = \mex \p{0, 1} = 2} ．
               * ${\p{1, 2, 4}} 枚目のカードを選んだとき， ${\mex \p{A_1, A_2,A_4} = \mex \p{0, 1, 2} = 3} ．
-            }
-            このほか，すべての選び方についての ${\mex} の総和は ${1 7} となる．
+            } このほか，すべての選び方についての ${\mex} の総和は ${1 7} となる．
           }
         >
         +frame ?:(3) { 部分点1解法 } <
@@ -601,14 +595,10 @@ let-block +subset-mex id =
             ${c ( x )} を ${A} の中に含まれる ${x} の個数 とすると，
             ${\mex} が ${x} になるようなカードの選び方の個数は，
             \listing {
-              * ${0 , 1 , \ldots , x - 1} がそれぞれ ${1} 枚以上選ばれている \br;
-              ${\to \p{2^{c(0)} - 1} \times \p{2^{c(1)} - 1} \times \cdots \times \p{2^{c(x - 1)} - 1}} 通り
-              * ${x} が選ばれていない \br;
-              ${\to 1} 通り
-              * ${x + 1} 以上の数は選ばれているか選ばれていないかは関係ない \br;
-              ${\to 2^{c ( x + 1 )} \times 2^{c ( x + 2 )} \times \cdots \times 2^{c ( 1 0 0 2 )}} 通り
-            }
-            これらの積が，${\mex} が ${x} になるようなカードの選び方の個数．
+              * ${0 , 1 , \ldots , x - 1} がそれぞれ ${1} 枚以上選ばれている \br; ${\to \p{2^{c(0)} - 1} \times \p{2^{c(1)} - 1} \times \cdots \times \p{2^{c(x - 1)} - 1}} 通り
+              * ${x} が選ばれていない \br; ${\to 1} 通り
+              * ${x + 1} 以上の数は選ばれているか選ばれていないかは関係ない \br; ${\to 2^{c ( x + 1 )} \times 2^{c ( x + 2 )} \times \cdots \times 2^{c ( 1 0 0 2 )}} 通り
+            } これらの積が，${\mex} が ${x} になるようなカードの選び方の個数．
           }
           +p { 各 ${x} についてこの値を求め， ${x} を掛けたのちに足し合わせればよい． }
         >
@@ -898,10 +888,7 @@ let-block +long-chess-board id =
         >
         +frame ?:(4) { 部分点4解法 } <
           +listing { * ${H = 3} }
-          +p {
-            ナイトを以下のように動かすことを考えると，ナイトの位置は周期 ${4} になっている．\br;
-            \phantom (from 2) { ${\to} ビショップの初期位置として ${3 \times 4} ケースを考えればよい． }
-          }
+          +p { ナイトを以下のように動かすことを考えると，ナイトの位置は周期 ${4} になっている．\br; \phantom (from 2) { ${\to} ビショップの初期位置として ${3 \times 4} ケースを考えればよい． } }
           +select (only 1) <
             +fig-center (imageh3-fb-base);
           > <
@@ -921,10 +908,7 @@ let-block +long-chess-board id =
             >
           >
           +phantom (from 3) <
-            +p {
-              この ${1 2} マスのうち， ${\ceil{\abs{c_k - c_b} \ / \ 2}}
-              が達成できないのは 図の位置にビショップがある時のみ．
-            }
+            +p { この ${1 2} マスのうち， ${\ceil{\abs{c_k - c_b} \ / \ 2}} が達成できないのは 図の位置にビショップがある時のみ． }
           >
           +phantom (from 4) <
             +p {
@@ -947,15 +931,13 @@ let-block +lcm-and-gcd id =
         +frame {} <
           +p {
             黒板に ${N \  \p{2 \leq N \leq 10^5}} 個の
-            正整数 ${A_1 , A_2 , \ldots , A_N \( 1 \leq A_i \leq 2 \times 1 0^5 )}
-            が書かれている．
+            正整数 ${A_1 , A_2 , \ldots , A_N \( 1 \leq A_i \leq 2 \times 1 0^5 )} が書かれている．
           }
           +block-skip (5pt);
           +p {
             次の操作を行えなくなるまで繰り返す:
             \listing {
-              * 黒板に書かれている数を ${2} つ選んで消す．消した数を ${x , \  y} として，\br;
-              ${\mathrm{lcm} ( x , \  y )} と ${\mathrm{gcd} ( x , \  y )}を黒板に書き加える．
+              * 黒板に書かれている数を ${2} つ選んで消す．消した数を ${x , \  y} として，\br; ${\mathrm{lcm} ( x , \  y )} と ${\mathrm{gcd} ( x , \  y )}を黒板に書き加える．
                ** ただし，操作の前後で黒板の数の組み合わせが変化しないような操作は行えない．
             }
           }
@@ -974,13 +956,11 @@ let-block +lcm-and-gcd id =
               \eqn (${\pb{
                 \mathrm{gcd}\p{A_1, A_2} \mod 998244353,
                 \mathrm{lcm}\p{A_1, A_2} \mod 998244353
-              }});
-              となる．
+              }}); となる．
             }
             +block-skip (5pt);
             +p {
-              ${\mathrm{mod}} を取らないとWAとなるため注意！ \br;
-              たとえば ${A = \pb{199999, 200000}} のとき，
+              ${\mathrm{mod}} を取らないとWAとなるため注意！ \br; たとえば ${A = \pb{199999, 200000}} のとき，
               ${\mathrm{lcm} ( 1 9 9 9 9 9 , 2 0 0 0 0 0 ) = 3 9 9 9 9 8 0 0 0 0 0} ．
             }
           >
@@ -993,8 +973,7 @@ let-block +lcm-and-gcd id =
             +p { 証明: ${g = \mathrm{gcd} \p{A_1, A_2, \ldots, A_N}} とする． }
             +listing {
               * ${A_1 , A_2 , \ldots , A_N} はすべて ${g} の倍数である．
-              また，選んだ ${2} つの数がともに ${g} の倍数の時，新たに書き加える数は ${2} つとも ${g} の倍数．\br;
-              ${\to} 何度操作を行っても，黒板に ${g} の倍数以外が書かれることはない．
+              また，選んだ ${2} つの数がともに ${g} の倍数の時，新たに書き加える数は ${2} つとも ${g} の倍数．\br; ${\to} 何度操作を行っても，黒板に ${g} の倍数以外が書かれることはない．
               * ${i = 2 , 3 , \ldots , N} に対して， ${( A_1 , A_i )} の ${2} つの数を選んで操作を行うことで，
               ${g} を作ることができる．
             }
@@ -1017,8 +996,7 @@ let-block +lcm-and-gcd id =
               ${2^\blue{2} \times 3^\blue{3} \times 5^\blue{5}};
               ${\mathrm{lcm} \p{A_1, A_2} =};
               ${2^\red{6} \times 3^\red{4} \times 5^\red{7}};
-            ];
-            問題の操作は，素因数ごとに肩の数の大きいほうを集めると ${\mathrm{lcm}}に，
+            ]; 問題の操作は，素因数ごとに肩の数の大きいほうを集めると ${\mathrm{lcm}}に，
             小さいほうを集めると ${\mathrm{gcd}}になることが分かる．
           }
           +block-skip (5pt);
@@ -1064,7 +1042,7 @@ let-block +deque-inversion id =
     '<
       +section ?:({ Writer: Nichi10p }) { |#id;: Deque Inversion| } <
         +frame {} <
-          +p { 最初，長さ ${N \  ( 2 \times N \leq 1 0^5 )} の数列 ${A \  ( - 1 0^5 \leq A_i \leq 1 0^5 )} がある． }
+          +p { 最初，長さ ${N \  ( 2 \leq N \leq 1 0^5 )} の数列 ${A \  ( - 1 0^5 \leq A_i \leq 1 0^5 )} がある． }
           +p { 以下のクエリが ${Q \  ( 1 \leq Q \leq 1 0^5 )} 個来るので，各クエリ操作後の ${A} の転倒数を求めよ． }
           +listing {
             * `1 x` : ${A} の\emph { 末尾 }に ${x}を追加する．
@@ -1096,7 +1074,7 @@ let-block +deque-inversion id =
           +listing { * ${N \leq 2 \times 1 0^4 , \  Q \leq 1 0 0} }
           +block-skip (5pt);
           +phantom (from 2) <
-            +p { 転倒数を高速に求めたい ${\to} BIT で求められる！ }
+            +p { 転倒数を高速に求めたい ${\to} BIT(fenwick tree) で求められる！ }
             +p { 転倒数とは，「"自分より左にある，自分より大きな数の個数" の総和」 }
           >
           +block-skip (2pt);
@@ -1107,10 +1085,9 @@ let-block +deque-inversion id =
                 * ${A_i} より大きい数の個数をBITにより求める．
                  ** いま BIT で管理しているのは「自分より左にある数」
                 * BITの ${A_i} の値を ${1} 増やす．
-              }
-              とすれば，転倒数が求められる．
+              } とすれば，転倒数が求められる．
             }
-            +p { このままだと負の数が出てくるが，あらかじめ ${1 0^6} を足しておけばよい． }
+            +p { このままだと負の数が出てくるが，あらかじめ ${1 0^5} を足しておけばよい． }
           >
         >
         +frame ?:(3) { 満点解法 } <
@@ -1118,14 +1095,10 @@ let-block +deque-inversion id =
             +p {
               操作により転倒数がどう変化するかを考える．
               \listing {
-                * ある数 ${x} が ${A} の\emph { 末尾 }に追加されるとき\br;
-                ${\to} 転倒数は「 ${A} のうち ${x} より大きい数の個数」ぶん増える．
-                * ある数 ${x} が ${A} の\emph { 末尾 }から取り除かれるとき\br;
-                ${\to} 転倒数は「 ${A} のうち ${x} より大きい数の個数」ぶん減る．
-                * ある数 ${x} が ${A} の\emph { 先頭 }に追加されるとき \br;
-                ${\to} 転倒数は「 ${A} の ${x} より小さい数の個数」ぶん増える．
-                * ある数 ${x} が ${A} の\emph { 先頭 } から取り除かれるとき\br;
-                ${\to} 転倒数は「 ${A} の ${x} より小さい数の個数」ぶん減る．
+                * ある数 ${x} が ${A} の\emph { 末尾 }に追加されるとき\br; ${\to} 転倒数は「 ${A} のうち ${x} より大きい数の個数」ぶん増える．
+                * ある数 ${x} が ${A} の\emph { 末尾 }から取り除かれるとき\br; ${\to} 転倒数は「 ${A} のうち ${x} より大きい数の個数」ぶん減る．
+                * ある数 ${x} が ${A} の\emph { 先頭 }に追加されるとき \br; ${\to} 転倒数は「 ${A} の ${x} より小さい数の個数」ぶん増える．
+                * ある数 ${x} が ${A} の\emph { 先頭 } から取り除かれるとき\br; ${\to} 転倒数は「 ${A} の ${x} より小さい数の個数」ぶん減る．
               }
             }
           >
@@ -1145,14 +1118,14 @@ CyanTheme.document '<
     date = { |2024/03/30| };
   |));
 
-  +cyan-or-less (`A`);
-  +ffffx (`B`);
-  +unions (`C`);
-  +x-word-database (`D`);
-  +range-rotate-query (`E`);
-  +subset-mex (`F`);
-  +long-chess-board (`G`);
-  +lcm-and-gcd (`H`);
+  % +cyan-or-less (`A`);
+  % +ffffx (`B`);
+  % +unions (`C`);
+  % +x-word-database (`D`);
+  % +range-rotate-query (`E`);
+  % +subset-mex (`F`);
+  % +long-chess-board (`G`);
+  % +lcm-and-gcd (`H`);
   +deque-inversion (`I`);
-  +counting-zig-zag-sequence (`J`);
+  % +counting-zig-zag-sequence (`J`);
 >

@@ -18,7 +18,7 @@ https://mofecoder.com/contests/cyan_or_less_01
 | [Deque Inversion](https://mofecoder.com/manage/problems/170)           | Nichi10p |   ✔    |      ✔       |     ✔      |      ✔      |  ✔   |      ✔      |
 | [Counting Zig Zag Sequence](https://mofecoder.com/manage/problems/142) | Ackvy    |   ✔    |      ✔       |     ✔      |      ✔      |  ✔   |      ✔      |
 | [Subset Mex](https://mofecoder.com/manage/problems/161)                | Kyo_s_s  |   ✔    |      ✔       |     ✔      |      ✔      |  ✔   |      ✔      |
-| [Colorful Balls]()                                                     | Ackcy    |   ✔    |      ✔       |     ✔      |            |     |            |
+| [Colorful Balls](https://mofecoder.com/manage/problems/171)            | Ackcy    |   ✔    |      ✔       |     ✔      |            |     |      ✔      |
 
 - 問題文: `statement.md` に記述、そのまま MofeCoder に登録できるようにする
 - テストケース: validator を書き、通ることを確認する

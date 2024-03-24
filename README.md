@@ -15,7 +15,7 @@ https://mofecoder.com/contests/cyan_or_less_01
 | [Long Chess Board](https://mofecoder.com/manage/problems/144)          | yasunori |   ✔    |      ✔       |     ✔      |             |  ✔   |      ✔      |
 | [LCM and GCD](https://mofecoder.com/manage/problems/155)               | yasunori |   ✔    |      ✔       |     ✔      |      ✔      |  ✔   |      ✔      |
 | [Range Rotate Query](https://mofecoder.com/manage/problems/162)        | loop0919 |   ✔    |      ✔       |     ✔      |      ✔      |  ✔   |      ✔      |
-| [Deque Inversion](https://mofecoder.com/manage/problems/170)           | Nichi10p |   ✔    |      ✔       |     ✔      |      ✔      |      |      ✔      |
+| [Deque Inversion](https://mofecoder.com/manage/problems/170)           | Nichi10p |   ✔    |      ✔       |     ✔      |      ✔      |  ✔   |      ✔      |
 | [Counting Zig Zag Sequence](https://mofecoder.com/manage/problems/142) | Ackvy    |   ✔    |      ✔       |     ✔      |      ✔      |  ✔   |      ✔      |
 | [Subset Mex](https://mofecoder.com/manage/problems/161)                | Kyo_s_s  |   ✔    |      ✔       |     ✔      |      ✔      |  ✔   |      ✔      |
 

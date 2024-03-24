@@ -1,0 +1,41 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+long long count_inverse(vector<int> const &A) {
+  long long cnt = 0;
+  for (size_t i = 0; i < A.size(); ++i)
+    for (size_t j = i+1; j < A.size(); ++j)
+      if (A[i] > A[j])
+        ++cnt;
+  return cnt;
+}
+
+int main() {
+  int N, Q;
+  cin >> N;
+  vector<int> A(N);
+  for (int i = 0; i < N; ++i)
+    cin >> A[i];
+
+  cin >> Q;
+  while (Q--) {
+    int T; cin >> T;
+
+    if (T == 3) {
+      int X; cin >> X;
+      A.insert(A.begin(), X);
+    }
+    if (T == 1) {
+      int X; cin >> X;
+      A.push_back(X);
+    }
+    if (T == 4)
+      A.erase(A.begin());
+    if (T == 2)
+      A.pop_back();
+
+    cout << count_inverse(A) << endl;
+  }
+}

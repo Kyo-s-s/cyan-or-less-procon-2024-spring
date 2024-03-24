@@ -7,7 +7,7 @@ while IFS= read -r -d '' file; do
         continue
     fi
 
-    if [[ "${file##*.}" == "pdf" ]]; then
+    if [[ "${file##*.}" == "pdf" ]] || [[ "${file##*.}" == "jpg" ]]; then
         continue
     fi
 

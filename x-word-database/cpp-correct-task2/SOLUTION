@@ -22,4 +22,4 @@ cxx_solution(src='main.cc',
 #cs_solution(src='main.cs') # C# (mono)
 
 ## Score
-expected_score(30)
+expected_score(40)

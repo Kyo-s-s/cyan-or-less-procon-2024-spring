@@ -9,18 +9,6 @@ jobs:
   test:
     strategy:
       fail-fast: false
-      matrix:
-        path: 
-          - cyan-or-less
-          - fffffx
-          - unions
-          - x-word-database
-          - lcm-and-gcd
-          - range-rotate-query
-          - long-chess-board
-          - counting-zig-zag-sequence
-          - subset-mex
-        
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -32,5 +20,53 @@ jobs:
       - name: Install pypy
         run: sudo apt-get install pypy3
 
-      - name: Rime test
-        run: rime test ${{ matrix.path }} -k
+      - name: cyan-or-less
+        uses: ./.github/actions/rime-test
+        with:
+          problem: cyan-or-less
+
+      - name: fffffx
+        uses: ./.github/actions/rime-test
+        with:
+          problem: fffffx
+
+      - name: unions
+        uses: ./.github/actions/rime-test
+        with:
+          problem: unions
+
+      - name: x-word-database
+        uses: ./.github/actions/rime-test
+        with:
+          problem: x-word-database
+
+      - name: lcm-and-gcd
+        uses: ./.github/actions/rime-test
+        with:
+          problem: lcm-and-gcd
+
+      - name: range-rotate-query
+        uses: ./.github/actions/rime-test
+        with:
+          problem: range-rotate-query
+
+      - name: long-chess-board
+        uses: ./.github/actions/rime-test
+        with:
+          problem: long-chess-board
+
+      - name: counting-zig-zag-sequence
+        uses: ./.github/actions/rime-test
+        with:
+          problem: counting-zig-zag-sequence
+
+      - name: deque-inversion
+        uses: ./.github/actions/rime-test
+        with:
+          problem: deque-inversion
+
+      - name: subset-mex
+        uses: ./.github/actions/rime-test
+        with:
+          problem: subset-mex
+

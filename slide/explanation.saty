@@ -191,14 +191,26 @@ let-block +x-word-database id =
             +p { 長さが ${X} 以下で `cyan` を含むような文字列はすべてよい文字列になる． }
           >
           +phantom (from 3) <
+            +align [
+              ${\mathrm{dp} \pB{i} \pB{j} :=};
+              ${X \text!{ の上から} i \text!{番目まで見て，}};
+              ${};
+              ${\text!{`cyan`の} j \text!{文字目までを末尾に含む} \/ \text!{すでに`cyan`を含む}};
+              ${};
+              ${\text!{ような文字列の個数}};
+            ];
             +p {
-              長さが ${K} で `cyan`を含む文字列の個数は，包除原理を使うと，
-              \eqn (${\sum_{i = 1}^{\floor{K/4}} ( - 1 )^{i + 1} \cdot 2 6^{K - 4 i} \cdot \mH{i+1}{K-4i}}); で求められる(ここで， ${\mH{n}{k}} は重複組合せ )．
-              \phantom (from 4) { よって，答えは， }
+              としてDPすることで， ${\mathrm{dp} \pB{i} \pB{\text!{`cyan` を含む}}} の値は
+              「`cyan` を連続部分列に持つ，ちょうど${i} 文字の文字列の個数」となる．
             }
           >
           +phantom (from 4) <
-            +eqn (${\sum_{K = 4}^X \sum_{i = 1}^{\floor{K/4}} ( - 1 )^{i + 1} \cdot 2 6^{K - 4 i} \cdot \mH{i+1}{K-4i}});
+            +block-skip (5pt);
+            +p {
+              ${\to} これらの和をとり，
+              ${\isum_{i = 1}^X \mathrm{dp} \pB{i} \pB{\text!{`cyan` を含む}}}
+              が答え．
+            }
           >
         >
         +frame ?:(3) { 満点解法 } <
@@ -1118,14 +1130,14 @@ CyanTheme.document '<
     date = { |2024/03/30| };
   |));
 
-  % +cyan-or-less (`A`);
-  % +ffffx (`B`);
-  % +unions (`C`);
-  % +x-word-database (`D`);
-  % +range-rotate-query (`E`);
-  % +subset-mex (`F`);
-  % +long-chess-board (`G`);
-  % +lcm-and-gcd (`H`);
+  +cyan-or-less (`A`);
+  +ffffx (`B`);
+  +unions (`C`);
+  +x-word-database (`D`);
+  +range-rotate-query (`E`);
+  +subset-mex (`F`);
+  +long-chess-board (`G`);
+  +lcm-and-gcd (`H`);
   +deque-inversion (`I`);
-  % +counting-zig-zag-sequence (`J`);
+  +counting-zig-zag-sequence (`J`);
 >

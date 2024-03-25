@@ -37,12 +37,19 @@ $\vdots$
 $\mathrm{query}_Q$
 </div>
 
-各クエリは、次の形式で与えられます。
+各クエリ $\mathrm{query}_i$は、以下に示す $3$ つの形式のいずれかである。
 
 <div class="code-math">
 
-$t$ $x$ $c$
+$1$ $x$ $c$
+</div>
+<div class="code-math">
 
+$2$ $x$
+</div>
+<div class="code-math">
+
+$3$ $x$
 </div>
 
 ## 出力

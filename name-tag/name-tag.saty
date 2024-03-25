@@ -41,7 +41,7 @@ let tag-base data is-staff =
   let x = 42pt in
     from-graphics-given-context (w, h) (fun ctx -> (let name =
       (read-inline (ctx
-        |> set-font-size 16pt
+        |> set-font-size 17pt
         |> set-text-color (Color.of-css `#316F63`)) { #name; }) in
     let base-design =
       [
@@ -105,6 +105,88 @@ let tag-base data is-staff =
         base-design;
         staff-design;
       ]))
+let tag-base2 data is-staff =
+  let name1 = data#name1 in
+  let name2 = data#name2 in
+  let icon = data#icon in
+  let icon-pos-x = 73pt in
+  let icon-pos-y = 60pt in
+  let icon-radius = 53pt in
+  let name-pos-c = 190pt in
+  let name-pos-y = 60pt in
+  let name-pos-y1 = 70pt in
+  let name-pos-y2 = 50pt in
+  let x = 42pt in
+    from-graphics-given-context (w, h) (fun ctx -> (let ctx =
+      ctx
+        |> set-font-size 17pt
+        |> set-text-color (Color.of-css `#316F63`) in
+    let name1 = read-inline ctx { #name1; } in
+    let name2 = read-inline ctx { #name2; } in
+    let base-design =
+      [
+        draw-text (icon-pos-x -' icon-radius, icon-pos-y -' icon-radius) (use-image-by-width (load-image icon) (icon-radius *' 2.));
+        fill bg-color ((Gr.rectangle (0pt, 0pt) (w, h))
+          |> unite-path (Gr.circle (icon-pos-x, icon-pos-y) icon-radius));
+        draw-text (w *' 0.5 -' 150pt *' 0.5 +' 10pt, 115pt) (use-image-by-width (load-image `contest-title.jpg`) 150pt);
+        stroke 0.5pt Color.black (Gr.rectangle (0pt, 0pt) (w, h));
+        fill cyan (start-path (0pt, h)
+          |> line-to (0pt, h -' x *' 2.)
+          |> line-to (x *' 2., h)
+          |> close-with-line);
+        fill brown (start-path (0pt, h)
+          |> line-to (0pt, h -' x)
+          |> line-to (x *' 2.5, h)
+          |> close-with-line);
+        fill green (start-path (0pt, h)
+          |> line-to (0pt, h -' x *' 2.5)
+          |> line-to (x, h)
+          |> close-with-line);
+        fill gray (start-path (0pt, h)
+          |> line-to (0pt, h -' x)
+          |> line-to (x, h)
+          |> close-with-line);
+        fill cyan (start-path (w, 0pt)
+          |> line-to (w, x *' 2.)
+          |> line-to (w -' x *' 2., 0pt)
+          |> close-with-line);
+        fill green (start-path (w, 0pt)
+          |> line-to (w, x *' 2.5)
+          |> line-to (w -' x, 0pt)
+          |> close-with-line);
+        fill brown (start-path (w, 0pt)
+          |> line-to (w, x)
+          |> line-to (w -' x *' 2.5, 0pt)
+          |> close-with-line);
+        fill gray (start-path (w, 0pt)
+          |> line-to (w, x)
+          |> line-to (w -' x, 0pt)
+          |> close-with-line);
+        fill Color.white (Gr.rectangle (name-pos-c -' (get-natural-width name1) *' 0.5 -' 5pt, name-pos-y1 -' 3pt) (name-pos-c +' (get-natural-width name1) *' 0.5 +' 5pt, name-pos-y1 +' 3pt));
+        draw-text (name-pos-c -' (get-natural-width name1) *' 0.5, name-pos-y1) name1;
+        fill Color.white (Gr.rectangle (name-pos-c -' (get-natural-width name2) *' 0.5 -' 5pt, name-pos-y2 -' 3pt) (name-pos-c +' (get-natural-width name2) *' 0.5 +' 5pt, name-pos-y2 +' 3pt));
+        draw-text (name-pos-c -' (get-natural-width name2) *' 0.5, name-pos-y2) name2;
+        stroke 0.5pt Color.black (Gr.rectangle (0pt, 0pt) (w, h));
+      ] in
+    let staff-design =
+      if is-staff
+      then
+        [
+          fill (Color.of-css `#316F63`) (start-path (w, h)
+            |> line-to (w, h -' x -' 20pt)
+            |> line-to (w -' x -' 20pt, h)
+            |> close-with-line);
+          draw-text (37pt, 186pt) (read-inline (ctx
+            |> set-font-size 11pt
+            |> set-text-color Color.white) { Staff })
+            |> linear-transform-graphics 1. 1. (0. -. 1.) 1.;
+        ]
+      else
+        [] in
+      List.concat [
+        base-design;
+        staff-design;
+      ]))
 let-block ctx +name-tag ?:is-staff name =
   let is-staff =
     match is-staff with
@@ -121,6 +203,19 @@ let-block ctx +name-tag ?:is-staff name =
         name = name-i;
         icon = `icon/` ^ name ^ `.jpg`;
       |) is-staff in
+    read-block ctx '<
+      +fig-center (vconcat [
+        hconcat [tag;tag;];
+      ]);
+    >
+let-block ctx +name-tag2 name1 name2 =
+  let icon = `icon/` ^ name1 ^ `／` ^ name2 ^ `.jpg` in
+  let tag =
+    tag-base2 (|
+      name1 = embed-string name1;
+      name2 = embed-string name2;
+      icon = icon;
+    |) false in
     read-block ctx '<
       +fig-center (vconcat [
         hconcat [tag;tag;];
@@ -199,13 +294,14 @@ standalone '<
   +name-tag (`じゅーすいそ`);
   +name-tag (`takumi152`);
   +name-tag (`seekworser`);
-  +name-tag (`KA37RI ／ かみなり`);
+  % +name-tag (`KA37RI ／ かみなり`);
+  +name-tag2 (`KA37RI`) (`かみなり`);
   +newpage;
   +name-tag (`kaliafluorido`);
   +name-tag (`meow_shin`);
   +name-tag (`ばしん`);
   +name-tag (`toshico`);
-  +name-tag (`りすりす／TwoSquirrels`);
+  +name-tag2 (`りすりす`) (`TwoSquirrels`);
   +newpage;
 
   +name-tag (`yurina256`);

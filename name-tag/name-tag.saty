@@ -11,7 +11,8 @@ let standalone bt =
       |> set-font HanIdeographic (`system:ZenKakuGothicNew-Medium`, 1.0, 0.0)
       |> set-font OtherScript (`system:ZenKakuGothicNew-Medium`, 1.0, 0.0)
       |> set-paragraph-margin 0pt 0.5pt
-      |> set-space-ratio-between-scripts 0.0 0.0 0.0 Latin Kana in
+      |> set-space-ratio-between-scripts 0.0 0.0 0.0 Latin Kana
+      |> set-space-ratio-between-scripts 0.0 0.0 0.0 Kana HanIdeographic in
   let bb = read-block ctx bt in
     page-break A4Paper (fun _ -> (|
       text-origin = (80pt, 8pt);
@@ -110,10 +111,16 @@ let-block ctx +name-tag ?:is-staff name =
       | Some b -> b
       | None -> false in
   let tag =
-    tag-base (|
-      name = embed-string name;
-      icon = `icon/` ^ name ^ `.jpg`;
-    |) is-staff in
+    let name-i =
+      if string-match (regexp-of-string `あめふり てる`) name
+      then
+        let n = (embed-string name) in { #n;\* }
+      else
+        embed-string name in
+      tag-base (|
+        name = name-i;
+        icon = `icon/` ^ name ^ `.jpg`;
+      |) is-staff in
     read-block ctx '<
       +fig-center (vconcat [
         hconcat [tag;tag;];
@@ -124,92 +131,89 @@ in
 
 standalone '<
   +name-tag ?:(true) (`Kyo_s_s`);
-  +name-tag (`じゅーすいそ`);
   +name-tag ?:(true) (`えくと`);
   +name-tag ?:(true) (`Ackvy`);
   +name-tag ?:(true) (`yasunori`);
-
-  +newpage;
   +name-tag ?:(true) (`Blueberry1001`);
+  +newpage;
   +name-tag ?:(true) (`forループ`);
   +name-tag ?:(true) (`ragna`);
   +name-tag ?:(true) (`Nichi10p`);
-  +newpage;
-
-  % ====================
-  % 画質悪いひと
   +name-tag (`けむにく`);
   +name-tag (`4O4`);
+  +newpage;
+
   +name-tag (`くしらっちょ`);
   +name-tag (`Etis`);
   +name-tag (`InTheBloom`);
-  +newpage;
   +name-tag (`ochiaigawa`);
   +name-tag (`ウルズニャー`);
+  +newpage;
   +name-tag (`真鍋愛`);
   +name-tag (`nikoro256`);
   +name-tag (`みたに`);
-  +newpage;
   +name-tag (`maruisan`);
   +name-tag (`sharu`);
+  +newpage;
+
   +name-tag (`Aさん`);
   +name-tag (`こるぼー`);
-  % +name-tag (`あめふり てる*`);
-  +newpage;
+  +name-tag (`あめふり てる`);
   +name-tag (`ロッチ`);
-  +name-tag (`trisector`);
   +name-tag (`yoichiro`);
+  +newpage;
   +name-tag (`zz_zz`);
   +name-tag (`jun`);
-  +newpage;
   +name-tag (`startcpp`);
   +name-tag (`shihaka`);
   +name-tag (`mizz`);
+  +newpage;
+
   +name-tag (`ひろゆき`);
   +name-tag (`えおむ`);
-  +newpage;
   +name-tag (`まぐげんがー`);
   +name-tag (`takotech`);
-  % ====================
-  +newpage;
   +name-tag (`Nafmo`);
+  +newpage;
   +name-tag (`shinchan`);
   +name-tag (`nonon`);
   +name-tag (`きたぴー`);
   +name-tag (`hiryuN`);
-  +newpage;
   +name-tag (`はちじ`);
+  +newpage;
+
   +name-tag (`Asa (a01sa01to)`);
   +name-tag (`noshinn`);
   +name-tag (`Cecil`);
   +name-tag (`shogo314`);
-  +newpage;
   +name-tag (`cordx56`);
+  +newpage;
   +name-tag (`mealy`);
   +name-tag (`harurun`);
   +name-tag (`public_yusuke`);
   +name-tag (`かわら`);
-  +newpage;
   +name-tag (`Magentor`);
+  +newpage;
+
   +name-tag (`prd_xxx`);
   +name-tag (`じゅーすいそ`);
   +name-tag (`takumi152`);
   +name-tag (`seekworser`);
-  +newpage;
-  % https://x.com/KA37RI_DY/status/1771942426518724671?s=20
   +name-tag (`KA37RI ／ かみなり`);
+  +newpage;
   +name-tag (`kaliafluorido`);
   +name-tag (`meow_shin`);
   +name-tag (`ばしん`);
   +name-tag (`toshico`);
-  +newpage;
   +name-tag (`りすりす／TwoSquirrels`);
+  +newpage;
+
   +name-tag (`yurina256`);
   +name-tag (`ひーぱ`);
   +name-tag (`keroru`);
   +name-tag (`cleantted`);
-  +newpage;
   +name-tag (`aplysia`);
+  +newpage;
   +name-tag (`tmya`);
   +name-tag (`Yuyo`);
   +name-tag (`mymelochan`);
@@ -218,4 +222,5 @@ standalone '<
   % +name-tag (`うだい`);
   % +name-tag (`ゆうき`);
   % +name-tag (`MM`);
+  % 69 = 参加者61 + 運営8
 >

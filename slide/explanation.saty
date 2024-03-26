@@ -1137,7 +1137,6 @@ let-block ctx +statistics score fa time =
   let ac-per =
     let per = 100 * ac * 100 / !team-cnt in
     let num = embed-string ((arabic (per / 100) ^ `.` ^ (arabic (per mod 100)))) in { #num; \% } in
-  % 正の得点を獲得した人の平均点
   let ave =
     let (sum, cnt) = List.fold (0, 0) (fun (a, b) (sum, cnt) -> (sum + a * b, cnt + b)) score in
     let per = sum * 100 / !team-cnt in

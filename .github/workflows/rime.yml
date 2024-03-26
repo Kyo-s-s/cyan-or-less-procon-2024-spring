@@ -70,3 +70,8 @@ jobs:
         with:
           problem: subset-mex
 
+      - name: colorful-balls
+        uses: ./.github/actions/rime-test
+        with:
+          problem: colorful-balls
+

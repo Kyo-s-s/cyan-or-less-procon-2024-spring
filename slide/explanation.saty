@@ -3,10 +3,12 @@
 @require: enumitem/enumitem
 @require: azmath/azmath
 @require: figbox/figbox
+@require: easytable/easytable
 @import: CyanTheme
 
 open SlydifiOverlay
 open FigBox
+open EasyTableAlias
 open CyanTheme
 let-block ctx +block-skip v = block-skip v
 let-inline ctx \inline-skip v = inline-skip v
@@ -1121,6 +1123,108 @@ let-block +deque-inversion id =
         >
       >
     >
+let-mutable team-cnt <- 0
+let-block ctx +set-team-cnt cnt =
+  let () = team-cnt <- cnt in block-nil
+let-block ctx +statistics score fa time =
+  let ac =
+    match (List.find (fun (a, _) -> a == 100) score) with
+      | Some(_, c) -> c
+      | None -> 0 in
+  let ac-cnt =
+    let num = embed-string (arabic ac) in
+    let den = embed-string (arabic !team-cnt) in { #num; / #den; } in
+  let ac-per =
+    let per = 100 * ac * 100 / !team-cnt in
+    let num = embed-string ((arabic (per / 100) ^ `.` ^ (arabic (per mod 100)))) in { #num; \% } in
+  % 正の得点を獲得した人の平均点
+  let ave =
+    let (sum, cnt) = List.fold (0, 0) (fun (a, b) (sum, cnt) -> (sum + a * b, cnt + b)) score in
+    let per = sum * 100 / !team-cnt in
+    let num = embed-string ((arabic (per / 100) ^ `.` ^ (arabic (per mod 100)))) in { #num; 点 } in
+    read-block ctx '<
+      +frame { 統計情報 } <
+        +block-skip (70pt);
+        +easytable ?:[] [c;c;] {
+          |AC数| #ac-cnt;
+          |AC率| #ac-per;
+          |平均点| #ave;
+          | |
+          | FA | #fa; (#time;)
+          |
+        }
+      >
+    >
+let color-list =
+  [
+    (10, Color.of-css `#E6F6FF`);
+    (20, Color.of-css `#CCECFF`);
+    (30, Color.of-css `#B3E2FF`);
+    (40, Color.of-css `#99D9FF`);
+    (50, Color.of-css `#80CFFF`);
+    (60, Color.of-css `#66C5FF`);
+    (70, Color.of-css `#4DBBFF`);
+    (80, Color.of-css `#33B1FF`);
+    (90, Color.of-css `#1AA7FF`);
+    (100, Color.of-css `#008DFF`);
+  ]
+let-block ctx +graph problems =
+  let (width, height) = (600pt, 300pt) in
+  let cnt = List.length problems in
+  let sz = width *' (1. /. (float cnt)) in
+  let-mutable base <- 0pt in
+  let low = 42pt in
+  let draw (name, score) =
+    let name = read-inline ctx (embed-string name) in
+    let pad = 10pt in
+    let one = (height -' low) *' (1. /. (float !team-cnt)) in
+    let-mutable nh <- 0pt in
+    let paint (score, cnt) =
+      let h = one *' (float cnt) in
+      let color =
+        match List.find (fun (a, _) -> a == score) color-list with
+          | Some(_, c) -> c
+          | None -> Color.black in
+      let res = fill color (Gr.rectangle (!base +' pad, low +' !nh) (!base +' sz -' pad, low +' !nh +' h)) in
+      let () = nh <- !nh +' h in res in
+    let ac =
+      let ac =
+        match List.find (fun (a, _) -> a == 100) score with
+          | Some(_, c) -> c
+          | None -> 0 in read-inline ctx (embed-string (`(` ^ (arabic ac) ^ `)`)) in
+    let res =
+      List.append [
+        draw-text (!base +' sz *' 0.5 -' (get-natural-width name) *' 0.5, 20pt) name;
+        draw-text (!base +' sz *' 0.5 -' (get-natural-width ac) *' 0.5, 0pt) ac;
+      ] (List.map paint (List.reverse score)) in
+    let () = base <- !base +' sz in res in
+    read-block ctx '<
+      +frame { 統計 } <
+        +block-skip (5pt);
+        +fig-center (from-graphics (width, height) (List.concat [
+          [
+            stroke 1pt Color.black (Gr.line (0pt, low) (width, low));
+          ];
+          List.concat (List.map draw problems);
+        ]));
+      >
+    >
+let score-A = [(100, 49);]
+let score-B =
+  [
+    (20, 4);
+    (40, 7);
+    (70, 12);
+    (100, 13);
+  ]
+let score-C = []
+let score-D = []
+let score-E = []
+let score-F = []
+let score-G = []
+let score-H = []
+let score-I = []
+let score-J = []
 in
 
 CyanTheme.document '<
@@ -1129,15 +1233,39 @@ CyanTheme.document '<
     author = { |運営メンバーのなまえ| };
     date = { |2024/03/30| };
   |));
+  +set-team-cnt (50);
+
+  +graph [
+    (`A`, score-A);
+    (`B`, score-B);
+    (`C`, score-C);
+    (`D`, score-D);
+    (`E`, score-E);
+    (`F`, score-F);
+    (`G`, score-G);
+    (`H`, score-H);
+    (`I`, score-I);
+    (`J`, score-J);
+  ];
 
   +cyan-or-less (`A`);
+  +statistics (score-A) { username } { time }
   +ffffx (`B`);
+  +statistics (score-B) { username } { time }
   +unions (`C`);
+  +statistics (score-C) { username } { time }
   +x-word-database (`D`);
+  +statistics (score-D) { username } { time }
   +range-rotate-query (`E`);
+  +statistics (score-E) { username } { time }
   +subset-mex (`F`);
+  +statistics (score-F) { username } { time }
   +long-chess-board (`G`);
+  +statistics (score-G) { username } { time }
   +lcm-and-gcd (`H`);
+  +statistics (score-H) { username } { time }
   +deque-inversion (`I`);
+  +statistics (score-I) { username } { time }
   +counting-zig-zag-sequence (`J`);
+  +statistics (score-J) { username } { time }
 >

@@ -1,0 +1,82 @@
+@require: class-slydifi/slydifi
+@require: math
+@require: enumitem/enumitem
+@require: azmath/azmath
+@require: figbox/figbox
+@require: easytable/easytable
+@import: CyanTheme
+
+open FigBox
+let-block ctx +block-skip v = block-skip v
+let-block +frame title inner = '<
+  +frame (title) <
+    +block-skip (5pt);
+    #inner;
+  >
+>
+let-inline ctx \url link it =
+  let it = read-inline ctx it in
+  let hook = hook-page-break (fun _ pos -> (let (w, h, d) = get-natural-metrics it in register-link-to-uri link pos w h d None)) in hook ++ it
+in
+
+CyanTheme.document '<
+  +make-title ((|
+    title = { |水以下コンテスト| };
+    author = { |Kyo_s_s, yasunori, Ackvy, えくと,| forループ, Nichi10p, Blueberry1001, ragna| };
+    date = { |2024/03/30| };
+  |));
+  +frame { Wifi } <
+    +p {
+      配布したユーザー名/パスワードを使用し，
+      芝浦工業大学ゲスト無線LANに接続してください．
+    }
+    +block-skip (5pt);
+    +p { 「SHIBAURA」に接続 ${\to} ユーザー名/パスワード入力 }
+  >
+  +frame { チーム制約 } <
+    +p {
+      3/29時点のAtCoderのレートに対し，
+      \listing {
+        * 黄色以上: ${4} pt
+        * 青: ${3} pt
+        * 水: ${2} pt
+        * 緑以下(AtCoder未参加を含む): ${1} pt
+      } と定めます．
+    }
+    +block-skip (5pt);
+    +p {
+      チームメンバーが ${3} 人以下で，かつチームメンバーのコストの総和が ${4} pt
+      以下の場合，チームを組むことができます．
+    }
+  >
+  +frame { MOFE登録 } <
+    +p { オンサイトパスワード: `techshiba` }
+    +block-skip (5pt);
+    +p {
+      \url (`https://twitter.com/shibaura_it/status/1678554699975512064`) ({ \emph { テクしば } }); は，
+      芝浦工業大学 工学部のマスコットキャラクターです．
+    }
+    +block-skip (5pt);
+    +p { チームで参加する場合，新たにアカウントを作成してください． }
+    +p { その際，メールアドレスは適当(`cyan@mofe.com` みたいな)でOKです． }
+  >
+  +frame { コンテストルール } <
+    +p { コンテスト時間は14:00から17:00の3時間を予定しています． }
+    +p { チーム内同時コーディング・検索可です． }
+    +block-skip (5pt);
+    +p { A問題以外の10問にはすべて部分点1, 2(問題によっては3も)が設定されています． }
+    +p { \emph { 部分点を獲得しても，すべてのケースについて正解にならないと提出結果がACにならないことに注意してください． } }
+    +fig-center (include-image 150pt `images/wa.jpg`);
+    +p { WAになっていますが，部分点の ${4 0} 点を獲得できています． }
+  >
+
+  +frame { 途中退室について } <
+    +p { 建物外に出るのに芝浦工業大学の学生証が必要です． }
+    +p { 途中退室をする場合，運営に声をかけてください． }
+    +block-skip (5pt);
+    +p {
+      隣の 304 教室を運営・全完者用の部屋とします．全完したり撤退したら，
+      \emph { チーム単位 }で移動してOKです (移動したら戻れません)．
+    }
+  >
+>

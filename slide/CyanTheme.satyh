@@ -1,4 +1,5 @@
 @require: class-slydifi/slydifi
+@require: base/base
 @require: math
 
 module CyanTheme: sig
@@ -186,13 +187,13 @@ end = struct
         let pos = (xrel 0.13, yrel 0.45 -' title-mgn) in
           SlydifiGraphics.put-texts (|
             align = (0.0, 1.0);
-            text-align = 0.5;
+            text-align = 0.;
             leading = (get-font-size ctx *' 1.6);
           |) pos iblst in
       let gr-date =
         let ctx = config#font-slide-date ctx in
         let iblst = List.map (read-inline ctx) content#date in
-        let pos = (xrel 0.13, yrel 0.35 -' title-mgn) in
+        let pos = (xrel 0.13, yrel 0.27 -' title-mgn) in
           SlydifiGraphics.put-texts (|
             align = (0.0, 1.0);
             text-align = 0.5;
@@ -317,12 +318,20 @@ end = struct
     let () =
       page-num
         |> SlydifiParam.set (SlydifiParam.get page-num + 1) in
+    let title =
+      if Length.equal (get-natural-width (read-inline ctx section)) 0pt
+      then
+        title
+      else
+        { #section; \sp (0pt); #title; } in
     let n-frame =
       n-frame
         |> Option.from 1 in
       read-block ctx '<
         +SlydifiScheme.genframe (frame-normal (SlydifiParam.get config)) (n-frame) ((|
-          title = { #section; \sp (0pt); #title; };
+          % title = { #section; \sp (0pt); #title; };
+
+          title = title;
           inner = inner;
         |));
       >

@@ -1,0 +1,106 @@
+@require: class-slydifi/slydifi
+@require: math
+@require: enumitem/enumitem
+@require: azmath/azmath
+@require: figbox/figbox
+@require: easytable/easytable
+@import: CyanTheme
+
+open FigBox
+open SlydifiOverlay
+let-block ctx +block-skip sz = block-skip sz
+let-inline ctx \url url =
+  let tb = read-inline ctx (embed-string url) in
+  let (w, h, d) = get-natural-metrics tb in
+  let f _ pos = register-link-to-uri url pos w h d None in
+  let hook = hook-page-break f in hook ++ tb
+in
+
+CyanTheme.document '<
+  +make-title ((|
+    title = { |水以下コンテスト 開催の裏側| };
+    author = { |Kyo_s_s| };
+    date = { |2024/04/12| };
+  |));
+
+  +section { |自己紹介| } <
+    +frame {} <
+      +block-skip (5pt);
+      +fig-block (hconcat [
+        textbox-with-width 450pt {
+        \listing {
+          * 名前: きょ
+          * Twitter(現 X): `@Kyo_s_s`
+          * 所属: 芝浦工業大学 数理科学科 学部4年
+          * AtCoder Algorithm: 青 / Heuristic: 黄
+          * 第1回/第2回 緑以下コンテスト Writer/Tester
+          * 水以下コンテストをオンサイト開催しました！
+           ** 今日はこのことについて話します！
+        }
+        };
+        gap 30pt;
+        vconcat [
+          include-image-with-height 180pt `./images/Kyo_s_s.jpg`;
+          gap 30pt;
+        ];
+      ]);
+    >
+  >
+
+  +section { |水以下コンテストとは？| } <
+    +frame ?:(3) {} <
+      +p { 2024/03/30に，芝浦工業大学豊洲キャンパスで「水以下コンテスト」を\br;オンサイト開催しました！ }
+      +block-skip (3pt);
+      +phantom (from 2) <
+        +listing {
+          * 灰diff想定1問，(だいたい)水diff想定10問の計11問で，3時間
+           ** 水diff想定の10問にはすべて部分点1, 2(問題によっては3も)が設定
+          * 黄色以上: 4pt，青: 3pt，水: 2pt，緑以下: 1pt として，\br;チームメンバーが3人以下かつ合計4pt以下でチームが組める
+          * 中級者をメインターゲットとしたチーム戦コンテスト
+           ** この難易度帯のチーム戦は少ないため，チーム戦を楽しんでほしい
+        }
+      >
+      +block-skip (3pt);
+      +phantom (from 3) <
+        +p {
+          オンサイトには50人くらいの方が参加してくれました！\br;
+          また，オンライン含め全体で約100チームの参加がありました！
+        }
+      >
+    >
+  >
+
+  +section { |開催のきっかけ| } <
+    +frame {} <
+      +p { くしらっちょさん主催の緑以下コンテストで初めて問題を作問 }
+      +p { 第2回緑以下コンテストがオンサイトで開催され，運営として参加 }
+      +p { 打ち上げで「またオンサイトで有志コンが開催されるといいね」みたいな話 ${\to} 芝浦工業大学で開催しよう！ }
+    >
+    +frame {} <
+      +p {
+        くしらっちょさんの第2回緑以下コンテスト開催記にて ${\ldots} 「
+        また，私にオンサイトコンテストというものを教えてくれたNafmoさん，LT会の主催をしてくれたユニークビジョンさん，ありがとうございました．」
+      }
+      +p { (\url (`https://kusirara.hatenablog.com/entry/2023/12/04/134934`); から引用) }
+    >
+  >
+  +section { |作問について| } <
+    % GitHub Action 設定した話
+    % 部分点設定，意外と大変(C++で部分点1のみ通ってほしい解法が部分点2の制約でも高速に通ってしまう...とか)
+    % Rime お世話になりましたのはなし
+    +frame { Rime } <
+      +p { Rime という作問補助ツールを使用しました． }
+      +block-skip (3pt);
+      +p { Rimeとは ${\ldots} 想定解法・想定後解法のチェックなどができるツールです． }
+      +fig-center (include-image 500pt `images/rime-test.jpg`);
+      +p {
+        「この愚直実装は部分点1ではACし，部分点2では落ちる」のようなことを確認する必要があり，
+        すべての問題でRimeを使用しました．
+      }
+    >
+    +frame { GitHub } <
+      +p { 問題はすべてGitHubで管理しました． }
+      +p { GitHub Actionsを用いてテストを自動化し，Rimeのテストを通過しないとMergeできないように設定したりしました． }
+    >
+  >
+>

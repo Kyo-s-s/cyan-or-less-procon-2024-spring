@@ -193,7 +193,12 @@ end = struct
       let gr-date =
         let ctx = config#font-slide-date ctx in
         let iblst = List.map (read-inline ctx) content#date in
-        let pos = (xrel 0.13, yrel 0.27 -' title-mgn) in
+        let pos =
+          if (List.length iblst) == 1
+          then
+            (xrel 0.13, yrel 0.36 -' title-mgn)
+          else
+            (xrel 0.13, yrel 0.27 -' title-mgn) in
           SlydifiGraphics.put-texts (|
             align = (0.0, 1.0);
             text-align = 0.5;

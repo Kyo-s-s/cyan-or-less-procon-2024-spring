@@ -1,0 +1,272 @@
+@require: class-slydifi/slydifi
+@require: math
+@require: enumitem/enumitem
+@require: azmath/azmath
+@require: figbox/figbox
+@require: easytable/easytable
+@import: CyanTheme
+
+open FigBox
+open SlydifiOverlay
+let-block ctx +block-skip sz = block-skip sz
+let-inline ctx \inline-skip sz = inline-skip sz
+let-inline ctx \inline-fil = inline-fil
+let-inline ctx \url url =
+  let tb = read-inline ctx (embed-string url) in
+  let (w, h, d) = get-natural-metrics tb in
+  let f _ pos = register-link-to-uri url pos w h d None in
+  let hook = hook-page-break f in hook ++ tb
+let-block ctx +blockquote it =
+  let pads = (30pt, 30pt, 10pt, 10pt) in
+  let a (x, y) w h d =
+    let p = 15pt in
+      [
+        fill (Color.gray 0.91) (Gr.rectangle (x +' p, y) (x -' 18pt +' w, y +' h));
+        fill Color.black (Gr.rectangle (x +' p, y) (x +' p +' 4pt, y +' h));
+      ] in
+  let set = (a, a, a, a) in block-frame-breakable ctx pads set (fun ctx -> read-block ctx it)
+in
+
+CyanTheme.document '<
+  +make-title ((|
+    title = { |水以下コンテスト 開催の裏側| };
+    author = { |Kyo_s_s| };
+    date = { |2024/04/12| };
+  |));
+
+  +section { |自己紹介| } <
+    +frame {} <
+      +block-skip (5pt);
+      +fig-block (hconcat [
+        textbox-with-width 450pt {
+        \listing {
+          * 名前: きょ
+          * Twitter(現 X): `@Kyo_s_s`
+          * 所属: 芝浦工業大学 数理科学科 学部4年
+          * AtCoder Algorithm: 青 / Heuristic: 黄
+          * 第1回/第2回 緑以下コンテスト Writer/Tester
+          * 水以下コンテストをオンサイト開催しました！
+           ** 今日はこのことについて話します！
+        }
+        };
+        gap 30pt;
+        vconcat [
+          include-image-with-height 180pt `./images/Kyo_s_s.jpg`;
+          gap 30pt;
+        ];
+      ]);
+    >
+  >
+
+  +section { |水以下コンテストとは？| } <
+    +frame ?:(3) {} <
+      +p { 2024/03/30に，芝浦工業大学豊洲キャンパスで「水以下コンテスト」を\br;オンサイト開催しました！ }
+      +block-skip (3pt);
+      +phantom (from 2) <
+        +listing {
+          * 灰diff想定1問，(だいたい)水diff想定10問の計11問で，3時間
+           ** 水diff想定の10問にはすべて部分点1, 2(問題によっては3も)が設定
+          * 黄色以上: 4pt，青: 3pt，水: 2pt，緑以下: 1pt として，\br;チームメンバーが3人以下かつ合計4pt以下でチームが組める
+          % * 中級者をメインターゲットとしたチーム戦コンテスト
+          %  ** この難易度帯のチーム戦は少ないため，チーム戦を楽しんでほしい
+        }
+      >
+      +block-skip (3pt);
+      +phantom (from 3) <
+        +p {
+          オンサイトには50人くらいの方が参加してくれました！\br;
+          また，オンライン含め全体で約100チームの参加がありました！
+        }
+      >
+    >
+  >
+
+  +section { |開催のきっかけ| } <
+    +frame ?:(3) {} <
+      +block-skip (3pt);
+      +listing { * くしらっちょさん主催の緑以下コンテストで初めて問題を作問 }
+      +block-skip (3pt);
+      +phantom (from 2) <
+        +listing {
+          * 第2回緑以下コンテストがオンサイトで開催され，運営として参加
+           ** 打ち上げで「またオンサイト有志コン開催されるといいね」という話になる\br;
+          ${\to} 開催しよう！
+        }
+      >
+      +block-skip (3pt);
+      +phantom (from 3) <
+        +listing {
+          * 開催するなら今度はチーム戦がよさそう(緑以下は個人だったため)
+           ** チーム戦ならICPCなどのように難易度シャッフルしたい
+           ** (だいたい)水diff想定の問題を集めて，部分点をたくさん設定！
+        }
+      >
+    >
+    +frame ?:(2) {} <
+      +block-skip (3pt);
+      +p { くしらっちょさんの第2回緑以下コンテスト開催記にて ${\ldots} }
+      +block-skip (10pt);
+      +phantom (from 2) <
+        +blockquote <
+          +p { また，私にオンサイトコンテストというものを教えてくれたNafmoさん，LT会の主催をしてくれたユニークビジョンさん，ありがとうございました． }
+        >
+        +p { \inline-fil; (\url (`https://kusirara.hatenablog.com/entry/2023/12/04/134934`); から引用) }
+      >
+    >
+    +frame ?:(7) ({}) (let a = { NafmoさんがユニークビジョンLT会で登壇 } in
+    let b = {
+    「緑Coderが作問をしてオンサイトに100人呼んでみた」 \br;
+    \url (`https://nafmo.dev/slides/#uv-study-20230711`);
+    } in
+    let c = { くしらっちょさんがこのLTを聞いて，「オンサイトいいなぁ」となる } in
+    let d = { くしらっちょさんがオンサイトで第2回緑以下コンテストを開催 } in
+    let e = { 運営として参加し，「ぼくもオンサイト開くぞ！」となる } in
+    let f = { 水以下コンテスト開催！ } in
+      '<
+        +p { どういうことかというと ${\ldots} }
+        +block-skip (3pt);
+        +ghost (only 2) <
+          +listing {
+            * #a;
+             ** #b;
+          }
+        >
+        +ghost (only 3) <
+          +listing {
+            * #a;
+             ** #b;
+             ** #c;
+          }
+        >
+        +ghost (only 4) <
+          +listing {
+            * #a;
+             ** #b;
+             ** #c;
+            * #d;
+          }
+        >
+        +ghost (only 5) <
+          +listing {
+            * #a;
+             ** #b;
+             ** #c;
+            * #d;
+             ** #e;
+          }
+        >
+        +ghost (from 6) <
+          +listing {
+            * #a;
+             ** #b;
+             ** #c;
+            * #d;
+             ** #e;
+            * #f;
+          }
+        >
+        +block-skip (3pt);
+        +p ?:(from 7) {
+          ユニークビジョンLT会が無ければ，開催されていなかったかも．\br;
+          開催していただき，本当にありがとうございます ${\ldots} ！
+        }
+      >);
+  >
+  +section { |作問について| } <
+    +frame ?:(3) { Rime } <
+      +p { Rime という作問補助ツールを使用しました． }
+      +block-skip (3pt);
+      +phantom (from 2) <
+        +p { Rimeとは ${\ldots} 想定解法・想定誤解法のチェックなどができるツールです． }
+        +fig-center (include-image 600pt `images/rime-test.jpg`);
+      >
+      +phantom (from 3) <
+        +p {
+          「この愚直実装は部分点1ではACし，部分点2では落ちる」のようなことを確認する必要があり，
+          すべての問題でRimeを使用しました．
+        }
+      >
+    >
+    +frame ?:(3) { Rime } <
+      +block-skip (3pt);
+      +p { C++とPythonの両方でACできることを確認しながらテストケースを\br;作成していたのですが ${\ldots} }
+      +phantom (from 2) <
+        +listing {
+          * C++では十分高速にACできるが，PythonだとTLがぎりぎり/ TLE
+          * Pythonで余裕をもってACできるように制約を調整したら，C++の本来落としたい解法が通ってしまう
+           ** 部分点1のみ通ってほしいC++解法が，部分点2の制約で\br;高速に通ってしまう ${\ldots} 等
+        }
+        +p { ということが発生し，部分点の制約設定が意外と大変でした． }
+      >
+      +block-skip (3pt);
+      +phantom (from 3) <
+        +p { Rimeによるコマンド1つでテストできるため，効率的に作業できました！ }
+      >
+    >
+    +frame ?:(2) { GitHub } <
+      +p { 問題はすべてGitHubで管理しました． }
+      +phantom (from 2) <
+        +p { GitHub Actionsを用いてテストを自動化し，Rimeのテストを通過しないとMergeできないように設定したりしました． }
+        +block-skip (3pt);
+        +fig-center (include-image 600pt `images/github-actions.jpg`
+          |> graffiti [
+          stroke 1pt Color.red (Gr.rectangle (60pt, 100pt) (270pt, 120pt));
+        ]);
+      >
+    >
+    +frame ?:(4) { GitHub } <
+      +block-skip (3pt);
+      +p {
+        Rimeのテストを通過しないとMergeできないように設定したため，
+        常に `main` ブランチはテストを通過している状態を保つことができました．
+      }
+      +phantom (from 2) <
+        +p { ${\to} 心理的な安心を保ちつつ作業できました． }
+      >
+      +block-skip (5pt);
+      +phantom (from 3) <
+        +p {
+          インターン先でGitHub Actionsを使ってテストを自動化していて，「水以下コンでも同じようにテスト自動化したい！」と思い，
+          初めてGitHub Actionsを書きました．
+        }
+      >
+      +phantom (from 4) <
+        +p { ${\to} 業務プログラミングは競技プログラミングの役に立つ！(？) }
+      >
+    >
+  >
+  +section { |おわりに| } <
+    +frame ?:(2) { 今日のまとめ } <
+      +block-skip (3pt);
+      +listing {
+        * 水以下コンテストをオンサイト開催したよ！
+         ** きっかけを辿るとユニークビジョンさんのLT会のおかげ！\br;
+        本当にありがとうございます！！
+      }
+      +block-skip (3pt);
+      +phantom (from 2) <
+        +listing {
+          * 作問にはRimeを使用し，GitHubで管理したよ！
+           ** 部分点をたくさん設定していたけど，Rimeを活用できた！
+           ** GitHub Actionsを初めて使ってテストを自動化した！安心！
+           ** 業プロは競プロの役に立つ！(？)
+        }
+      >
+    >
+    +frame {} <
+      +block-skip (3pt);
+      +p { まだまだ話せなかった裏話がたくさんあります． }
+      +listing {
+        * GitHub Actionsの無料枠を使い切りそうになってしまい，\br;慌てて高速化した話
+        * 当日MOFEに気軽に寄付できるようにした話
+        * 原案として出されたが，解けなくて没になった問題の話
+        * 難易度推定はやっぱり難しかった話
+        * PyPyがPythonより断然速かった話
+        * スライド・名札をすべて \SATySFi; で書いた話
+        * ${\ldots}
+      }
+      +p { 気になるある話があれば，是非この後話しかけてください！ }
+    >
+  >
+  +section { |ご清聴ありがとうございました！| } <>
+>
